@@ -1,6 +1,7 @@
 .tab-in {
     padding: 20px;
 }
+
 .full-w {
     width: 100%;
 }
@@ -8,6 +9,13 @@
 .full {
     width: 100%;
     height: 100%;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .form {
@@ -34,15 +42,10 @@
 .scroll-y-a {
     overflow-y: auto
 }
+
 .no-padding-v {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
-}
-#form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .form-page {
@@ -52,6 +55,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .hidden {
     display: none !important
 }
@@ -134,12 +138,12 @@ body {
 }
 
 .one-card-main {
-    height: 400px;
+    height: 370px;
 }
 
 .one-card-main .card-content {
     overflow-y: auto;
-    height: 250px;
+    height: 222px;
 }
 
 .one-card-main .card-panel {

@@ -19,6 +19,10 @@
                     <a href="#call_landing" data-call="landing" data-action="/admin/about"
                        data-method="get">Лэндинг</a>
                 </li>
+                <li>
+                    <a href="#call_orders" data-call="orders" data-action="/admin/orders"
+                       data-method="get">Заказы</a>
+                </li>
             </ul>
 
                 <a class="btn waves-effect waves-red" href="{{ route('logout') }}"
