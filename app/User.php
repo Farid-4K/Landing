@@ -14,12 +14,22 @@ class User extends Model
        'count',
        'message',
        'grant',
+       'complete',
      ];
+   protected $table = 'users';
 
    public static function trash($id)
    {
       $row = self::query()->find($id);
       $row->delete();
+      return true;
+   }
+
+   public static function complete($id)
+   {
+      $row = self::query()->find($id);
+      $row->complete = true;
+      $row->save();
       return true;
    }
 }

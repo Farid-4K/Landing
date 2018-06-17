@@ -44,6 +44,7 @@ class AdminController extends Controller
       return view('admin.makeup_rules');
    }
 
+
    public function editAdminInformation(Request $request)
    {
       $id = $request->get('id');
@@ -55,7 +56,7 @@ class AdminController extends Controller
         'email'    => 'email',
       ]);
 
-      $row = Admin::find(1);
+      $row = Admin::query()->find(1);
 
       if ($row->fill([
         'name'     => $validated['name'] ?: 'admin',

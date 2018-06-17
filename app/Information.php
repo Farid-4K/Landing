@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use \Storage;
+use Illuminate\Support\Facades\Storage;
 
 class Information extends Model
 {
@@ -24,30 +24,6 @@ class Information extends Model
       $row = self::query()->find($id);
       $row->delete();
       return true;
-   }
-
-   /**
-    * @param \Illuminate\Http\Request $request
-    *
-    * @return bool|\Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
-    */
-   public static function do_update(Request $request, $input)
-   {
-      extract($input);
-      if ($request->filled($tag)) {
-         $data = self::query()->find($request->get($id));
-         $data->tag_id = $request->get($tag);
-         $data->information = $request->get($inf);
-         if ($request->hasFile($img)) {
-            $data->information = self::uploadImage($request, $img);
-         }
-         $data->save();
-         self::$message = 'Сохранено';
-         return true;
-      } else {
-         self::$message = 'Неверное имя тега';
-         return false;
-      }
    }
 
    public static function checkUploadData($input)

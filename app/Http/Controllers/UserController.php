@@ -9,9 +9,12 @@ class UserController extends Controller
 {
    public function show()
    {
-      $users = User::all();
+      $uncomplete = User::where('complete', false)->get();
+      $complete = User::where('complete', true)->get();
+
       $data = [
-        'users' => $users,
+        'uncomplete' => $uncomplete,
+        'complete'   => $complete,
       ];
 
       return view('admin.orders', $data);
@@ -19,10 +22,22 @@ class UserController extends Controller
 
    public function delete(Request $request)
    {
-      if ($request->filled('id')) {
+      if($request->filled('id')) {
          $id = $request->get('id');
-         if (User::trash($id)) {
+         if(User::trash($id)) {
             return response('Заказ удален - ' . $id);
+         } else {
+            return response('Ошибка', 500);
+         }
+      }
+   }
+
+   public function complete(Request $request)
+   {
+      if($request->filled('id')) {
+         $id = $request->get('id');
+         if(User::complete($id)) {
+            return response('Заказ завершен - ' . $id);
          } else {
             return response('Ошибка', 500);
          }

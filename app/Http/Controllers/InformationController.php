@@ -73,7 +73,6 @@ class InformationController extends Controller
       }
    }
 
-
    public function delete(Request $request)
    {
       if ($request->filled('id')) {

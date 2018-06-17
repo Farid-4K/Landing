@@ -172,8 +172,8 @@
                      <label for="form_lorem">Сообщение</label>
                   </div>
                   <div class="input-field">
-                     <input name="count" id="form_lorem" type="text" class="validate">
-                     <label for="form_lorem">Кол-во товара</label>
+                     <input name="count" id="form_count" type="text" class="validate">
+                     <label for="form_count">Кол-во товара</label>
                   </div>
                   <div class="input-box">
                      <label>
