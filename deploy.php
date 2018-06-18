@@ -43,7 +43,21 @@ host('php.elt')
    ->identityFile('~/.ssh/id_rsa')
    ->set('deploy_path', '/www/htdocs/team2');
 
-// Tasks
+task('deploy:migration', function () {
+   run('php {{release_path}}/artisan migrate --force');
+})->desc('Artisan migrations');
+
+task('deploy:seed', function () {
+   run('php {{release_path}}/artisan db:seed');
+})->desc('Artisan seed');
+
+task('deploy:link', function () {
+   run('link {{release_path}}/../../shared/.env {{release_path}}/.env');
+})->desc('create env link');
+
+task('deploy:composerinstall', function () {
+   run('cd {{release_path}} && composer install');
+})->desc('create env link');
 
 desc('Deploy your project');
 task('deploy', [
@@ -52,9 +66,10 @@ task('deploy', [
    'deploy:lock',
    'deploy:release',
    'deploy:update_code',
-//    'deploy:shared',
-   //    'deploy:writable',
-   //    'deploy:vendors',
+   'deploy:composerinstall',
+   'deploy:link',
+   'deploy:migration',
+   'deploy:seed',
    'deploy:clear_paths',
    'deploy:symlink',
    'deploy:unlock',
