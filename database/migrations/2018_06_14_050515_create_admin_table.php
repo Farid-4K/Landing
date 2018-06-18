@@ -20,7 +20,7 @@ class CreateAdminTable extends Migration
          $table->string('email');
          $table->string('password');
          $table->string('login');
-         $table->integer('vk');
+         $table->integer('vk')->default(false);
          $table->rememberToken();
          $table->timestamps();
       });

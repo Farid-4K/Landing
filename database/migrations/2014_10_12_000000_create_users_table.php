@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
          $table->string('phone');
          $table->string('count');
          $table->string('message');
-         $table->boolean('grant');
+         $table->string('grant');
+         $table->string('complete')->default(0);
          $table->rememberToken();
          $table->timestamps();
       });
