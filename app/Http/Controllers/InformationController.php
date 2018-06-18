@@ -51,7 +51,7 @@ class InformationController extends Controller
         'id'          => 'required',
         'tag_id'      => 'required|regex:/^([\w]+[^0-9])/|max:100',
         'information' => 'max:1000',
-        'image'       => 'image',
+        'image'       => 'image'
       ]);
 
       if ($request->hasFile('image')) {

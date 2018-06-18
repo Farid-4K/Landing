@@ -48,11 +48,22 @@
             </div>
          </div>
       </div>
-      <div id="test2" class="col s12">Test 2</div>
+      <div id="test2" class="col s12">
+         <div class="row">
+            <div class="card-panel">
+
+            </div>
+         </div>
+      </div>
       <div id="test3" class="col s12">
          <div class="row">
             <div class="card card-panel">
                Сайт <span class="green-text">включен</span>
+            </div>
+            <div class="card card-panel">
+               <button class="btn-flat waves-effect waves-red">
+                  Удалить все данные о покупателях
+               </button>
             </div>
          </div>
       </div>

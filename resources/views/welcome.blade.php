@@ -20,7 +20,7 @@
 
 <body>
 
-<header>
+<header style="background: url({{$main_image}}) no-repeat center center">
    <div class="container">
       <div class="row">
          <div class="col-xs-6 fadeInUp" style="z-index: 2">
