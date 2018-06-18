@@ -5,35 +5,40 @@
 @endsection
 
 @section('content')
-   <nav class="teal">
-      <div class="nav-wrapper tab-in no-padding-v">
-         <ul class="right">
-            <li>
-               <a href="#call_information_table" data-call="information" data-action="/admin/table/information"
-                  data-method="get">Информация</a>
-            </li>
-            <li>
-               <a href="#call_settings" data-call="setting" data-action="/admin/settings"
-                  data-method="get">Настройки</a>
-            </li>
-            <li>
-               <a href="#call_landing" data-call="landing" data-action="/admin/about"
-                  data-method="get">Лэндинг</a>
-            </li>
-            <li>
-               <a href="#call_orders" data-call="orders" data-action="/admin/orders"
-                  data-method="get">Заказы</a>
-            </li>
-         </ul>
-         <a class="btn waves-effect waves-red" href="{{ route('logout') }}"
-            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-            {{ __('Logout') }}
-         </a>
-         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-         </form>
-      </div>
-   </nav>
+   <div class="navbar-fixed">
+      <nav class="teal">
+         <div class="nav-wrapper tab-in no-padding-v">
+            <ul class="right">
+               <li>
+                  <a href="/admin/landing/preview">Предпросмотр</a>
+               </li>
+               <li>
+                  <a href="#call_information_table" data-call="information" data-action="/admin/table/information"
+                     data-method="get">Информация</a>
+               </li>
+               <li>
+                  <a href="#call_settings" data-call="setting" data-action="/admin/settings"
+                     data-method="get">Настройки</a>
+               </li>
+               <li>
+                  <a href="#call_landing" data-call="landing" data-action="/admin/about"
+                     data-method="get">Лэндинг</a>
+               </li>
+               <li>
+                  <a href="#call_orders" data-call="orders" data-action="/admin/orders"
+                     data-method="get">Заказы</a>
+               </li>
+            </ul>
+            <a class="btn waves-effect waves-red" href="{{ route('logout') }}"
+               onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+               {{ __('Logout') }}
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+               @csrf
+            </form>
+         </div>
+      </nav>
+   </div>
 
    <div id="mainContentController"></div>
 

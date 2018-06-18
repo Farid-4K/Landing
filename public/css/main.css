@@ -328,16 +328,27 @@ body {
    Main styles
    ========================================================================== */
 header {
+    position: relative;
     width: 100%;
     padding: 20px 10px 60px 10px;
     height: 100vh;
     overflow: hidden;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    background-size: cover!important;
+    -webkit-background-size: cover!important;
+    -moz-background-size: cover!important;
+    -o-background-size: cover!important;
 }
-
+.fixed-cards-500 .card{
+   height: 500px;
+}
+.fixed-cards-500 .card-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.half-img{
+    width: auto!important;
+}
 header::before {
     content: '';
     display: block;

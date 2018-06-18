@@ -3,10 +3,10 @@
 <div class="container">
    <div class="row">
       @foreach ($information as $val)
-         <div class="col xl4 l4 m6 s12">
+         <div class="col xl12 l4 m6 s12">
             <div class="card card-panel one-card-main">
                <div class="card-title center">
-                  <div data-tag-id="{{$val['id']}}"><h5>{{$val['tag_id']}}</h5></div>
+                  <div data-tag-id="{{$val['id']}}"><h5>{{$val['description']}} ({{$val['tag_id']}})</h5></div>
                </div>
                <div class="card-content scroll-y-a">
                   <div>{{$val['information']}}</div>
@@ -15,7 +15,7 @@
                   <div class="form-action-inline">
                      <div>
                         <button type="submit" data-delete-id="{{$val['id']}}"
-                                class="btn deleteData-ID waves-effect waves-red tooltipped" data-position="top"
+                                class="btn deleteData-ID tooltipped" data-position="top"
                                 data-tooltip="Удалить">
                            <i class="material-icons">delete</i>
                         </button>

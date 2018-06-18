@@ -40,5 +40,6 @@ Route::middleware('auth')->group(
      Route::get('/admin/about', 'AdminController@documentation');
      Route::any('/admin/orders/delete', 'UserController@delete');
      Route::any('/admin/orders/complete', 'UserController@complete');
+     Route::any('/admin/landing/preview', 'InformationController@preview');
 
   });

@@ -24,7 +24,7 @@
    <div class="container">
       <div class="row">
          <div class="col-xs-6 fadeInUp" style="z-index: 2">
-            <a href="#"><h1>{{$title}}</h1></a>
+            <a href="#"><img src="{{$logo}}" alt=""></a>
          </div>
       </div>
 
@@ -55,23 +55,33 @@
 <section id="main-info" class="pad-xl">
    <div class="container">
       <div class="row">
-         <div class="col-sm-4 wow fadeIn" data-wow-delay="0.4s">
+         <div class="col-sm-3 wow fadeIn" data-wow-delay="0.4s">
+            <div class="flex-center">
+               <img src="{{$ef1}}" alt="" class="responsive-img">
+            </div>
             <hr class="line purple">
-            <h3>Lorem ipsum dolor sit.</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut est facilisis, eu
-               elementum mi volutpat. Pellentesque ac tristique nisi.</p>
+            <h5>{{$ef1_inf}}</h5>
          </div>
-         <div class="col-sm-4 wow fadeIn" data-wow-delay="0.8s">
+         <div class="col-sm-3 wow fadeIn" data-wow-delay="0.8s">
+            <div class="flex-center">
+               <img src="{{$ef2}}" alt="" class="responsive-img">
+            </div>
             <hr class="line blue">
-            <h3>Lorem ipsum dolor sit.</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut est facilisis, eu
-               elementum mi volutpat. Pellentesque ac tristique nisi.</p>
+            <h5>{{$ef2_inf}}</h5>
          </div>
-         <div class="col-sm-4 wow fadeIn" data-wow-delay="1.2s">
+         <div class="col-sm-3 wow fadeIn" data-wow-delay="1.2s">
+            <div class="flex-center">
+               <img src="{{$ef3}}" alt="" class="responsive-img">
+            </div>
             <hr class="line yellow">
-            <h3>Lorem ipsum dolor sit.</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci ut est facilisis, eu
-               elementum mi volutpat. Pellentesque ac tristique nisi.</p>
+            <h5>{{$ef3_inf}}</h5>
+         </div>
+         <div class="col-sm-3 wow fadeIn" data-wow-delay="1.2s">
+            <div class="flex-center">
+               <img src="{{$ef4}}" alt="" class="responsive-img">
+            </div>
+            <hr class="line yellow">
+            <h5>{{$ef4_inf}}</h5>
          </div>
       </div>
    </div>
@@ -81,69 +91,83 @@
    <div class="container">
       <div class="row margin-40">
          <div class="col s8 offset-m2 text-center">
-            <h2>Pricing</h2>
-            <p class="white-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam viverra orci
-               ut.</p>
+            <h2>{{$title_2}}</h2>
          </div>
       </div>
 
-      <div class="row margin-50">
+      <div class="row fixed-cards-500 margin-50">
 
          <div class="col s4">
-            <br/>
-            <ul class="text-center z-depth-3">
-               <li class="headline"><h5>Personal</h5></li>
-               <li class="price">
-                  <div class="amount">150 рублей</div>
-               </li>
-               <li class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, voluptatum.
-               </li>
-               <li class="features first">Up To 25 Projects</li>
-               <li class="features">10GB Storage</li>
-               <li class="features">Other info</li>
-               <li class="features">
-                  <button class="btn waves-effect waves-light">Купить</button>
-               </li>
-            </ul>
+            <div class="card card-panel">
+               <div class="card-image">
+                  <img src="{{$ef5}}" class="half-img" alt="">
+               </div>
+               <div class="card-title text-center">
+                  {{$ef5_title}}
+               </div>
+               <div class="card-content text-center">
+                  {{$ef5_content}}
+               </div>
+            </div>
          </div>
 
          <div class="col s4">
-            <ul class="text-center z-depth-3">
-               <li class="headline"><h5>Professional</h5></li>
-               <li class="price">
-                  <div class="amount">250 рублей</div>
-               </li>
-               <li class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, unde!</li>
-               <li class="features first">до 25 проектов</li>
-               <li class="features">10GB Места</li>
-               <li class="features">Lorem lorem</li>
-               <li class="features">lorem lorem</li>
-               <li class="features">
-                  <button class="btn waves-effect waves-light">Купить
-                  </button>
-               </li>
-            </ul>
+            <div class="card card-panel">
+               <div class="card-image">
+                  <img src="{{$ef6}}" alt="" class="half-img">
+               </div>
+               <div class="card-title text-center">
+                  {{$ef6_title}}
+               </div>
+               <div class="card-content text-center">
+                  {{$ef6_content}}
+               </div>
+            </div>
          </div>
 
          <div class="col s4">
-            <br/>
-            <ul class="text-center z-depth-3">
-               <li class="headline"><h5>Business</h5></li>
-               <li class="price">
-                  <div class="amount">400 рублей</div>
-               </li>
-               <li class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, nobis!</li>
-               <li class="features first">до 25 проектов</li>
-               <li class="features">10GB места</li>
-               <li class="features">lorem lorem</li>
-               <li class="features">
-                  <button class="btn waves-effect waves-light">Купить</button>
-               </li>
-            </ul>
+            <div class="card card-panel">
+               <div class="card-image">
+                  <img src="{{$ef7}}" alt="" class="half-img">
+               </div>
+               <div class="card-title text-center">
+                  {{$ef7_title}}
+               </div>
+               <div class="card-content text-center">
+                  {{$ef7_content}}
+               </div>
+            </div>
          </div>
+
+            <div class="col offset-s2 s4">
+               <div class="card card-panel">
+                  <div class="card-image">
+                     <img src="{{$ef8}}" alt="" class="half-img">
+                  </div>
+                  <div class="card-title text-center">
+                     {{$ef8_title}}
+                  </div>
+                  <div class="card-content text-center">
+                     {{$ef8_content}}
+                  </div>
+               </div>
+            </div>
+
+            <div class="col s4">
+               <div class="card card-panel">
+                  <div class="card-image">
+                     <img src="{{$ef9}}" alt="" class="half-img">
+                  </div>
+                  <div class="card-title text-center">
+                     {{$ef9_title}}
+                  </div>
+                  <div class="card-content text-center">
+                     {{$ef9_content}}
+                  </div>
+               </div>
+            </div>
 
       </div>
-
    </div>
 </section>
 

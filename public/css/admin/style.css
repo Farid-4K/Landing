@@ -138,12 +138,12 @@ body {
 }
 
 .one-card-main {
-    height: 370px;
+    height: auto;
 }
 
 .one-card-main .card-content {
     overflow-y: auto;
-    height: 222px;
+    height: auto;
 }
 
 .one-card-main .card-panel {

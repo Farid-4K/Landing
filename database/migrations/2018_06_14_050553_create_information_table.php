@@ -17,6 +17,7 @@ class CreateInformationTable extends Migration
       Schema::create('information', function (Blueprint $table) {
          $table->increments('id');
          $table->string('tag_id')->default('null');
+         $table->string('description')->default('null');
          $table->text('information');
          $table->timestamps();
       });
