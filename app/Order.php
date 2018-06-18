@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Order extends Model
 {
    protected $fillable
      = [
@@ -16,7 +16,7 @@ class User extends Model
        'grant',
        'complete',
      ];
-   protected $table = 'users';
+   protected $table = 'orders';
 
    public static function trash($id)
    {

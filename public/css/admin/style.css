@@ -114,7 +114,9 @@ body {
     justify-content: center;
     align-items: center;
 }
-
+.word-break{
+    word-break: break-all;
+}
 .card-content {
     word-break: break-all;
 }

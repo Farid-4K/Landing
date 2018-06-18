@@ -36,10 +36,10 @@ Route::middleware('auth')->group(
      Route::any('/admin/settings', 'AdminController@profile');
      Route::any('/admin/settings/set', 'AdminController@editAdminInformation');
      Route::get('/admin/settings/logout', 'AdminController@logout');
-     Route::get('/admin/orders', 'UserController@show');
+     Route::get('/admin/orders', 'OrdersController@show');
      Route::get('/admin/about', 'AdminController@documentation');
-     Route::any('/admin/orders/delete', 'UserController@delete');
-     Route::any('/admin/orders/complete', 'UserController@complete');
+     Route::any('/admin/orders/delete', 'OrdersController@delete');
+     Route::any('/admin/orders/complete', 'OrdersController@complete');
      Route::any('/admin/landing/preview', 'InformationController@preview');
 
   });

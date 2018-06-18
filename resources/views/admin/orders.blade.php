@@ -35,7 +35,7 @@
             </div>
          </div>
          <div id="modal{{$user['id']}}" class="modal">
-            <div class="modal-content flow-text">{{$user['message']}}</div>
+            <div class="modal-content flow-text word-break"><p class="word-break">{{$user['message']}}</p></div>
             <div class="modal-footer">
                <a href="#" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
             </div>
@@ -62,7 +62,7 @@
             </div>
          </div>
          <div id="modal{{$users['id']}}" class="modal">
-            <div class="modal-content flow-text">{{$users['message']}}</div>
+            <div class="modal-content flow-text word-break"><p class="word-break">{{$users['message']}}</p></div>
             <div class="modal-footer">
                <a href="#" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
             </div>

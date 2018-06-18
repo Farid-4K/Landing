@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Order;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class OrdersController extends Controller
 {
    public function show()
    {
-      $uncomplete = User::where('complete', false)->get();
-      $complete = User::where('complete', true)->get();
+      $uncomplete = Order::where('complete', false)->get();
+      $complete = Order::where('complete', true)->get();
 
       $data = [
         'uncomplete' => $uncomplete,
@@ -24,7 +24,7 @@ class UserController extends Controller
    {
       if($request->filled('id')) {
          $id = $request->get('id');
-         if(User::trash($id)) {
+         if(Order::trash($id)) {
             return response('Заказ удален - ' . $id);
          } else {
             return response('Ошибка', 500);
@@ -36,7 +36,7 @@ class UserController extends Controller
    {
       if($request->filled('id')) {
          $id = $request->get('id');
-         if(User::complete($id)) {
+         if(Order::complete($id)) {
             return response('Заказ завершен - ' . $id);
          } else {
             return response('Ошибка', 500);

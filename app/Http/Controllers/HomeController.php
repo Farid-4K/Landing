@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Information;
-use App\User;
+use App\Order;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -32,7 +32,7 @@ class HomeController extends Controller
           'message' => 'max:1000',
           'grant'   => 'required',
         ]);
-      $user = new User;
+      $user = new Order;
       $user->fill(
         [
           'name'    => $validated['name'],

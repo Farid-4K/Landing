@@ -56,32 +56,32 @@
    <div class="container">
       <div class="row">
          <div class="col-sm-3 wow fadeIn" data-wow-delay="0.4s">
-            <div class="flex-center">
+            <div class="flex-center fixed-h-100">
                <img src="{{$ef1}}" alt="" class="responsive-img">
             </div>
             <hr class="line purple">
-            <h5>{{$ef1_inf}}</h5>
+            <h5 class="text-center">{{$ef1_inf}}</h5>
          </div>
          <div class="col-sm-3 wow fadeIn" data-wow-delay="0.8s">
-            <div class="flex-center">
+            <div class="flex-center fixed-h-100">
                <img src="{{$ef2}}" alt="" class="responsive-img">
             </div>
             <hr class="line blue">
-            <h5>{{$ef2_inf}}</h5>
+            <h5 class="text-center">{{$ef2_inf}}</h5>
          </div>
          <div class="col-sm-3 wow fadeIn" data-wow-delay="1.2s">
-            <div class="flex-center">
+            <div class="flex-center fixed-h-100">
                <img src="{{$ef3}}" alt="" class="responsive-img">
             </div>
             <hr class="line yellow">
-            <h5>{{$ef3_inf}}</h5>
+            <h5 class="text-center">{{$ef3_inf}}</h5>
          </div>
          <div class="col-sm-3 wow fadeIn" data-wow-delay="1.2s">
-            <div class="flex-center">
+            <div class="flex-center fixed-h-100">
                <img src="{{$ef4}}" alt="" class="responsive-img">
             </div>
             <hr class="line yellow">
-            <h5>{{$ef4_inf}}</h5>
+            <h5 class="text-center">{{$ef4_inf}}</h5>
          </div>
       </div>
    </div>
@@ -97,7 +97,7 @@
 
       <div class="row fixed-cards-500 margin-50">
 
-         <div class="col s4">
+         <div class="col s12 m4">
             <div class="card card-panel">
                <div class="card-image">
                   <img src="{{$ef5}}" class="half-img" alt="">
@@ -111,7 +111,7 @@
             </div>
          </div>
 
-         <div class="col s4">
+         <div class="col s12 m4">
             <div class="card card-panel">
                <div class="card-image">
                   <img src="{{$ef6}}" alt="" class="half-img">
@@ -125,7 +125,7 @@
             </div>
          </div>
 
-         <div class="col s4">
+         <div class="col s12 m4">
             <div class="card card-panel">
                <div class="card-image">
                   <img src="{{$ef7}}" alt="" class="half-img">
@@ -139,7 +139,7 @@
             </div>
          </div>
 
-            <div class="col offset-s2 s4">
+            <div class="col offset-m2 s12 m4">
                <div class="card card-panel">
                   <div class="card-image">
                      <img src="{{$ef8}}" alt="" class="half-img">
@@ -153,7 +153,7 @@
                </div>
             </div>
 
-            <div class="col s4">
+            <div class="col s12 m4">
                <div class="card card-panel">
                   <div class="card-image">
                      <img src="{{$ef9}}" alt="" class="half-img">
