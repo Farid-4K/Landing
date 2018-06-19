@@ -19,10 +19,13 @@ class AdminController extends Controller
    {
       if ($request->get('page') == 'setting') {
 
-         $vk = Admin::query()->find(1);
-         $vk = $vk->vk;
+         $admin = Admin::query()->find(1);
+
          $data = [
-           'vk' => $vk,
+             'vk' => $admin->vk,
+             'name'=>$admin->name,
+             'email'=>$admin->email,
+             'login'=>$admin->login,
          ];
 
          return view('admin.settings', $data);

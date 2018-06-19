@@ -26,8 +26,8 @@ class HomeController extends Controller
       $validated = $request->validate(
         [
           'name'    => 'required',
-          'email'   => 'email|required',
-          'phone'   => 'numeric',
+          'email'   => 'email',
+          'phone'   => 'required',
           'count'   => 'required|max:10',
           'message' => 'max:1000',
           'grant'   => 'required',

@@ -18,7 +18,7 @@
                                 <label for="login">LOGIN</label>
                             </div>
                             <div class="input-field">
-                                <input id="password" name="password" type="text" class="validate">
+                                <input id="password" name="password" type="password" class="validate">
                                 <label for="password">PASSWORD</label>
                             </div>
                             <div class="input-field">

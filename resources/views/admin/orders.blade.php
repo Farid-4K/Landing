@@ -27,7 +27,7 @@
                   <i class="material-icons">delete</i>
                </button>
                <button type="submit" data-delete-id="{{$user['id']}}"
-                       class="btn completeData-ID waves-effect waves-red tooltipped" data-position="top"
+                       class="btn completeData-ID waves-effect waves-green tooltipped" data-position="top"
                        data-tooltip="Выполнено">
                   <i class="material-icons">check</i>
                </button>

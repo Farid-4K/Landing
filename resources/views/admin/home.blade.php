@@ -10,7 +10,8 @@
          <div class="nav-wrapper tab-in no-padding-v">
             <ul class="right">
                <li>
-                  <a href="/admin/landing/preview">Предпросмотр</a>
+                  <a href="#call_preview" data-call="preview" data-action="/admin/landing/preview"
+                     data-method="get">Предпросмотр</a>
                </li>
                <li>
                   <a href="#call_information_table" data-call="information" data-action="/admin/table/information"

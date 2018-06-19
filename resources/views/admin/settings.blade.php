@@ -19,20 +19,17 @@
                   <div class="card-content">
                      @csrf
                      <div class="input-field">
-                        <input name="name" id="name" type="text" class="">
                         <label for="name">Имя</label>
+                        <input name="name" id="name" type="text" class="" value="{{$name}}" placeholder="Имя">
                      </div>
                      <div class="input-field">
-                        <input name="email" id="email" type="text" class="">
-                        <label for="email">Почта</label>
+                        <input name="email" id="email" type="text" class="" value="{{$email}}" placeholder="Email">
                      </div>
                      <div class="input-field">
-                        <input name="login" id="login" type="text" class="">
-                        <label for="login">Логин</label>
+                        <input name="login" id="login" type="text" class="" value="{{$login}}" placeholder="Логин">
                      </div>
                      <div class="input-field">
-                        <input name="password" id="password" type="text" class="">
-                        <label for="password">Пароль</label>
+                        <input name="password" id="password" type="text" class="" placeholder="Пароль">
                      </div>
                   </div>
                   <div class="card-action">
