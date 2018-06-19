@@ -4,42 +4,58 @@
  * Public route group
  */
 Route::get('/', 'HomeController@welcome');
-
 Route::post('/main/add', 'HomeController@add');
 
 /**
  * Login route group
  */
 Route::get('/login/vk', 'Auth\LoginController@redirectToProvider');
-
 Route::get('/login/vk/catch', 'Auth\LoginController@redirectToProvider');
-
 Route::get('/login/vk/callback', 'Auth\LoginController@handleProviderCallback');
-
 Auth::routes();
 
 /**
  * Admin route group
  */
-Route::middleware('auth')->group(
+Route::middleware('auth')->namespace('Admin')->group(
   function () {
-
+     /**
+      * Group without connection to database
+      */
      Route::get(
        '/admin', function () {
         return view('admin.home');
      });
 
-     Route::get('/admin/table/information', 'InformationController@table');
+     Route::get(
+       '/admin/about', function () {
+        return view('admin.makeup_rules');
+     });
+
+     /**
+      * Group that edits the content
+      */
+     Route::get('/admin/table/', 'InformationController@table');
      Route::any('/admin/table/delete', 'InformationController@delete');
      Route::any('/admin/table/create', 'InformationController@create');
      Route::any('/admin/table/update', 'InformationController@update');
-     Route::any('/admin/settings', 'AdminController@profile');
-     Route::any('/admin/settings/set', 'AdminController@editAdminInformation');
-     Route::get('/admin/settings/logout', 'AdminController@logout');
+
+     /**
+      * Group that edits the profile setting
+      */
+     Route::any('/admin/settings/profile', 'AdminController@showProfile');
+     Route::any('/admin/settings/set', 'AdminController@set');
+     Route::get('/admin/settings/untie', 'AdminController@untie');
+
+     /**
+      * Group that control for orders
+      */
      Route::get('/admin/orders', 'OrdersController@show');
-     Route::get('/admin/about', 'AdminController@documentation');
      Route::any('/admin/orders/delete', 'OrdersController@delete');
      Route::any('/admin/orders/complete', 'OrdersController@complete');
-     Route::any('/admin/landing/preview', 'InformationController@preview');
 
+     /**
+      * Landing preview route
+      */
+     Route::any('/admin/landing/preview', 'InformationController@preview');
   });

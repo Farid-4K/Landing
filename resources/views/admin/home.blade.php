@@ -14,11 +14,11 @@
                      data-method="get">Предпросмотр</a>
                </li>
                <li>
-                  <a href="#call_information_table" data-call="information" data-action="/admin/table/information"
+                  <a href="#call_information_table" data-call="information" data-action="/admin/table"
                      data-method="get">Информация</a>
                </li>
                <li>
-                  <a href="#call_settings" data-call="setting" data-action="/admin/settings"
+                  <a href="#call_settings" data-call="setting" data-action="/admin/settings/profile"
                      data-method="get">Настройки</a>
                </li>
                <li>

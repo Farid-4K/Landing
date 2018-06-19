@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -9,12 +10,12 @@ class OrdersController extends Controller
 {
    public function show()
    {
-      $uncomplete = Order::where('complete', false)->get();
-      $complete = Order::where('complete', true)->get();
+      $uncompleted = Order::query()->where('complete', false)->get();
+      $completed = Order::query()->where('complete', true)->get();
 
       $data = [
-        'uncomplete' => $uncomplete,
-        'complete'   => $complete,
+        'uncompleted' => $uncompleted,
+        'completed'   => $completed,
       ];
 
       return view('admin.orders', $data);

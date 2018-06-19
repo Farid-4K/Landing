@@ -37,7 +37,7 @@
                      @if($vk == '0')
                         <a href="/login/vk" class="btn waves-effect right waves-light">Привязать ВК</a>
                      @elseif ($vk != '0')
-                        <a href="/admin/settings/logout" id="vk_logout"
+                        <a href="/admin/settings/untie" id="vk_logout"
                            class="btn right waves-effect waves-light">Отвязать ВК</a>
                      @endif
                   </div>

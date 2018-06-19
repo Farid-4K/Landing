@@ -11,7 +11,7 @@
    </div>
 
    <div id="test1" class="col s12">
-      @foreach($uncomplete as $user)
+      @foreach($uncompleted as $user)
          <div class="card card-panel flow-text">
             <div class="card-title">{{$user['name']}}</div>
             <div class="card-content">
@@ -43,7 +43,7 @@
       @endforeach
    </div>
    <div id="test2" class="col s12">
-      @foreach($complete as $users)
+      @foreach($completed as $users)
          <div class="card card-panel flow-text">
             <div class="card-title">{{$users['name']}}</div>
             <div class="card-content">
