@@ -4,17 +4,11 @@
     <meta charset="utf-8">
     <title>Типа.Лэндинг</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/animate.css">
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Montserrat:400,700'
           rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-
-    <script src="/js/landing/modernizr-2.7.1.js"></script>
 
 </head>
 
@@ -23,16 +17,16 @@
 <header style="background: url({{$main_image}}) no-repeat center center">
     <div class="container">
         <div class="row">
-            <div class="col-xs-6 fadeInUp" style="z-index: 2">
+            <div class="col s6">
                 <a href="#"><img src="{{$logo}}" alt=""></a>
             </div>
         </div>
 
         <div class="row">
             <div class="header-info">
-                <div class="col s12 text-center">
-                    <h1 class="wow text-shadow fadeIn">{{$full_title}}</h1>
-                    <p class="lead text-shadow wow fadeIn" data-wow-delay="0.5s">{{$header_info}}</p>
+                <div class="col s12">
+                    <h1 class="text-shadow center-align">{{$full_title}}</h1>
+                    <p class="lead text-shadow center-align">{{$header_info}}</p>
                 </div>
 
                 <div class="row">
@@ -55,33 +49,33 @@
 <section id="main-info" class="pad-xl">
     <div class="container">
         <div class="row">
-            <div class="col-sm-3 wow fadeIn" data-wow-delay="0.4s">
+            <div class="col s3">
                 <div class="flex-center fixed-h-100">
                     <img src="{{$ef1}}" alt="" class="responsive-img">
                 </div>
                 <hr class="line purple">
-                <h5 class="text-center">{{$ef1_inf}}</h5>
+                <h5 class="center-align">{{$ef1_inf}}</h5>
             </div>
-            <div class="col-sm-3 wow fadeIn" data-wow-delay="0.8s">
+            <div class="col s3">
                 <div class="flex-center fixed-h-100">
                     <img src="{{$ef2}}" alt="" class="responsive-img">
                 </div>
                 <hr class="line blue">
-                <h5 class="text-center">{{$ef2_inf}}</h5>
+                <h5 class="center-align">{{$ef2_inf}}</h5>
             </div>
-            <div class="col-sm-3 wow fadeIn" data-wow-delay="1.2s">
+            <div class="col s3">
                 <div class="flex-center fixed-h-100">
                     <img src="{{$ef3}}" alt="" class="responsive-img">
                 </div>
                 <hr class="line yellow">
-                <h5 class="text-center">{{$ef3_inf}}</h5>
+                <h5 class="center-align">{{$ef3_inf}}</h5>
             </div>
-            <div class="col-sm-3 wow fadeIn" data-wow-delay="1.2s">
+            <div class="col s3">
                 <div class="flex-center fixed-h-100">
                     <img src="{{$ef4}}" alt="" class="responsive-img">
                 </div>
-                <hr class="line yellow">
-                <h5 class="text-center">{{$ef4_inf}}</h5>
+                <hr class="line blue">
+                <h5 class="center-align">{{$ef4_inf}}</h5>
             </div>
         </div>
     </div>
@@ -90,7 +84,7 @@
 <section id="pricing" class="pad-lg">
     <div class="container">
         <div class="row margin-40">
-            <div class="col s8 offset-m2 text-center">
+            <div class="col s8 offset-m2 center-align">
                 <h2>{{$title_2}}</h2>
             </div>
         </div>
@@ -102,10 +96,10 @@
                     <div class="card-image">
                         <img src="{{$ef5}}" class="half-img" alt="">
                     </div>
-                    <div class="card-title text-center">
+                    <div class="card-title center-align">
                         {{$ef5_title}}
                     </div>
-                    <div class="card-content text-center">
+                    <div class="card-content center-align">
                         {{$ef5_content}}
                     </div>
                 </div>
@@ -116,10 +110,10 @@
                     <div class="card-image">
                         <img src="{{$ef6}}" alt="" class="half-img">
                     </div>
-                    <div class="card-title text-center">
+                    <div class="card-title center-align">
                         {{$ef6_title}}
                     </div>
-                    <div class="card-content text-center">
+                    <div class="card-content center-align">
                         {{$ef6_content}}
                     </div>
                 </div>
@@ -130,10 +124,10 @@
                     <div class="card-image">
                         <img src="{{$ef7}}" alt="" class="half-img">
                     </div>
-                    <div class="card-title text-center">
+                    <div class="card-title center-align">
                         {{$ef7_title}}
                     </div>
-                    <div class="card-content text-center">
+                    <div class="card-content center-align">
                         {{$ef7_content}}
                     </div>
                 </div>
@@ -144,10 +138,10 @@
                     <div class="card-image">
                         <img src="{{$ef8}}" alt="" class="half-img">
                     </div>
-                    <div class="card-title text-center">
+                    <div class="card-title center-align">
                         {{$ef8_title}}
                     </div>
-                    <div class="card-content text-center">
+                    <div class="card-content center-align">
                         {{$ef8_content}}
                     </div>
                 </div>
@@ -158,10 +152,10 @@
                     <div class="card-image">
                         <img src="{{$ef9}}" alt="" class="half-img">
                     </div>
-                    <div class="card-title text-center">
+                    <div class="card-title center-align">
                         {{$ef9_title}}
                     </div>
-                    <div class="card-content text-center">
+                    <div class="card-content center-align">
                         {{$ef9_content}}
                     </div>
                 </div>
@@ -226,7 +220,7 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-sm-8 margin-20">
+            <div class="col s8 margin-20">
                 <ul class="list-inline social">
                     <li>Зацените нас в</li>
                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -235,7 +229,7 @@
                 </ul>
             </div>
 
-            <div class="col-sm-4 text-right">
+            <div class="col s4 right-align">
                 <p>
                     <small>2018 типа.лэндинг проект Гудлайн.<br>
                         Создано <a href="http://visualsoldiers.com">Кем-то</a></small>

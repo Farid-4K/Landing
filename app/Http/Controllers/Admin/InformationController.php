@@ -39,18 +39,15 @@ class InformationController extends Controller
        * Add to database
        */
       $row = new Information();
-      $v = $request;
       if($row->fill(
         [
           'tag_id'      => $validated['tag_id'],
           'information' => $information ?: 'default',
         ])
       ) {
-         if($row->save()) {
-            return response('Загружено');
-         };
-      } else {
-         return response('ERROR', 500);
+         return $row->save()
+           ? response('Загружено')
+           : response('ERROR', 500);
       }
    }
 
@@ -87,11 +84,9 @@ class InformationController extends Controller
           'information' => $information,
         ])
       ) {
-         if($row->save()) {
-            return response('Загружено');
-         };
-      } else {
-         return response('ERROR', 500);
+         return $row->save()
+           ? response('Загружено')
+           : response('ERROR', 500);
       }
    }
 
@@ -99,11 +94,9 @@ class InformationController extends Controller
    {
       if($request->filled('id')) {
          $id = $request->get('id');
-         if(Information::trash($id)) {
-            return response('Блок удален номер - ' . $id);
-         } else {
-            return response('Ошибка', 500);
-         }
+         return Information::trash($id)
+           ? response('Блок удален номер - ' . $id)
+           : response('Ошибка', 500);
       }
    }
 

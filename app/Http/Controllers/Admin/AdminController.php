@@ -63,11 +63,7 @@ class AdminController extends Controller
           'password' => Hash::make($validated['password']),
         ])
       ) {
-         if($row->save()) {
-            return response('Сохранено');
-         };
-      } else {
-         return response('ERROR', 500);
+         return $row->save() ? response('Сохранено') : response('Ошибка', 500);
       }
    }
 }
