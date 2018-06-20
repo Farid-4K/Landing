@@ -32,6 +32,11 @@ Route::middleware('auth')->namespace('Admin')->group(
             return view('admin.makeup_rules');
         });
 
+        Route::get(
+          '/v2', function (){
+             return view('v2.landing');
+        }
+        );
         /**
          * Group that edits the content
          */
