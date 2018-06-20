@@ -64,9 +64,8 @@
                                                    value="{{$val['description']}}" class="validate">
                                         </div>
                                         <div class="input-field">
-                                                <textarea name="information"
-                                                          type="text"
-                                                          class="materialize-textarea validate">{{$val['information']}}</textarea>
+                                                <textarea name="information" type="text" class="materialize-textarea
+                                                validate">{{$val['information']}}</textarea>
                                         </div>
                                     </div>
                                     <div class="input-field card-action">
@@ -97,7 +96,6 @@
         @endforeach
     </div>
 </div>
-
 <div style="display: none;" class="card-panel card new-data-form new-data-form-ID">
     <form action="/admin/table/create" enctype="multipart/form-data" method="POST">
         @csrf
@@ -106,6 +104,10 @@
             <div class="input-field">
                 <input id="tag_add" name="tag_id" type="text" class="validate">
                 <label for="tag_add">Имя тега</label>
+            </div>
+            <div class="input-field">
+                <input id="des_add" name="description" type="text" class="validate">
+                <label for="des_add">Название</label>
             </div>
             <div class="input-field">
             <textarea id="inf_add" name="information" type="text"
@@ -134,7 +136,6 @@
 
 
 <script src="/js/form.js"></script>
-
 <script>
     $(document).ready(function () {
         $('.deleteData-ID').click(function () {

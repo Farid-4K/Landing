@@ -8,44 +8,44 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-   public function welcome()
-   {
-      $flights = Information::all();
+    public function welcome()
+    {
+        $flights = Information::all();
 
-      $data = [];
+        $data = [];
 
-      foreach ($flights as $flight) {
-         $data[$flight->tag_id] = $flight->information;
-      }
+        foreach ($flights as $flight) {
+            $data[$flight->tag_id] = $flight->information;
+        }
 
-      return view('welcome', $data);
-   }
+        return view('welcome', $data);
+    }
 
-   public function add(Request $request)
-   {
-      $validated = $request->validate(
-        [
-          'name'    => 'required',
-          'email'   => 'email',
-          'phone'   => 'required',
-          'count'   => 'required|max:10',
-          'message' => 'max:1000',
-          'grant'   => 'required',
-        ]);
-      $user = new Order;
-      $user->fill(
-        [
-          'name'    => $validated['name'],
-          'email'   => $validated['email'],
-          'phone'   => $validated['phone'] ?: 0,
-          'count'   => $validated['count'] ?: 0,
-          'message' => $validated['message'] ?: 'default',
-          'grant'   => $validated['grant'],
-        ]);
-      if($user->save()) {
-         return response('Запрос отправлен');
-      } else {
-         return response('Ошибка');
-      }
-   }
+    public function add(Request $request)
+    {
+        $validated = $request->validate(
+            [
+                'name' => 'required',
+                'email' => 'email',
+                'phone' => 'required',
+                'count' => 'required|max:10',
+                'message' => 'max:1000',
+                'grant' => 'required',
+            ]);
+        $user = new Order;
+        $user->fill(
+            [
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'] ?: 0,
+                'count' => $validated['count'] ?: 0,
+                'message' => $validated['message'] ?: 'Сообщения нет',
+                'grant' => $validated['grant'],
+            ]);
+        if ($user->save()) {
+            return response('Запрос отправлен');
+        } else {
+            return response('Ошибка');
+        }
+    }
 }

@@ -178,7 +178,7 @@
                         @csrf
                         <div class="input-field">
                             <input name="name" id="form_name" type="text" class="validate">
-                            <label for="form_name">Ф.И.О</label>
+                            <label for="form_name">Имя</label>
                         </div>
                         <div class="input-field">
                             <input name="email" id="form_email" type="text" class="validate">
@@ -187,11 +187,11 @@
                         <div class="input-field">
                             <input name="phone" id="form_phone" class="phone" type="tel"
                                    placeholder="+7 (___)___-__-__">
-                            <label for="form_phone">Номер телефона</label>
+                            <label for="form_phone">Контактный телефон</label>
                         </div>
                         <div class="input-field">
                             <input name="message" id="form_lorem" type="text" class="validate">
-                            <label for="form_lorem">Сообщение</label>
+                            <label for="form_lorem">Дополнительная информация</label>
                         </div>
                         <div class="input-field">
                             <div><span class="p range-slider">Кол-во товара</span></div>
@@ -203,7 +203,7 @@
                         <div class="input-box">
                             <label>
                                 <input name="grant" type="checkbox">
-                                <span>Даю соглаие на обработку персональных данных</span>
+                                <span>Согласие на обработку персональных данных</span>
                             </label>
                         </div>
                         <div class="input-box">
@@ -228,7 +228,6 @@
                     <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
-
             <div class="col s4 right-align">
                 <p>
                     <small>2018 типа.лэндинг проект Гудлайн.<br>

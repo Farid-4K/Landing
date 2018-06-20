@@ -15,11 +15,11 @@
                         <div id="form" class="card-panel">
                             <div class="input-field">
                                 <input id="login" name="login" type="text" class="validate">
-                                <label for="login">LOGIN</label>
+                                <label class="active" for="login">LOGIN</label>
                             </div>
                             <div class="input-field">
                                 <input id="password" name="password" type="password" class="validate">
-                                <label for="password">PASSWORD</label>
+                                <label class="active" for="password">PASSWORD</label>
                             </div>
                             <div class="input-field">
                                 <button class="btn waves-effect waves-light">Вход</button>
