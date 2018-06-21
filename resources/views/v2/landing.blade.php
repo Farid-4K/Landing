@@ -90,7 +90,7 @@
 							<div class="row">
 								<div class="col s6">
 									<div class="card-image">
-										<img src="image/Picture-(2)(1).png" alt="">
+										<img src="/image/Picture-(2)(1).png" alt="">
 									</div>
 								</div>
 								<div class="col s6">
@@ -116,7 +116,7 @@
 								</div>
 								<div class="col s6">
 									<div class="card-image">
-										<img src="image/Picture-(3)(1).png" alt="">
+										<img src="/image/Picture-(3)(1).png" alt="">
 									</div>
 								</div>
 							</div>
@@ -127,7 +127,7 @@
 							<div class="row">
 								<div class="col s6">
 									<div class="card-image">
-										<img src="image/Picture-(4)(1).png" alt="">
+										<img src="/image/Picture-(4)(1).png" alt="">
 									</div>
 								</div>
 								<div class="col s6">
