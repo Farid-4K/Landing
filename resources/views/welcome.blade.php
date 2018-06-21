@@ -12,7 +12,7 @@
 
 </head>
 
-<body>{{$asd}}
+<body>
 
 <header style="background: url({{$main_image}}) no-repeat center center">
     <div class="container">

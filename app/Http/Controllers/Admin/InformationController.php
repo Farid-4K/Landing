@@ -17,12 +17,22 @@ class InformationController extends Controller
 
    public function create(Request $request)
    {
+
+      $id = $request->get('id');
+
+      if(!empty($id)) {
+         $row = Information::query()->find($id);
+         $unique = null;
+      } else {
+         $row = new Information();
+         $unique = '|unique:information';
+      }
       /**
        * Validation
        */
       $validated = $request->validate(
         [
-          'tag_id'      => 'required|unique:information|regex:/^([\w]+[^0-9])/|max:100',
+          'tag_id'      => 'required|regex:/^([\w]+[^0-9])/|max:100'.$unique,
           'information' => 'max:1000',
           'image'       => 'image',
           'description' => 'max:100',
@@ -38,9 +48,9 @@ class InformationController extends Controller
       }
 
       /**
-       * Add to database
+       * Add to database or update
        */
-      $row = new Information();
+
       if($row->fill(
         [
           'tag_id'      => $validated['tag_id'],
@@ -51,45 +61,6 @@ class InformationController extends Controller
          return $row->save()
            ? response('Загружено')
            : response('error', 500);
-      }
-   }
-
-   public function update(Request $request)
-   {
-      /**
-       * Validation
-       */
-      $validated = $request->validate(
-        [
-          'id'          => 'required',
-          'description' => 'max:100|required',
-          'information' => 'max:1000',
-          'image'       => 'image',
-        ]);
-
-      /**
-       * Check image upload
-       */
-      if($request->hasFile('image')) {
-         $information = Information::checkUploadData($validated['image']);
-      } else {
-         $information = $validated['information'];
-      }
-
-      /**
-       * Find row and add to database
-       */
-      $id = $request->get('id');
-      $row = Information::query()->find($id);
-      if($row->fill(
-        [
-          'description' => $validated['description'],
-          'information' => $information,
-        ])
-      ) {
-         return $row->save()
-           ? response('Загружено')
-           : response('ERROR', 500);
       }
    }
 
@@ -130,8 +101,8 @@ class InformationController extends Controller
                 ];
              },
              $db),
-           'use'=> array_diff($tags, $variables),
-           'not_use' => array_diff($variables, $tags),
+           'use'         => array_diff($tags, $variables),
+           'not_use'     => array_diff($variables, $tags),
 
          ];
 

@@ -43,7 +43,6 @@ Route::middleware('auth')->namespace('Admin')->group(
         Route::get('/admin/table/', 'InformationController@table');
         Route::any('/admin/table/delete', 'InformationController@delete');
         Route::any('/admin/table/create', 'InformationController@create');
-        Route::any('/admin/table/update', 'InformationController@update');
 
         /**
          * Group that edits the profile setting

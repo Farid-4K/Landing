@@ -42,7 +42,8 @@
    <div class="row">
       @foreach ($information as $val)
          <div class="col xl12 l4 m6 s12">
-            <div class="card card-panel one-card-main">
+            <div class="card card-panel one-card-main" data-information="{{$val['information']}}"
+                 data-id="{{$val['id']}}" data-desc="{{$val['description']}}" data-tag="{{$val['tag_id']}}">
                <div class="card-title center">
                   <div data-tag-id="{{$val['id']}}"><h5>{{$val['description']}} ({{$val['tag_id']}})</h5></div>
                </div>
@@ -82,55 +83,6 @@
                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
             </div>
          </div>
-
-
-         <div style="display: none" id="formto{{$val['id']}}" class="col form l6 form-show-ID m8 s12">
-            <div class="container">
-               <div class="row">
-                  <div class="col s12">
-                     <div class="card-panel card">
-                        <form action="/admin/table/update" enctype="multipart/form-data"
-                              method="POST">
-                           @csrf
-                           <div class="card-title">Изменение информации<i
-                                 class="material-icons close-edit-form-ID pointer right">close</i>
-                           </div>
-                           <div class="card-content">
-                              <input type="text" name="id" hidden value="{{$val['id']}}">
-                              <div class="input-field">
-                                 <input name="description" type="text"
-                                        value="{{$val['description']}}" class="validate">
-                              </div>
-                              <div class="input-field">
-                                                <textarea name="information" type="text" class="materialize-textarea
-                                                validate">{{$val['information']}}</textarea>
-                              </div>
-                           </div>
-                           <div class="input-field card-action">
-                              <div class="photo-input">
-                                 <input type="hidden" name="public" value="{{$val['id']}}">
-                                 <div class="file-field input-field">
-                                    <div class="btn">
-                                       <span>Фото</span>
-                                       <input type="file" name="image">
-                                    </div>
-
-                                    <div class="file-path-wrapper">
-                                       <input class="file-path validate" type="text"/>
-                                    </div>
-                                 </div>
-                                 <button type="submit" name="save"
-                                         class="btn save-form-ID waves-effect waves-light">
-                                    Сохранить
-                                 </button>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
       @endforeach
    </div>
 </div>
@@ -138,16 +90,19 @@
    <form action="/admin/table/create" enctype="multipart/form-data" method="POST">
       @csrf
       {{ method_field('POST') }}
+      <input id="id_add" type="hidden" name="id" value="0">
       <div class="card-content">
-         <div class="input-field">
-            <input id="tag_add" name="tag_id" type="text" class="validate">
-            <label for="tag_add">Имя тега</label>
+         <div>
+            <span>Имя тега</span>
+            <div class="input-field inline">
+               <input id="tag_add" name="tag_id" type="text" class="validate">
+            </div>
+            <span>Подпись</span>
+            <div class="input-field inline">
+               <input id="des_add" name="description" type="text" class="validate">
+            </div>
          </div>
-         <div class="input-field">
-            <input id="des_add" name="description" type="text" class="validate">
-            <label for="des_add">Название</label>
-         </div>
-         <div class="input-field">
+         <div class="input-field full-w">
             <textarea id="inf_add" name="information" type="text"
                       class="materialize-textarea validate"></textarea>
             <label for="inf_add">Текст</label>
@@ -156,7 +111,7 @@
       <div class="file-field input-field">
          <div class="btn">
             <span>Фото</span>
-            <input type="file" class="file-add-path-ID" name="image">
+            <input id="img_add" type="file" class="file-add-path-ID" name="image">
          </div>
          <div class="file-path-wrapper">
             <input class="file-path validate" type="text" placeholder="Upload file"/>
@@ -177,36 +132,51 @@
 <script>
    $(document).ready(function () {
       $('.deleteData-ID').click(function () {
-         $(this).parent().parent().parent().parent().slideUp('slow');
+         $(this).parents(".one-card-main").slideUp('slow');
          ajaxStart('/admin/table/delete', 'GET', 'id=' + $(this).attr("data-delete-id"));
-      });
-      $('.openEditForm-ID').click(function () {
-         var id = $(this).attr('data-form-id');
-         $('#formto' + id).fadeIn();
       });
       $(".close-new-data-form-ID").click(function () {
          $(this).parent().fadeOut();
       });
+
       $(".open-add-data-form-ID").click(function () {
+         $("#tag_add").val("").attr("value", "").removeAttr("disabled");
+         $("#des_add").val("").attr("value", "");
+         $("#inf_add").val("").attr("value", "");
+         $("#img_add").val("").attr("value", "");
+         $("#id_add").val("").attr("value", "");
          $(".new-data-form-ID").fadeIn();
       });
+
       $(".form-close-new-data-form-ID").click(function () {
-         $(this).parent().parent().parent().fadeOut();
+         $(this).parents(".new-data-form-ID").fadeOut();
       });
+
       $(".file-add-path-ID").change(function () {
          if ($(this).val() !== '') {
             $("#inf_add").attr("disabled", "on");
          }
       });
-      $(".close-edit-form-ID").click(function () {
-         $(this).parents(".form").fadeOut();
-      });
+
       $('.tooltipped').tooltip({enterDelay: 1000});
       $(document).ready(function () {
          $('.modal').modal();
       });
-      $('.save-form-ID').click(function () {
-         $(this).parent().parent().parent().parent().parent().parent().parent().parent().fadeOut();
-      })
+
+
+      $(".openEditForm-ID").click(function () {
+         let card = $(this).parents(".one-card-main");
+         let data = [];
+         data.id = card.attr("data-id");
+         data.information = card.attr("data-information");
+         data.description = card.attr("data-desc");
+         data.tag_id = card.attr("data-tag");
+         $("#tag_add").val(data.tag_id).attr("value", data.tag_id).click();
+         $("#des_add").val(data.description).attr("value", data.description);
+         $("#inf_add").val(data.information).attr("value", data.information);
+         $("#id_add").val(data.id).attr("value", data.id);
+         M.textareaAutoResize($('textarea'));
+         $(".new-data-form-ID").fadeIn();
+      });
    });
 </script>
