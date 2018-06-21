@@ -59,8 +59,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn waves-effect left waves-light">Сохранить</button>
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+                    <button class="btn-flat waves-effect right waves-green">Сохранить</button>
+                    <a href="#!" class="modal-close waves-effect waves-red btn-flat">Закрыть</a>
                 </div>
             </div>
         </form>
