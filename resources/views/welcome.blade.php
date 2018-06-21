@@ -12,7 +12,7 @@
 
 </head>
 
-<body>{{$asd}}
+<body>
 
 <header style="background: url({{$main_image}}) no-repeat center center">
     <div class="container">
@@ -216,26 +216,47 @@
     </div>
 </section>
 
-<footer>
+<footer class="page-footer cyan darken-2">
     <div class="container">
-
         <div class="row">
-            <div class="col s8 margin-20">
-                <ul class="list-inline social">
-                    <li>Зацените нас в</li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <div class="col l4 m6 s12">
+                <h5 class="white-text">О КОМПАНИИ</h5>
+                <ul>
+                    <li>Новости Good Line</li>
+                    <li>Центры обслуживания</li>
+                    <li>Документы</li>
+                    <li>Реквизиты</li>
+                    <li>Вакансии</li>
                 </ul>
             </div>
-            <div class="col s4 right-align">
-                <p>
-                    <small>2018 типа.лэндинг проект Гудлайн.<br>
-                        Создано <a href="http://visualsoldiers.com">Кем-то</a></small>
-                </p>
+            <div class="col l4 m6 s12">
+                <h5 class="white-text">УСЛУГИ</h5>
+                <ul>
+                    <li>Сервис и оборудование</li>
+                    <li>Роутер Good Line</li>
+                    <li>Калькулятор услуг</li>
+                    <li>Бамбук ТВ</li>
+                    <li>Dr.Web</li>
+                    <li>Wi-Fi зоны</li>
+                </ul>
+            </div>
+            <div class="col l4 m6 s12">
+                <h5 class="white-text">ПОМОЩЬ</h5>
+                <ul>
+                    <li>Удаленный помощник</li>
+                    <li>Приложение «Техподдержка»</li>
+                    <li>Подключен ли ваш дом?</li>
+                    <li>Инструкция по настройке ТВ</li>
+                    <li>Конфиденциальность</li>
+                </ul>
             </div>
         </div>
-
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
     </div>
 </footer>
 
