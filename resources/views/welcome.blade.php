@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-
 </head>
 
 <body>
@@ -206,6 +205,7 @@
                                 <span>Согласие на обработку персональных данных</span>
                             </label>
                         </div>
+                        @captcha()
                         <div class="input-box">
                             <button name="start" class="btn waves-effect waves-light">оформить</button>
                         </div>
@@ -259,10 +259,10 @@
         </div>
     </div>
 </footer>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/mask.js"></script>
 <script>
-    $(document).ready(function () {
+    $(function () {
 
 
         var rangeSlider = function () {
@@ -282,69 +282,49 @@
                 });
             });
         };
-
+$("#form_phone").mask("+9(999)999-99-99");
         rangeSlider();
 
-        var phoneInput = document.querySelector('.phone')
-        phoneInput.addEventListener('keydown', function (event) {
-            if (!(event.key == 'ArrowLeft' || event.key == 'ArrowRight' || event.key == 'Backspace' || event.key == 'Tab')) {
-                event.preventDefault()
-            }
-            let mask = '+7 (111) 111-11-11';
-
-            if (/[0-9\+\ \-\(\)]/.test(event.key)) {
-                let currentString = this.value;
-                let currentLength = currentString.length;
-                if (/[0-9]/.test(event.key)) {
-                    if (mask[currentLength] == '1') {
-                        this.value = currentString + event.key;
-                    } else {
-                        for (var i = currentLength; i < mask.length; i++) {
-                            if (mask[i] == '1') {
-                                this.value = currentString + event.key;
-                                break;
-                            }
-                            currentString += mask[i];
-                        }
-                    }
-                }
-            }
-        });
-        $(document).ready(function () {
-            $('form').submit(function (event) {
-                event.preventDefault();
-                $.ajax({
-                    type: $(this).attr('method'),
-                    url: $(this).attr('action'),
-                    data: new FormData(this),
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    beforeSend: function () {
-                        $(".loader").removeClass("hidden");
-                    },
-                    success: function (result) {
-                        M.toast({html: result});
-                        $(".loader").addClass("hidden");
+        $('form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                type: $(this).attr('method'),
+                url: $(this).attr('action'),
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function () {
+                    $(".loader").removeClass("hidden");
+                },
+                success: function (result) {
+                    $(".loader").addClass("hidden");
+                    let response = grecaptcha.getResponse();
+                    if (response.length >= 10) {
                         let current = $("button[name=start]").parent().parent();
                         current.fadeOut();
                         $(".excellent").delay(500).fadeIn();
                         let height = current.height();
                         let width = current.width();
                         $(".excellent").width(width).height(height);
-                    },
-                    error: function (result) {
-                        let data = result.responseJSON.message;
-                        let error = result.responseJSON.errors;
-                        if (data !== undefined) {
-                            M.toast({html: data});
-                            M.toast({html: error[Object.keys(error)[0]]});
-                        }
-                        $(".loader").addClass("hidden");
-                    },
-                });
+                    }
+                    else {
+                        M.toast({html: 'Капча не прошла'});
+                    }
+                    M.toast({html: result});
+                },
+                error: function (result) {
+                    let data = result.responseJSON.message;
+                    let error = result.responseJSON.errors;
+                    if (data !== undefined) {
+                        M.toast({html: data});
+                        M.toast({html: error[Object.keys(error)[0]]});
+                    }
+                    $(".loader").addClass("hidden");
+                },
             });
         });
+
     })
 </script>
 </body>
