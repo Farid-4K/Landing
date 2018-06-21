@@ -93,7 +93,7 @@
       <input id="id_add" type="hidden" name="id" value="0">
       <div class="card-content">
          <div>
-            <span>Имя тега</span>
+            <span id="tag_add_t">Имя тега</span>
             <div class="input-field inline">
                <input id="tag_add" name="tag_id" type="text" class="validate">
             </div>
@@ -140,7 +140,8 @@
       });
 
       $(".open-add-data-form-ID").click(function () {
-         $("#tag_add").val("").attr("value", "").removeAttr("disabled");
+         $("#tag_add_t").text('Имя тега');
+         $("#tag_add").val("").attr("value", "").removeAttr("disabled").removeAttr("hidden");
          $("#des_add").val("").attr("value", "");
          $("#inf_add").val("").attr("value", "");
          $("#img_add").val("").attr("value", "");
@@ -171,7 +172,8 @@
          data.information = card.attr("data-information");
          data.description = card.attr("data-desc");
          data.tag_id = card.attr("data-tag");
-         $("#tag_add").val(data.tag_id).attr("value", data.tag_id).click();
+         $("#tag_add_t").text('');
+         $("#tag_add").val(data.tag_id).attr("value", data.tag_id).attr("hidden","");
          $("#des_add").val(data.description).attr("value", data.description);
          $("#inf_add").val(data.information).attr("value", data.information);
          $("#id_add").val(data.id).attr("value", data.id);

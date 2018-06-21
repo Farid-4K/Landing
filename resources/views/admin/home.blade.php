@@ -14,11 +14,11 @@
                      data-method="get">Предпросмотр</a>
                </li>
                <li>
-                  <a href="#call_information_table" data-call="information" data-action="/admin/table"
+                  <a href="#call_information" data-call="information" data-action="/admin/table"
                      data-method="get">Информация</a>
                </li>
                <li>
-                  <a href="#call_settings" data-call="setting" data-action="/admin/settings/profile"
+                  <a href="#call_settings" data-call="settings" data-action="/admin/settings/profile"
                      data-method="get">Настройки</a>
                </li>
                <li>
@@ -60,7 +60,7 @@
    </div>
 
    <script>
-      $(document).ready(function () {
+      $(function () {
          M.AutoInit();
          $("nav li>a").click(function () {
             $.ajax({
@@ -93,6 +93,8 @@
                }
             });
          });
+         $("a[data-call='"+location.hash.substr(6)+"']").click();
+
       });
    </script>
 
