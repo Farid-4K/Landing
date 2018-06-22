@@ -5,34 +5,46 @@
       @if($not_use)
          <div class="col s12">
             <div class="card">
-               <div class="card-content">
-                  <div class="card-title">
-                     <div>Несуществующий текст</div>
+               <form action="/admin/table/create/unused" method="POST">
+                  @csrf
+                  <div class="card-content">
+                     <div class="card-title">
+                        <div>Несуществующий текст</div>
+                     </div>
+                     @foreach($not_use as $not_uses)
+                        <label class="chip">
+                           <input name="{{$not_uses}}" type="checkbox" class="left" checked="checked"/>
+                           <span>{{$not_uses}}</span>
+                        </label>
+                     @endforeach
                   </div>
-                  @foreach($not_use as $not_uses)
-                     <div class="chip">{{$not_uses}}</div>
-                  @endforeach
-               </div>
-               <div class="card-action">
-                  <button class="btn-flat waves-effect waves-green">Создать все ключи</button>
-               </div>
+                  <div class="card-action">
+                     <button type="submit" class="btn-flat waves-effect waves-green">Создать</button>
+                  </div>
+               </form>
             </div>
          </div>
       @endif
       @if($use)
          <div class="col s12">
             <div class="card">
-               <div class="card-content">
-                  <div class="card-title">
-                     <div>Неиспользуемый текст</div>
+               <form id="unusedDeletingForm" action="/admin/table/delete/unused" method="POST">
+                  @csrf
+                  <div class="card-content">
+                     <div class="card-title">
+                        <div>Неиспользуемый текст</div>
+                     </div>
+                     @foreach($use as $uses)
+                        <label class="chip">
+                           <input name="{{$uses}}" type="checkbox" class="left" checked="checked"/>
+                           <span>{{$uses}}</span>
+                        </label>
+                     @endforeach
                   </div>
-                  @foreach($use as $uses)
-                     <div class="chip">{{$uses}}</div>
-                  @endforeach
-               </div>
-               <div class="card-action">
-                  <button class="btn-flat waves-effect waves-red">Удалить все ключи</button>
-               </div>
+                  <div class="card-action">
+                     <button type="submit" class="btn-flat waves-effect waves-red">Удалить</button>
+                  </div>
+               </form>
             </div>
          </div>
       @endif
@@ -130,7 +142,7 @@
 
 <script src="/js/form.js"></script>
 <script>
-   $(document).ready(function () {
+   jQuery(document).ready(function ($) {
       $('.deleteData-ID').click(function () {
          $(this).parents(".one-card-main").slideUp('slow');
          ajaxStart('/admin/table/delete', 'GET', 'id=' + $(this).attr("data-delete-id"));
@@ -164,6 +176,12 @@
          $('.modal').modal();
       });
 
+      $("#unusedDeletingForm button").click(function () {
+         let form = "#unusedDeletingForm";
+         if ($(form + " input").is(":checked")) {
+            $(form + " input:checked").parent().fadeOut();
+         }
+      });
 
       $(".openEditForm-ID").click(function () {
          let card = $(this).parents(".one-card-main");
@@ -173,7 +191,7 @@
          data.description = card.attr("data-desc");
          data.tag_id = card.attr("data-tag");
          $("#tag_add_t").text('');
-         $("#tag_add").val(data.tag_id).attr("value", data.tag_id).attr("hidden","");
+         $("#tag_add").val(data.tag_id).attr("value", data.tag_id).attr("hidden", "");
          $("#des_add").val(data.description).attr("value", data.description);
          $("#inf_add").val(data.information).attr("value", data.information);
          $("#id_add").val(data.id).attr("value", data.id);

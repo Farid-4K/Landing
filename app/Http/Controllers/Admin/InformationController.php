@@ -17,7 +17,6 @@ class InformationController extends Controller
 
    public function create(Request $request)
    {
-
       $id = $request->get('id');
 
       if(!empty($id)) {
@@ -32,7 +31,7 @@ class InformationController extends Controller
        */
       $validated = $request->validate(
         [
-          'tag_id'      => 'required|regex:/^([\w]+[^0-9])/|max:100'.$unique,
+          'tag_id'      => 'required|regex:/^([\w]+[^0-9])/|max:100' . $unique,
           'information' => 'max:1000',
           'image'       => 'image',
           'description' => 'max:100',
@@ -60,7 +59,7 @@ class InformationController extends Controller
       ) {
          return $row->save()
            ? response('Загружено')
-           : response('error', 500);
+           : response('Ошибка', 500);
       }
    }
 
@@ -84,10 +83,12 @@ class InformationController extends Controller
 
          $parse = new Parser;
          $variables = $parse->parseBladeEchos('welcome.blade.php');
-         foreach ($db as $key => $columns) {
-            $tags[$key] = sprintf('$%s', $columns->tag_id);
+         foreach ($variables as $key => $val) {
+            $variables[$key] = substr($val, 1);
          }
-
+         foreach ($db as $key => $columns) {
+            $tags[$key] = $columns->tag_id;
+         }
          $data = [
            'information' => array_map(
              function ($s) {
@@ -124,5 +125,15 @@ class InformationController extends Controller
       }
 
       return view('admin.preview', $data);
+   }
+
+   public function deleteUnused(Request $request)
+   {
+      foreach ($request->all() as $key => $val) {
+         if($val === 'on') {
+            Information::query()->where('tag_id', '=', $key)->delete();
+         }
+      }
+      return response('Нечего удалять');
    }
 }

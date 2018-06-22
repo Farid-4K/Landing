@@ -35,14 +35,14 @@ Route::middleware('auth')->namespace('Admin')->group(
         Route::get(
           '/v2', function (){
              return view('v2.landing');
-        }
-        );
+        });
         /**
          * Group that edits the content
          */
         Route::get('/admin/table/', 'InformationController@table');
         Route::any('/admin/table/delete', 'InformationController@delete');
         Route::any('/admin/table/create', 'InformationController@create');
+        Route::any('/admin/table/delete/unused', 'InformationController@deleteUnused');
 
         /**
          * Group that edits the profile setting
