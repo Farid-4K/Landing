@@ -19,7 +19,7 @@ class AdminController extends Controller
 
     public function showProfile(Request $request)
     {
-        if ($request->get('page') == 'setting') {
+        if ($request->get('page') == 'settings') {
             $admin = Admin::query()->find(1);
 
             $data = [
