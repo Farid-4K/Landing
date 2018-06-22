@@ -19,6 +19,7 @@
                <div>Телефон: {{$user['phone']}}</div>
                <div>Кол-во: {{$user['count']}}</div>
                <div>Согласие: @if($user['grant']==='on')Дано@endif</div>
+               <div>Дата: {{$user['created_at']}}</div>
             </div>
             <div class="card-action">
                <button type="submit" data-delete-id="{{$user['id']}}"
@@ -51,6 +52,7 @@
                <div>Телефон: {{$users['phone']}}</div>
                <div>Кол-во: {{$users['count']}}</div>
                <div>Согласие: @if($users['grant']==='on')Дано@endif</div>
+               <div>Дата: {{$users['created_at']}}</div>
             </div>
             <div class="card-action">
                <button type="submit" data-delete-id="{{$users['id']}}"
