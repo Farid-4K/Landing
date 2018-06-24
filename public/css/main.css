@@ -135,7 +135,10 @@ h3 {
     color: #ffffff;
     font-weight: 400;
 }
-
+.breack-word{
+    word-wrap: break-word;
+    word-break: break-all;
+}
 p {
     font-size: 17px;
     line-height: 22px;

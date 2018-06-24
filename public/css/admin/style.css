@@ -134,11 +134,6 @@ body {
         padding: 10px !important;
     }
 }
-
-.toast-container {
-    z-index: 93782449812759 !important;
-}
-
 .one-card-main {
     height: auto;
 }
@@ -146,8 +141,4 @@ body {
 .one-card-main .card-content {
     overflow-y: auto;
     height: auto;
-}
-
-.one-card-main .card-panel {
-    padding: 18px !important;
 }

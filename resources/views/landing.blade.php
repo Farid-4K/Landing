@@ -16,7 +16,7 @@
 <header style="background: url({{$main_image}}) no-repeat center center">
    <div class="">
       <div class="row">
-         <div class="col s3 offset-s9">
+         <div class="col l3 offset-l9 s12">
             <a href="#"><img src="{{$logo}}" alt=""></a>
          </div>
       </div>
@@ -24,13 +24,14 @@
       <div class="row">
          <div class="header-info">
             <div class="col s12">
-               <h1 class="text-shadow center-align">{{$full_title}}</h1>
-               <p class="lead text-shadow center-align">{{$header_info}}</p>
+               <h1 class="text-shadow hide-on-small-only breack-word center-align">{{$full_title}}</h1>
+               <h4 class="text-shadow hide-on-med-and-up white-text breack-word center-align">{{$full_title}}</h1>
+               <p class="lead flow-text text-shadow center-align">{{$header_info}}</p>
             </div>
 
             <div class="row">
                <div class="col s12 flex-center">
-                  <div class="wow flex-center fadeInUp" data-wow-delay="1.4s">
+                  <div class="flex-center">
                      <a href="#invite" class="btn waves-effect waves-light btn-large scroll">Заказать</a>
                   </div>
                </div>
@@ -41,35 +42,35 @@
    </div>
 </header>
 
-<div class="mouse-icon hidden-xs">
+<div class="mouse-icon hide-on-small-only">
    <div class="scroll"></div>
 </div>
 
 <section id="main-info" class="pad-xl">
    <div class="container">
       <div class="row">
-         <div class="col s3">
+         <div class="col s12 m3">
             <div class="flex-center fixed-h-100">
                <img src="{{$ef1}}" alt="" class="responsive-img">
             </div>
             <hr class="line purple">
             <h5 class="center-align">{{$ef1_inf}}</h5>
          </div>
-         <div class="col s3">
+         <div class="col s12 m3">
             <div class="flex-center fixed-h-100">
                <img src="{{$ef2}}" alt="" class="responsive-img">
             </div>
             <hr class="line blue">
             <h5 class="center-align">{{$ef2_inf}}</h5>
          </div>
-         <div class="col s3">
+         <div class="col s12 m3">
             <div class="flex-center fixed-h-100">
                <img src="{{$ef3}}" alt="" class="responsive-img">
             </div>
             <hr class="line yellow">
             <h5 class="center-align">{{$ef3_inf}}</h5>
          </div>
-         <div class="col s3">
+         <div class="col s12 m3">
             <div class="flex-center fixed-h-100">
                <img src="{{$ef4}}" alt="" class="responsive-img">
             </div>
@@ -83,20 +84,20 @@
 <section id="pricing" class="pad-lg">
    <div class="container">
       <div class="row margin-40">
-         <div class="col s8 offset-m2 center-align">
-            <h2>{{$title_2}}</h2>
+         <div class="col s12 center-align">
+            <h2 class="breack-word">{{$title_2}}</h2>
          </div>
       </div>
 
       <div class="row fixed-cards-500 margin-50">
 
-         <div class="col s12 m4">
-            <div class="card card-panel">
+         <div class="col s12 m12 l6">
+            <div class="card">
                <div class="card-image">
                   <img src="{{$ef5}}" class="half-img" alt="">
                </div>
-               <div class="card-title center-align">
-                  {{$ef5_title}}
+               <div class="center-align">
+                  <h5>{{$ef5_title}}</h5>
                </div>
                <div class="card-content center-align">
                   {{$ef5_content}}
@@ -104,13 +105,26 @@
             </div>
          </div>
 
-         <div class="col s12 m4">
-            <div class="card card-panel">
+         <div class="col l6 s12 m12">
+            <div class="card">
+               <div class="card-image">
+                  <img src="{{$ef8}}" alt="" class="half-img">
+               </div>
+               <div class="center-align">
+                  <h5>{{$ef8_title}}</h5>
+               </div>
+               <div class="card-content center-align">
+                  {{$ef8_content}}
+               </div>
+            </div>
+         </div>
+         <div class="col s12 m12 l6">
+            <div class="card">
                <div class="card-image">
                   <img src="{{$ef6}}" alt="" class="half-img">
                </div>
-               <div class="card-title center-align">
-                  {{$ef6_title}}
+               <div class="center-align">
+                  <h5>{{$ef6_title}}</h5>
                </div>
                <div class="card-content center-align">
                   {{$ef6_content}}
@@ -118,13 +132,13 @@
             </div>
          </div>
 
-         <div class="col s12 m4">
-            <div class="card card-panel">
+         <div class="col s12 m12 l6">
+            <div class="card">
                <div class="card-image">
                   <img src="{{$ef7}}" alt="" class="half-img">
                </div>
-               <div class="card-title center-align">
-                  {{$ef7_title}}
+               <div class="center-align">
+                  <h5>{{$ef7_title}}</h5>
                </div>
                <div class="card-content center-align">
                   {{$ef7_content}}
@@ -132,27 +146,14 @@
             </div>
          </div>
 
-         <div class="col offset-m2 s12 m4">
-            <div class="card card-panel">
-               <div class="card-image">
-                  <img src="{{$ef8}}" alt="" class="half-img">
-               </div>
-               <div class="card-title center-align">
-                  {{$ef8_title}}
-               </div>
-               <div class="card-content center-align">
-                  {{$ef8_content}}
-               </div>
-            </div>
-         </div>
 
-         <div class="col s12 m4">
-            <div class="card card-panel">
+         <div class="col offset-l3 s12 m12 l6">
+            <div class="card">
                <div class="card-image">
                   <img src="{{$ef9}}" alt="" class="half-img">
                </div>
-               <div class="card-title center-align">
-                  {{$ef9_title}}
+               <div class="center-align">
+                  <h5>{{$ef9_title}}</h5>
                </div>
                <div class="card-content center-align">
                   {{$ef9_content}}
@@ -185,12 +186,12 @@
                   </div>
                   <div class="input-field">
                      <input name="phone" id="form_phone" class="phone" type="tel"
-                            placeholder="+7 (___)___-__-__">
+                            placeholder="+7 ( ) - -">
                      <label for="form_phone">Контактный телефон</label>
                   </div>
                   <div class="input-field">
                      <input name="message" id="form_lorem" type="text" class="validate">
-                     <label for="form_lorem">Дополнительная информация</label>
+                     <label for="form_lorem">Доп. информация</label>
                   </div>
                   <div class="input-field">
                      <div><span class="p range-slider">Кол-во товара</span></div>
@@ -317,7 +318,6 @@
                let data = result.responseJSON.message;
                let error = result.responseJSON.errors;
                if (data !== undefined) {
-                  M.toast({html: data});
                   M.toast({html: error[Object.keys(error)[0]]});
                }
                $(".loader").addClass("hidden");

@@ -1,11 +1,12 @@
-<a class="btn-floating btn-large waves-effect open-add-data-form-ID btn-r-d-position waves-light red"><i
-      class="material-icons">add</i></a>
+<a id="openAddDataForm" class="btn-floating btn-large waves-effect btn-r-d-position waves-light red">
+   <i class="material-icons">add</i>
+</a>
 <div class="container">
    <div class="row">
       @if($not_use)
          <div class="col s12">
             <div class="card">
-               <form action="/admin/table/create/unused" method="POST">
+               <form class="unusedDeletingForm" action="/admin/table/create/unused" method="POST">
                   @csrf
                   <div class="card-content">
                      <div class="card-title">
@@ -19,7 +20,10 @@
                      @endforeach
                   </div>
                   <div class="card-action">
-                     <button type="submit" class="btn-flat waves-effect waves-green">Создать</button>
+                     <button type="submit" name="create" value="create" class="btn-flat waves-effect waves-green">
+                        Создать
+                     </button>
+                     <a name="delete" id="deleteUnusedText" value="true" class="btn-flat right waves-effect waves-red">Удалить</a>
                   </div>
                </form>
             </div>
@@ -28,7 +32,7 @@
       @if($use)
          <div class="col s12">
             <div class="card">
-               <form id="unusedDeletingForm" action="/admin/table/delete/unused" method="POST">
+               <form class="unusedDeletingForm" action="/admin/table/delete/unused" method="POST">
                   @csrf
                   <div class="card-content">
                      <div class="card-title">
@@ -53,20 +57,27 @@
 <div class="container">
    <div class="row">
       @foreach ($information as $val)
-         <div class="col xl12 l4 m6 s12">
-            <div class="card card-panel one-card-main" data-information="{{$val['information']}}"
+         <div class="col s12">
+            <div class="card one-card-main" data-information="{{$val['information']}}"
                  data-id="{{$val['id']}}" data-desc="{{$val['description']}}" data-tag="{{$val['tag_id']}}">
-               <div class="card-title center">
-                  <div data-tag-id="{{$val['id']}}"><h5>{{$val['description']}} ({{$val['tag_id']}})</h5></div>
-               </div>
                <div class="card-content scroll-y-a">
-                  <div>{{$val['information']}}</div>
+                  <div class="card-title center">
+                     <div data-tag-id="{{$val['id']}}">
+                        <h5>{{$val['description']}} ({{$val['tag_id']}})</h5>
+                     </div>
+                  </div>
+                  <div>
+                     <span>{{$val['information']}}</span>
+                  </div>
                </div>
                <div class="card-action">
                   <div class="form-action-inline">
                      <div>
-                        <button type="submit" data-delete-id="{{$val['id']}}"
-                                class="btn deleteData-ID tooltipped" data-position="top"
+                        <button id="deleteInformation"
+                                type="submit"
+                                data-delete-id="{{$val['id']}}"
+                                class="btn tooltipped waves-effect waves-red"
+                                data-position="top"
                                 data-tooltip="Удалить">
                            <i class="material-icons">delete</i>
                         </button>
@@ -98,7 +109,7 @@
       @endforeach
    </div>
 </div>
-<div style="display: none;" class="card-panel card new-data-form new-data-form-ID">
+<div id="newDataForm" style="display: none;" class="card-panel card new-data-form">
    <form action="/admin/table/create" enctype="multipart/form-data" method="POST">
       @csrf
       {{ method_field('POST') }}
@@ -117,69 +128,89 @@
          <div class="input-field full-w">
             <textarea id="inf_add" name="information" type="text"
                       class="materialize-textarea validate"></textarea>
-            <label for="inf_add">Текст</label>
+            <span class="helper-text">Текст</span>
          </div>
       </div>
       <div class="file-field input-field">
          <div class="btn">
             <span>Фото</span>
-            <input id="img_add" type="file" class="file-add-path-ID" name="image">
+            <input id="img_add" type="file" name="image">
          </div>
          <div class="file-path-wrapper">
             <input class="file-path validate" type="text" placeholder="Upload file"/>
          </div>
       </div>
       <div class="input-field flex-center card-action">
-         <button type="submit" name="save" class="btn form-close-new-data-form-ID waves-effect waves-light">
+         <button type="submit" id="formCloseNewDataForm" class="btn waves-effect waves-light">
             Сохранить
          </button>
       </div>
    </form>
-   <a class="btn-floating btn-large waves-effect close-new-data-form-ID btn-r-d-position waves-light red"><i
-         class="material-icons">close</i></a>
+   <a id="closeNewDataForm" class="btn-floating btn-large waves-effect btn-r-d-position waves-light red"><i
+         class="material-icons">close</i>
+   </a>
 </div>
-
 
 <script src="/js/form.js"></script>
 <script>
    jQuery(document).ready(function ($) {
-      $('.deleteData-ID').click(function () {
+
+      let delay = 100;
+
+      $('#deleteInformation').click(function () {
          $(this).parents(".one-card-main").slideUp('slow');
          ajaxStart('/admin/table/delete', 'GET', 'id=' + $(this).attr("data-delete-id"));
       });
-      $(".close-new-data-form-ID").click(function () {
-         $(this).parent().fadeOut();
+      $("#closeNewDataForm").click(function () {
+         $(this).parent().fadeOut(200);
       });
 
-      $(".open-add-data-form-ID").click(function () {
+      $("#openAddDataForm").click(function () {
          $("#tag_add_t").text('Имя тега');
          $("#tag_add").val("").attr("value", "").removeAttr("disabled").removeAttr("hidden");
          $("#des_add").val("").attr("value", "");
          $("#inf_add").val("").attr("value", "");
          $("#img_add").val("").attr("value", "");
          $("#id_add").val("").attr("value", "");
-         $(".new-data-form-ID").fadeIn();
+         $("#newDataForm").fadeIn(200);
       });
 
-      $(".form-close-new-data-form-ID").click(function () {
-         $(this).parents(".new-data-form-ID").fadeOut();
+      $(".one-card-main").each(function () {
+         delay += 100;
+         $(this).delay(delay).css({
+            opacity: 0,
+            bottom: 10,
+         }).animate({
+            opacity: 1,
+            bottom: 0,
+         }, 285);
       });
 
-      $(".file-add-path-ID").change(function () {
+      $("#formCloseNewDataForm").click(function () {
+         $(this).parents("#newDataForm").fadeOut(200);
+      });
+
+      $("#img_add").change(function () {
          if ($(this).val() !== '') {
             $("#inf_add").attr("disabled", "on");
          }
       });
 
-      $('.tooltipped').tooltip({enterDelay: 1000});
-      $(document).ready(function () {
-         $('.modal').modal();
+      $('.tooltipped').tooltip({enterDelay: 2000});
+      $('.modal').modal();
+
+      $(".unusedDeletingForm button").click(function () {
+         let form = $(this).parents("form").find("input");
+         if ($(form).is(":checked")) {
+            location.reload();
+         }
       });
 
-      $("#unusedDeletingForm button").click(function () {
-         let form = "#unusedDeletingForm";
-         if ($(form + " input").is(":checked")) {
-            $(form + " input:checked").parent().fadeOut();
+      $("#deleteUnusedText").click(function () {
+         ajaxStart('/admin/table/erase/unused', 'POST', ($(this).parents("form").serialize()));
+         let form = $(this).parents("form").find("input");
+         if ($(form).is(":checked")) {
+            location.reload();
          }
       });
 
@@ -196,7 +227,8 @@
          $("#inf_add").val(data.information).attr("value", data.information);
          $("#id_add").val(data.id).attr("value", data.id);
          M.textareaAutoResize($('textarea'));
-         $(".new-data-form-ID").fadeIn();
+         $("#newDataForm").fadeIn();
       });
-   });
+   })
+   ;
 </script>

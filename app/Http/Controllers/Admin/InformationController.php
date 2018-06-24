@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Information;
 use App\Http\Controllers\Controller;
-use App\Information;
+use App\Landing\BladeEditor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Parser;
 
 class InformationController extends Controller
 {
@@ -19,13 +19,14 @@ class InformationController extends Controller
    {
       $id = $request->get('id');
 
-      if(!empty($id)) {
+      if( ! empty($id)) {
          $row = Information::query()->find($id);
          $unique = null;
       } else {
          $row = new Information();
          $unique = '|unique:information';
       }
+
       /**
        * Validation
        */
@@ -41,7 +42,7 @@ class InformationController extends Controller
        * Check image upload
        */
       if($request->hasFile('image')) {
-         $information = Information::checkUploadData($validated['image']);
+         $information = Information::uploadImage($validated['image']);
       } else {
          $information = $validated['information'];
       }
@@ -49,7 +50,6 @@ class InformationController extends Controller
       /**
        * Add to database or update
        */
-
       if($row->fill(
         [
           'tag_id'      => $validated['tag_id'],
@@ -63,14 +63,69 @@ class InformationController extends Controller
       }
    }
 
+   public function createUnused(Request $request)
+   {
+      foreach ($request->all() as $key => $val) {
+         if($val === 'on') {
+            $db = new Information;
+            $db->tag_id = $key;
+            $db->information = 'Стандартный текст';
+            $db->description = 'Заголовок';
+            $db->save();
+         };
+      }
+
+      return response('Создано');
+   }
+
    public function delete(Request $request)
    {
       if($request->filled('id')) {
          $id = $request->get('id');
+
          return Information::trash($id)
            ? response('Блок удален номер - ' . $id)
            : response('Ошибка', 500);
       }
+   }
+
+   public function deleteUnused(Request $request)
+   {
+      foreach ($request->all() as $key => $val) {
+         if($val === 'on') {
+            Information::query()->where('tag_id', '=', $key)->delete();
+         };
+      }
+
+      return response('Удалено');
+   }
+
+   public function eraseUnused(Request $request)
+   {
+      $template = new BladeEditor("landing");
+      foreach ($request->all() as $key => $val) {
+         if($val === 'on') {
+            $template->replaceBladeEcho($key, '');
+         }
+      }
+
+      return $template->save() ? response('Удалено') : response('Ошибка');
+   }
+
+   public function preview()
+   {
+      /**
+       * Analogy of the method from HomeController but have middleware auth
+       */
+      $flights = Information::all();
+
+      $data = [];
+
+      foreach ($flights as $flight) {
+         $data[$flight->tag_id] = $flight->information;
+      }
+
+      return view('admin.preview', $data);
    }
 
    public function table(Request $request)
@@ -81,11 +136,8 @@ class InformationController extends Controller
       if($request->get('page') == 'information') {
          $db = json_decode(Information::all());
 
-         $parse = new Parser;
-         $variables = $parse->parseBladeEchos('welcome.blade.php');
-         foreach ($variables as $key => $val) {
-            $variables[$key] = substr($val, 1);
-         }
+         $parse = new BladeEditor("landing");
+         $variables = $parse->parseBladeEchos(true);
          foreach ($db as $key => $columns) {
             $tags[$key] = $columns->tag_id;
          }
@@ -109,31 +161,5 @@ class InformationController extends Controller
 
          return view('admin.information_table', $data);
       }
-   }
-
-   public function preview()
-   {
-      /**
-       * Analogy of the method from HomeController but have middleware auth
-       */
-      $flights = Information::all();
-
-      $data = [];
-
-      foreach ($flights as $flight) {
-         $data[$flight->tag_id] = $flight->information;
-      }
-
-      return view('admin.preview', $data);
-   }
-
-   public function deleteUnused(Request $request)
-   {
-      foreach ($request->all() as $key => $val) {
-         if($val === 'on') {
-            Information::query()->where('tag_id', '=', $key)->delete();
-         }
-      }
-      return response('Нечего удалять');
    }
 }

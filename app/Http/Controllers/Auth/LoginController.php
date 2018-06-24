@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Admin;
+use App\Admin\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
 {
+   use AuthenticatesUsers;
 
    /*
    |--------------------------------------------------------------------------
@@ -21,9 +22,9 @@ class LoginController extends Controller
    | redirecting them to your home screen. The controller uses a trait
    | to conveniently provide its functionality to your applications.
    |
-   */
+    */
 
-   use AuthenticatesUsers;
+   protected $redirectAfterLogout = '/';
 
    /**
     * Where to redirect users after login.
@@ -32,20 +33,6 @@ class LoginController extends Controller
     */
    protected $redirectTo = '/admin';
 
-   protected $redirectAfterLogout = '/';
-
-   public function username()
-   {
-      return 'login';
-   }
-   public function showLoginForm()
-   {
-      $vk = Admin::query()->find(1)->vk;
-      $data = [
-        'vk' => $vk,
-      ];
-      return view('auth.login', $data);
-   }
    /**
     * Create a new controller instance.
     *
@@ -54,15 +41,10 @@ class LoginController extends Controller
    public function __construct()
    {
       $this->middleware('guest')->except([
-        'logout',
-        'redirectToProvider',
-        'handleProviderCallback',
+         'logout',
+         'redirectToProvider',
+         'handleProviderCallback',
       ]);
-   }
-
-   public function redirectToProvider()
-   {
-      return Socialite::driver('vkontakte')->redirect();
    }
 
    public function handleProviderCallback(Request $request)
@@ -79,5 +61,24 @@ class LoginController extends Controller
          Auth::loginUsingId(1, true);
          return redirect('/admin');
       }
+   }
+
+   public function redirectToProvider()
+   {
+      return Socialite::driver('vkontakte')->redirect();
+   }
+
+   public function showLoginForm()
+   {
+      $vk = Admin::query()->find(1)->vk;
+      $data = [
+         'vk' => $vk,
+      ];
+      return view('auth.login', $data);
+   }
+
+   public function username()
+   {
+      return 'login';
    }
 }
