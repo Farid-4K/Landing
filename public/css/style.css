@@ -1,6 +1,3 @@
 .page-height{height: 100vh;}
 .flex-center{display: flex; justify-content: center; align-items: center}
-.background-header{
-    background: url("https://img1.goodfon.ru/original/3360x1050/7/24/makro-priroda-paporotnik-vetki-listia-zelenyi-fon.jpg") no-repeat center center;
-    background-size: cover;
-}
+.background-header{background-size: cover;}

@@ -40,11 +40,11 @@ Route::middleware('auth')->namespace('Admin')->group(
        * Group that edits the content
        */
       Route::get('/admin/table/', 'InformationController@table');
-      Route::any('/admin/table/delete', 'InformationController@delete');
-      Route::any('/admin/table/create', 'InformationController@create');
-      Route::any('/admin/table/delete/unused', 'InformationController@deleteUnused');
-      Route::any('/admin/table/create/unused', 'InformationController@createUnused');
-      Route::any('/admin/table/erase/unused', 'InformationController@eraseUnused');
+      Route::get('/admin/table/delete', 'InformationController@delete');
+      Route::get('/admin/table/create', 'InformationController@create');
+      Route::get('/admin/table/delete/unused', 'InformationController@deleteUnused');
+      Route::get('/admin/table/create/unused', 'InformationController@createUnused');
+      Route::get('/admin/table/erase/unused', 'InformationController@eraseUnused');
 
       /**
        * Group that edits the profile setting

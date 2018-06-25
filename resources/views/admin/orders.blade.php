@@ -12,13 +12,13 @@
 
    <div id="test1" class="col s12">
       @foreach($uncompleted as $user)
-         <div class="card card-panel flow-text">
-            <div class="card-title">{{$user['name']}}</div>
+         <div class="card">
             <div class="card-content">
-               <div>Почта: {{$user['email']}}</div>
-               <div>Телефон: {{$user['phone']}}</div>
-               <div>Кол-во: {{$user['count']}}</div>
-               <div>Согласие: @if($user['grant']==='on')Дано@endif</div>
+               <div class="card-title">{{$user['name']}}</div>
+               <div class="h5">Почта: {{$user['email']}}</div>
+               <div class="h5">Телефон: {{$user['phone']}}</div>
+               <div class="h5">Кол-во: {{$user['count']}}</div>
+               <div class="h5">Согласие: @if($user['grant']==='on')Дано@endif</div>
             </div>
             <div class="card-action">
                <button type="submit" data-delete-id="{{$user['id']}}"
@@ -31,7 +31,7 @@
                        data-tooltip="Выполнено">
                   <i class="material-icons">check</i>
                </button>
-               <a class="waves-effect waves-light btn modal-trigger right" href="#modal{{$user['id']}}">Сообщение</a>
+               <a class="black-text btn-flat modal-trigger right" href="#modal{{$user['id']}}">Сообщение</a>
             </div>
          </div>
          <div id="modal{{$user['id']}}" class="modal">
@@ -44,21 +44,19 @@
    </div>
    <div id="test2" class="col s12">
       @foreach($completed as $users)
-         <div class="card card-panel flow-text">
-            <div class="card-title">{{$users['name']}}</div>
+         <div class="card">
             <div class="card-content">
-               <div>Почта: {{$users['email']}}</div>
-               <div>Телефон: {{$users['phone']}}</div>
-               <div>Кол-во: {{$users['count']}}</div>
-               <div>Согласие: @if($users['grant']==='on')Дано@endif</div>
+               <div class="card-title">{{$users['name']}}</div>
+               <div class="h5">Почта: {{$users['email']}}</div>
+               <div class="h5">Телефон: {{$users['phone']}}</div>
+               <div class="h5">Кол-во: {{$users['count']}}</div>
+               <div class="h5">Согласие: @if($users['grant']==='on')Дано@endif</div>
             </div>
             <div class="card-action">
-               <button type="submit" data-delete-id="{{$users['id']}}"
-                       class="btn deleteData-ID waves-effect waves-red tooltipped" data-position="top"
-                       data-tooltip="Удалить">
+               <button type="submit" data-delete-id="{{$users['id']}}" class="btn deleteData-ID waves-effect waves-red">
                   <i class="material-icons">delete</i>
                </button>
-               <a class="waves-effect waves-light btn modal-trigger right" href="#modal{{$users['id']}}">Сообщение</a>
+               <a class="black-text btn-flat modal-trigger right" href="#modal{{$users['id']}}">Сообщение</a>
             </div>
          </div>
          <div id="modal{{$users['id']}}" class="modal">
@@ -73,16 +71,16 @@
 </div>
 <script src="/js/form.js"></script>
 <script>
-   $(document).ready(function () {
-      $('.modal').modal();
-      $('.deleteData-ID').click(function () {
-         $(this).parent().parent().slideUp('slow');
-         ajaxStart('/admin/orders/delete', 'GET', 'id=' + $(this).attr("data-delete-id"));
-      });
-      $('.completeData-ID').click(function () {
-         $(this).parent().parent().slideUp('slow');
-         ajaxStart('/admin/orders/complete', 'GET', 'id=' + $(this).attr("data-delete-id"));
-      });
-      $(".tabs").tabs();
-   });
+    jQuery(function () {
+        $('.modal').modal();
+        $(".tabs").tabs();
+        $('.deleteData-ID').click(function () {
+            $(this).parent().parent().slideUp('slow');
+            ajaxStart('/admin/orders/delete', 'GET', 'id=' + $(this).attr("data-delete-id"));
+        });
+        $('.completeData-ID').click(function () {
+            $(this).parent().parent().slideUp('slow');
+            ajaxStart('/admin/orders/complete', 'GET', 'id=' + $(this).attr("data-delete-id"));
+        });
+    });
 </script>
