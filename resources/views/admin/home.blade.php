@@ -69,7 +69,7 @@
    <li>
       <a class="waves-effect waves-red" href="{{ route('logout') }}"
       onclick="logout();">
-      {{ __('Logout') }}
+         {{ __('Logout') }}
    </a>
 </li>
 </ul>
@@ -93,9 +93,9 @@
 </div>
 
 <script>
-   $(function () {
-      function logout()
-      {event.preventDefault();document.getElementById('logout-form').submit();}
+   function logout()
+   {event.preventDefault();document.getElementById('logout-form').submit();}
+   jQuery(document).ready(function ($) {
       M.AutoInit();
       $('.sidenav').sidenav();
       $(".main-nav-menu-ID .action-ajax").click(function () {

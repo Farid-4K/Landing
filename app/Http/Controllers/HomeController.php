@@ -16,7 +16,7 @@ class HomeController extends Controller
          [
             'name'    => 'required',
             'email'   => 'email',
-            'phone'   => 'required|regex:/\+([0-9]\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2})/i',
+            'phone'   => 'required|regex:/(^[\W0-9]+)/i',
             'count'   => 'required|max:10',
             'message' => 'max:1000',
             'grant'   => 'required',

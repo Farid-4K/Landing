@@ -25,7 +25,7 @@
          <div class="header-info">
             <div class="col s12">
                <h1 class="text-shadow hide-on-small-only breack-word center-align">{{$full_title}}</h1>
-               <h4 class="text-shadow hide-on-med-and-up white-text breack-word center-align">{{$full_title}}</h1>
+               <h4 class="text-shadow hide-on-med-and-up white-text breack-word center-align">{{$full_title}}</h4>
                <p class="lead flow-text text-shadow center-align">{{$header_info}}</p>
             </div>
 

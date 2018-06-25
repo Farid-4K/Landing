@@ -20,9 +20,9 @@
 				<div class="col s12 m6">
 					<div class="card card-panel flex-between h20 hoverable">
 						<div class="card-image">
-							<img src="image/Kachestvo-svyazi.jpg" alt="">
+							<img src="/image/Kachestvo-svyazi.jpg" alt="">
 						</div>
-						<div class="card-content center-align full-w flow-text">
+						<div class="card-content center-align full-w">
 							<span>Безлимитный интернет с постоянной скоростью 100 Мбит/сек, самый быстрый в России</span>
 						</div>
 					</div>
@@ -30,9 +30,9 @@
 				<div class="col s12 m6">
 					<div class="card card-panel flex-between h20 hoverable">
 						<div class="card-image">
-							<img src="image/profit_01.png" alt="">
+							<img src="/image/profit_01.png" alt="">
 						</div>
-						<div class="card-content center-align full-w flow-text">
+						<div class="card-content center-align full-w">
 							<span>Колл-центр отвечает на ваши звонки круглосуточно</span>
 						</div>
 					</div>
@@ -40,9 +40,9 @@
 				<div class="col s12 m6">
 					<div class="card card-panel flex-between h20 hoverable">
 						<div class="card-image">
-							<img src="image/profit_02.png" alt="">
+							<img src="/image/profit_02.png" alt="">
 						</div>
-						<div class="card-content center-align full-w flow-text">
+						<div class="card-content center-align full-w">
 							<span>Чат техподдержки на мобильном решаем любую проблему, просто напишите</span>
 						</div>
 					</div>
@@ -50,9 +50,9 @@
 				<div class="col s12 m6">
 					<div class="card card-panel flex-between h20 hoverable">
 						<div class="card-image">
-							<img src="image/Dlya-routera.jpg" alt="">
+							<img src="/image/Dlya-routera.jpg" alt="">
 						</div>
-						<div class="card-content center-align full-w flow-text">
+						<div class="card-content center-align full-w">
 							<span>Бесплатное телевидение на компьютере Бамбук ТВ</span>
 						</div>
 					</div>
@@ -60,9 +60,9 @@
 				<div class="col s12 m6">
 					<div class="card card-panel flex-between h20 hoverable">
 						<div class="card-image">
-							<img src="image/profit_03.png" alt="">
+							<img src="/image/profit_03.png" alt="">
 						</div>
-						<div class="card-content center-align full-w flow-text">
+						<div class="card-content center-align full-w">
 							<span>Качество вашей связи всегда будет на высоте! А еще мы постоянно мониторим состояние сети</span>
 						</div>
 					</div>
@@ -70,9 +70,9 @@
 				<div class="col s12 m6">
 					<div class="card card-panel flex-between h20 hoverable">
 						<div class="card-image">
-							<img src="image/profit_04.png" alt="">
+							<img src="/image/profit_04.png" alt="">
 						</div>
-						<div class="card-content center-align full-w flow-text">
+						<div class="card-content center-align full-w">
 							<span>Двухдиапазонный роутер</span>
 						</div>
 					</div>
