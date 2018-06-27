@@ -55,7 +55,7 @@ class InformationController extends Controller
          ])
       ) {
          return $row->save()
-            ? response('Загружено')
+            ? response('Загружено', 200)
             : response('Ошибка', 500);
       }
    }

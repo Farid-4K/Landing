@@ -165,7 +165,6 @@
    </div>
 </section>
 
-
 <section id="invite" class="pad-lg light-gray-bg">
    <div class="container">
       <div class="row">
@@ -208,7 +207,7 @@
                   </div>
                   @captcha()
                   <div class="input-box">
-                     <button name="start" class="btn waves-effect waves-light">оформить</button>
+                     <button name="start" value="start" class="btn waves-effect waves-light">оформить</button>
                   </div>
                </form>
             </div>
