@@ -12,6 +12,8 @@
 </head>
 
 <body>
+{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title{{$full_title}}
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 
 <header style="background: url({{$main_image}}) no-repeat center center">
    <div class="">
@@ -23,8 +25,8 @@
       <div class="row">
          <div class="header-info">
             <div class="col s12">
-               <h1 class="text-shadow hide-on-small-only breack-word center-align">{{$full_title}}</h1>
-               <h4 class="text-shadow hide-on-med-and-up white-text breack-word center-align">{{$full_title}}</h4>
+               <h1 class="text-shadow hide-on-small-only breack-word center-align"></h1>
+               <h4 class="text-shadow hide-on-med-and-up white-text breack-word center-align"></h4>
                <p class="lead flow-text text-shadow center-align">{{$header_info}}</p>
             </div>
 
@@ -164,6 +166,7 @@
    </div>
 </section>
 
+
 <section id="invite" class="pad-lg light-gray-bg">
    <div class="container">
       <div class="row">
@@ -206,7 +209,7 @@
                   </div>
                   @captcha()
                   <div class="input-box">
-                     <button name="start" value="start" class="btn waves-effect waves-light">оформить</button>
+                     <button name="start" class="btn waves-effect waves-light">оформить</button>
                   </div>
                </form>
             </div>

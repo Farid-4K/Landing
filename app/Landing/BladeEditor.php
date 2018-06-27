@@ -35,20 +35,14 @@ class BladeEditor
 
    /**
     * @param string $variable - Искомая переменная
-    * @param bool $variant    - Если true, вернет переменную без знака доллара
     *
     * @return string - Найденная переменная
     */
-   public function findBladeEcho($variable, $variant = false)
+   public function findBladeEcho($variable)
    {
-      preg_match_all(
-        '/(?:\{{2})(\$' . $variable . ')(?:\}{2})/um', $this->template,
-        $matches);
-      foreach ($matches[1] as $key => $val) {
-         $variables[$key] = substr($val, 1);
-      }
-
-      return $variant ? $variables : $matches[1];
+      return preg_match_all(
+        '/(?:\{{2})(\$' . $variable . ')(?:\}{2})/um', $this->template) ? true
+        : false;
    }
 
    /**
@@ -77,9 +71,9 @@ class BladeEditor
    {
       $this->current = preg_replace(
         '/\{{2}\$' . $variable . '\}{2}/um',
-        $subject, $this->template);
+        $subject, $this->template, -1, $count);
 
-      return $this->current ? true : false;
+      return $count ? true : false;
    }
 
    /**
@@ -87,7 +81,8 @@ class BladeEditor
     */
    public function save()
    {
-      return file_put_contents($this->path, $this->current) ? true : false;
+      return file_put_contents($this->path, $this->current) ? true
+        : file_put_contents($this->path, $this->template) ? true : false;
    }
 
    /**
