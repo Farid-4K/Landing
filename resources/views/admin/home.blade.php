@@ -132,6 +132,7 @@
 
    <form id="logout-form" action="{{ route('logout') }}" role="form" method="POST" style="display: none;">
       @csrf
+      {{method_field('POST')}}
    </form>
 
 @endsection

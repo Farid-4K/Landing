@@ -21,12 +21,12 @@ class AdminController extends Controller
    {
       $validated = $request->validate(
          [
-            'name'  => '',
+            'name'  => 'max:50',
             'login' => 'required|max:100',
             'email' => 'email',
          ]);
 
-      $row = Admin::query()->find(1);
+      $row = Admin::query()->first();
 
       if ($row->fill(
          [
@@ -35,7 +35,9 @@ class AdminController extends Controller
             'email' => $validated['email'],
          ])
       ) {
-         return $row->save() ? response('Сохранено') : response('Ошибка', 500);
+         return $row->save()
+           ? response('Сохранено', 200)
+           : response('Ошибка', 500);
       }
    }
 
@@ -53,14 +55,16 @@ class AdminController extends Controller
             'password' => Hash::make($validated['password']),
          ])
       ) {
-         return $row->save() ? response('Сохранено') : response('Ошибка', 500);
+         return $row->save()
+           ? response('Сохранено',200)
+           : response('Ошибка', 500);
       }
    }
 
    public function showProfile(Request $request)
    {
       if ($request->get('page') == 'settings') {
-         $admin = Admin::query()->find(1);
+         $admin = Admin::query()->first();
 
          $data = [
             'vk'    => $admin->vk,
@@ -75,7 +79,7 @@ class AdminController extends Controller
 
    public function untie(Request $request)
    {
-      $db = Admin::query()->find(1);
+      $db = Admin::query()->first();
       $db->vk = 0;
       $db->save();
       return redirect('/admin');

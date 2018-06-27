@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Laravel\Socialite\Facades\Socialite;
+use Tests\Unit\adminControllerTest;
 
 class LoginController extends Controller
 {
@@ -50,15 +51,15 @@ class LoginController extends Controller
    public function handleProviderCallback(Request $request)
    {
       $user = Socialite::driver('vkontakte')->user();
-      $admin = Admin::query()->find(1);
+      $admin = Admin::query()->first();
       if (!Auth::guest()) {
          $admin->vk = $user->getId();
          $admin->save();
-         Auth::loginUsingId(1, true);
+         Auth::loginUsingId($admin->id, true);
          return redirect('/admin');
       }
       if ($admin->vk == $user->getId()) {
-         Auth::loginUsingId(1, true);
+         Auth::loginUsingId($admin->id, true);
          return redirect('/admin');
       }
    }
@@ -70,7 +71,7 @@ class LoginController extends Controller
 
    public function showLoginForm()
    {
-      $vk = Admin::query()->find(1)->vk;
+      $vk = Admin::query()->first()->vk;
       $data = [
          'vk' => $vk,
       ];
