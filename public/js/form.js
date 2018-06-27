@@ -16,7 +16,12 @@ function ajaxStart(url, method, data) {
             M.toast({html: result});
             $(".loader").addClass("hidden");
         },
-        error: function () {
+        error: function (result) {
+            let data = result.responseJSON.message;
+            let error = result.responseJSON.errors;
+            if (data !== undefined) {
+                M.toast({html: error[Object.keys(error)[0]]});
+            }
             $(".loader").addClass("hidden");
         },
     });
