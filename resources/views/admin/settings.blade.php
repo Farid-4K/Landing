@@ -14,10 +14,10 @@
 
       <div data-role="tabAbout" id="tabAbout" class="col s12">
          <div class="row">
-            <div class="card card-panel">
-               <div class="card-title">Настройки</div>
+            <div class="card">
                <form data-role="saveAdminData">
                   <div class="card-content">
+                     <div class="card-title">Настройки</div>
                      @csrf
                      <div class="input-field">
                         <input name="name" id="name" type="text" class="" value="{{$name}}">

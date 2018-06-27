@@ -18,7 +18,6 @@
                <div class="h5">Почта: {{$user['email']}}</div>
                <div class="h5">Телефон: {{$user['phone']}}</div>
                <div class="h5">Кол-во: {{$user['count']}}</div>
-               <div class="h5">Согласие: @if($user['grant']==='on')Дано@endif</div>
             </div>
             <div class="card-action">
                <button type="submit" data-delete-id="{{$user['id']}}"
@@ -50,7 +49,6 @@
                <div class="h5">Почта: {{$users['email']}}</div>
                <div class="h5">Телефон: {{$users['phone']}}</div>
                <div class="h5">Кол-во: {{$users['count']}}</div>
-               <div class="h5">Согласие: @if($users['grant']==='on')Дано@endif</div>
             </div>
             <div class="card-action">
                <button type="submit" data-delete-id="{{$users['id']}}" class="btn deleteData-ID waves-effect waves-red">
