@@ -63,7 +63,9 @@ class InformationController extends Controller
    public function createUnused(Request $request)
    {
       if ($request->has('_token')) {
+
          foreach ($request->all() as $key => $val) {
+
             if ($val === 'true') {
                $db = new Information;
                $db->tag_id = $key;
@@ -72,9 +74,11 @@ class InformationController extends Controller
                $db->save();
             };
          }
+      } else {
+          return response('Ошибка доступа', 403);
       }
 
-      return response('Создано');
+      return response('Создано', 200);
    }
 
    public function delete(Request $request)
@@ -92,6 +96,7 @@ class InformationController extends Controller
    {
       if ($request->has('_token')) {
          foreach ($request->all() as $key => $val) {
+
             if ($val === 'true') {
                Information::query()->where('tag_id', '=', $key)->delete();
             };
