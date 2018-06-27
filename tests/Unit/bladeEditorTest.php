@@ -15,7 +15,7 @@ class bladeEditorTest extends TestCase
    use WithoutMiddleware;
    use RefreshDatabase;
 
-   const VARIABLE = 'full_title';
+   const VARIABLE = 'variable';
 
    public function testFindEcho()
    {
@@ -23,8 +23,9 @@ class bladeEditorTest extends TestCase
        * Окружение
        */
       $this->seed(\DatabaseSeeder::class);
-      $template = new BladeEditor('landing');
-
+      $template = new BladeEditor('../../tests/common/landing');
+      $template->template = '{{$variable}}';
+      $template->save();
       /**
        * Тестирование
        */
@@ -41,7 +42,7 @@ class bladeEditorTest extends TestCase
       /**
        * Окружение
        */
-      $template = new BladeEditor('landing');
+      $template = new BladeEditor('../../tests/common/landing');
 
       /**
        * Тестирование
@@ -65,7 +66,8 @@ class bladeEditorTest extends TestCase
        * Тестирование
        */
       $status[0] = $template->replaceBladeEcho(
-        Information::query()->first()->tag_id, '');
+        'variable', null);
+      $template->save();
 
       /**
        * Оценка
