@@ -78,9 +78,9 @@
                            class="btn-flat black-text waves-effect waves-teal">Изменить</a>
                      </div>
                      <div>
-                        @if($val['image']===true)
+                        @if($val['image'])
                            <a href="#modal{{$val['id']}}"
-                              class="waves-effect waves-light btn-floating modal-trigger">
+                              class="waves-effect btn-floating modal-trigger">
                               <i class="material-icons">visibility</i>
                            </a>
                         @endif
@@ -92,14 +92,16 @@
                </div>
             </div>
          </div>
-         <div id="modal{{$val['id']}}" class="modal">
-            <div class="modal-content flex-center">
-               <img src="{{$val['information']}}" alt="" class="responsive-img">
+         @if($val['image'])
+            <div id="modal{{$val['id']}}" class="modal">
+               <div class="modal-content flex-center">
+                  <img src="{{$val['information']}}" alt="" class="responsive-img">
+               </div>
+               <div class="modal-footer">
+                  <a class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+               </div>
             </div>
-            <div class="modal-footer">
-               <a href="#" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
-            </div>
-         </div>
+         @endif
       @endforeach
    </div>
 </div>
@@ -233,25 +235,26 @@
          inputClear($(form.data.inf));
          inputClear($(form.data.img));
          inputClear($(form.data.id));
+         M.textareaAutoResize($(form.data.inf));
          $(form.parent).fadeIn(150);
          return true;
       });
 
       /* Стартовая анимация */
       $(card.self).each(function () {
-         delay += 100;
-         $(this).delay(delay).css({
-            opacity: 0,
-            bottom: 10,
-         }).animate({
+         delay += 110;
+         $(this).css({
+            opacity: 0.2,
+            top: 18,
+         }).delay(delay).animate({
             opacity: 1,
-            bottom: 0,
-         }, 285);
+            top: 0,
+         }, 250);
       });
 
       /* отключение поля - информация */
       $(form.data.img).change(function () {
-         if (!Boolean($(this).empty())) {
+         if (Boolean($(this).empty())) {
             $(form.data.inf).attr("disabled", "on");
          } else {
             $(form.data.inf).removeAttr("disabled");
