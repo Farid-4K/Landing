@@ -22,13 +22,15 @@ class HomeController extends Controller
             'grant'   => 'required',
          ]);
       $user = new Order;
+
+
       if ($response->isVerified() == 'true') {
          $user->fill(
             [
                'name'    => $validated['name'],
                'email'   => $validated['email'],
-               'phone'   => $validated['phone'] ?: 0,
-               'count'   => $validated['count'] ?: 0,
+               'phone'   => $validated['phone'],
+               'count'   => $validated['count'],
                'message' => $validated['message'] ?: 'Сообщения нет',
                'grant'   => $validated['grant'],
             ]);

@@ -4,7 +4,7 @@
  * Public route group
  */
 Route::get('/', 'HomeController@welcome');
-Route::post('/main/add', 'HomeController@add');
+Route::any('/main/add', 'HomeController@add');
 
 /**
  * Login route group
