@@ -9,51 +9,51 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+   /**
+    * Добавление заказа
+    *
+    * @param \Illuminate\Http\Request $request
+    * @param \Anam\Captcha\Captcha $captcha
+    *
+    * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+    */
    public function add(Request $request, Captcha $captcha)
    {
+      /**
+       * Валидация
+       */
       $response = $captcha->check($request);
       $validated = $request->validate(
-         [
-            'name'    => 'required',
-            'email'   => 'email',
-            'phone'   => 'required|regex:/(^[\W0-9]+)/i',
-            'count'   => 'required|max:10',
-            'message' => 'max:1000',
-            'grant'   => 'required',
-         ]);
-      $user = new Order;
+        [
+          'name'    => 'required',
+          'email'   => 'email',
+          'phone'   => 'required|regex:/(^[\W0-9]+)/i',
+          'count'   => 'required|max:10',
+          'message' => 'required|max:1000',
+          'grant'   => 'required',
+        ]);
 
-
-      if ($response->isVerified() == 'true') {
-         $user->fill(
-            [
-               'name'    => $validated['name'],
-               'email'   => $validated['email'],
-               'phone'   => $validated['phone'],
-               'count'   => $validated['count'],
-               'message' => $validated['message'] ?: 'Сообщения нет',
-               'grant'   => $validated['grant'],
-            ]);
-         if ($user->save()) {
-            return response('Запрос отправлен');
-         } else {
-            return response('Ошибка');
-         }
+      /**
+       * Запись
+       */
+      if($response->isVerified() == 'true') {
+          return Order::query()->create($validated)
+           ? response('Запрос отправлен',200)
+           : response('Ошибка',500);
       } else {
-         return response('Ошибка');
+         return response('Ошибка',402);
       }
    }
 
+   /**
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
    public function welcome()
    {
-      $flights = Information::all();
-
-      $data = [];
-
-      foreach ($flights as $flight) {
-         $data[$flight->tag_id] = $flight->information;
+      foreach (Information::all() as $col) {
+         $data[$col->tag_id] = $col->information;
       }
 
-      return view('landing', $data);
+      return view('landing', $data ?? null);
    }
 }
