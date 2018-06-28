@@ -1,291 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=0.6, maximum-scale=1.0, user-scalable=no">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+   <meta charset="utf-8">
+   <title>Типа.Лэндинг</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900|Montserrat:400,700'
+         rel='stylesheet' type='text/css'>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
-   <link rel="stylesheet" href="/css/style2.css">
+   <link rel="stylesheet" href="/css/main.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 </head>
+
 <body>
-<header class="flex-center center-align background-2 flex-column full-window">
-   <div class="container">
-      <h1 class="text-shadow white-text">Домашний интернет Good Line в Кемерове</h1>
-      <h2 class="text-shadow white-text">17 населенных пунктов
-         и более 500 000 жителей Кузбасса
-         выбрали нас за:</h2>
+
+<header style="background: url({{$main_image}}) no-repeat center center">
+   <div class="">
+      <div class="row">
+         <div class="col l3 offset-l9 s12">
+            <a href="#"><img src="{{$logo}}" alt=""></a>
+         </div>
+      </div>
+      <div class="row">
+         <div class="header-info">
+            <div class="col s12">
+               <h1 class="text-shadow hide-on-small-only breack-word center-align">{{$full_title}}</h1>
+               <h4 class="text-shadow hide-on-med-and-up white-text breack-word center-align">{{$full_title}}</h4>
+               <p class="lead flow-text text-shadow center-align">{{$header_info}}</p>
+            </div>
+
+            <div class="row">
+               <div class="col s12 flex-center">
+                  <div class="flex-center">
+                     <a href="#invite" class="btn waves-effect waves-light btn-large scroll">Заказать</a>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+      </div>
    </div>
 </header>
-<div class="block flex-center cyan darken-1 full-window">
+
+<div class="mouse-icon hide-on-small-only">
+   <div class="scroll"></div>
+</div>
+
+<section id="main-info" class="pad-xl">
    <div class="container">
       <div class="row">
-         <div class="col s12 m6">
-            <div class="card card-panel flex-between h20 hoverable">
-               <div class="card-image">
-                  <img src="/image/Kachestvo-svyazi.jpg" alt="">
-               </div>
-               <div class="card-content center-align full-w">
-                  <span>Безлимитный интернет с постоянной скоростью 100 Мбит/сек, самый быстрый в России</span>
-               </div>
+         <div class="col s12 m3">
+            <div class="flex-center fixed-h-100">
+               <img src="{{$ef1}}" alt="" class="responsive-img">
             </div>
+            <hr class="line purple">
+            <h5 class="center-align">{{$ef1_inf}}</h5>
          </div>
-         <div class="col s12 m6">
-            <div class="card card-panel flex-between h20 hoverable">
-               <div class="card-image">
-                  <img src="/image/profit_01.png" alt="">
-               </div>
-               <div class="card-content center-align full-w">
-                  <span>Колл-центр отвечает на ваши звонки круглосуточно</span>
-               </div>
+         <div class="col s12 m3">
+            <div class="flex-center fixed-h-100">
+               <img src="{{$ef2}}" alt="" class="responsive-img">
             </div>
+            <hr class="line blue">
+            <h5 class="center-align">{{$ef2_inf}}</h5>
          </div>
-         <div class="col s12 m6">
-            <div class="card card-panel flex-between h20 hoverable">
-               <div class="card-image">
-                  <img src="/image/profit_02.png" alt="">
-               </div>
-               <div class="card-content center-align full-w">
-                  <span>Чат техподдержки на мобильном решаем любую проблему, просто напишите</span>
-               </div>
+         <div class="col s12 m3">
+            <div class="flex-center fixed-h-100">
+               <img src="{{$ef3}}" alt="" class="responsive-img">
             </div>
+            <hr class="line yellow">
+            <h5 class="center-align">{{$ef3_inf}}</h5>
          </div>
-         <div class="col s12 m6">
-            <div class="card card-panel flex-between h20 hoverable">
-               <div class="card-image">
-                  <img src="/image/Dlya-routera.jpg" alt="">
-               </div>
-               <div class="card-content center-align full-w">
-                  <span>Бесплатное телевидение на компьютере Бамбук ТВ</span>
-               </div>
+         <div class="col s12 m3">
+            <div class="flex-center fixed-h-100">
+               <img src="{{$ef4}}" alt="" class="responsive-img">
             </div>
-         </div>
-         <div class="col s12 m6">
-            <div class="card card-panel flex-between h20 hoverable">
-               <div class="card-image">
-                  <img src="/image/profit_03.png" alt="">
-               </div>
-               <div class="card-content center-align full-w">
-                  <span>Качество вашей связи всегда будет на высоте! А еще мы постоянно мониторим состояние сети</span>
-               </div>
-            </div>
-         </div>
-         <div class="col s12 m6">
-            <div class="card card-panel flex-between h20 hoverable">
-               <div class="card-image">
-                  <img src="/image/profit_04.png" alt="">
-               </div>
-               <div class="card-content center-align full-w">
-                  <span>Двухдиапазонный роутер</span>
-               </div>
-            </div>
-         </div>
-         <div class="center-align full-w white-text">
-            В Кемерове 4 центра обслуживания абонентов в Центральном, Ленинском, Рудничном и Заводском районах. Чтобы
-            определить, подключен ли к Good Line ваш дом, воспользуйтесь <a class="white-text"
-                                                                            href="https://goodline.info/pomosh/podklyuchen-li-vash-dom.html">формой</a>.
+            <hr class="line blue">
+            <h5 class="center-align">{{$ef4_inf}}</h5>
          </div>
       </div>
    </div>
-</div>
-<div class="block flex-center  inline">
-   <div class="container margin-40">
-      <div class="row">
-         <div class="col s12 xl10 offset-xl1">
-            <div class="card">
-               <div class="row">
-                  <div class="col l6 s12">
-                     <div class="card-image">
-                        <div class="row">
-                        <img class="col offset-s2 s8 m12" src="/image/Picture-(2)(1).png" alt="">
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col l6 s12">
-                     <div class="card-content">
-                        <div class="flow-text">Безлимитный интернет с постоянной скоростью 100 Мбит/сек, самый
-                           быстрый в России
-                        </div>
-                        У нас самый быстрый интернет в России по данным независимого рейтинга NetIndex, составленного
-                        на основе данных мирового эксперта по замерам скорости — SpeedTest. Мы — лидер интернет-рынка
-                        Кузбасса!
-                        Подключаем в 17 городах области. В том числе и частные дома в Кемерове, Белове и Юрге.
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col s12 xl10 offset-xl1">
-            <div class="card">
-               <div class="row">
-                  <div class="col l6 s12">
-                     <div class="card-content">
-                        <div class="flow-text">Резервные каналы: вы не останетесь без связи</div>
-                        Мы организовали резервные каналы до каждого из подключенных городов, поэтому повреждение
-                        линий не повлияет на надёжность связи. Благодаря оптоволоконной сети между всеми городами
-                        присутствия, качество нашей связи всегда на высоте.
-                        Стабильное подключение к интернету
-                        А еще у нас самое современное оборудование и качество подключения всегда на высоте благодаря
-                        оптоволоконному кабелю.
-                     </div>
-                  </div>
-                  <div class="col l6 s12">
-                     <div class="card-image">
-                        <div class="row">
-                        <img class="col s9 offset-s2 m12" src="/image/Picture-(3)(1).png" alt="">
-                           </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col s12 xl10 offset-xl1">
-            <div class="card">
-               <div class="row">
-                  <div class="col l6 s12">
-                     <div class="card-image">
-                        <div class="row">
-                        <img class="col s9 offset-s2 m12" src="/image/Picture-(4)(1).png" alt="">
-                           </div>
-                     </div>
-                  </div>
-                  <div class="col l6 s12">
-                     <div class="card-content">
-                        Операторы колл-центра отвечают на ваши звонки круглосуточно
-                        Мы создали крупнейший в Кузбассе контакт-центр — ни один Ваш звонок не останется без ответа.
-                        Работаем 24 часа в сутки!
-                        Приложение «Техподдержка Good Line»
-                        Умный робот Лена поможет вам решить любой вопрос, а при необходимости к беседе подключится
-                        «живой» оператор. Также в приложении вы сможете оплатить услуги и подключить автоплатеж.
-                        Просто и безопасно.
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
+</section>
 
-<div class="block hide-on-med-and-down flex-center full-window background-1">
+<section id="pricing" class="pad-lg">
    <div class="container">
-      <div class="row">
-
-         <div class="col s10 offset-s1">
-
-            <div class="tariff__item" id="701">
-               <div class="tariff__item_header">
-                  <div class="tariff__item_header--title">701</div>
-                  <div class="tariff__item_header--desc"></div>
-                  <div class="tariff__item_header--addition">
-                     <span class="green_span">Новинка</span>
-                     <span class="red_span">Для новых абонентов</span>
-                  </div>
-               </div>
-               <div class="clearfix"></div>
-               <div class="tariff__item_body flex-center">
-                  <div class="tariff__item_body--speed tariff__item_body--item speed-medium">
-                     <div class="tariff__item_body--header"><a
-                           href="start/internet/podklyuchit-internet-ot-good-line.html">Интернет</a></div>
-                     <div class="speed--count">75</div>
-                     <div class="speed--size">Мбит/с</div>
-                  </div>
-                  <div class="tariff__item_body--speed green tariff__item_body--item tariff__item_body--btv">
-                     <div class="tariff__item_body--header"><a
-                           href="start/bolshoe-tv/podklyuchit-czifrovoe-tv-ot-good-line.html">Большое ТВ</a></div>
-                     <div class="speed--count">100</div>
-                     <div class="speed--size">каналов</div>
-                     <div class="old--price">160 руб/мес</div>
-                     <div class="new--price tooltip" data-tooltip-content="#custom-tip">Бесплатно</div>
-                  </div>
-                  <div class="tariff__item_body--speed tariff__item_body--item tariff__item_body--console">
-                     <div class="tariff__item_body--header"><a
-                           href="start/bolshoe-tv/oborudovanie.html">Приставка</a></div>
-                     <div class="old--price">4500 руб</div>
-                     <div class="new--price">В подарок</div>
-                  </div>
-                  <div class="tariff__item_body--price tariff__item_body--item">
-                     <div class="indent20"></div>
-                     <div class="price--count">701</div>
-                     <div class="price--size"></div>
-                     <div class="indent20"></div>
-                     <a class="button rightChoice" href="system/pop-up/701.html">Подключить</a>
-                     <div class="indent20"></div>
-                  </div>
-               </div>
-               <div class="clearfix"></div>
-            </div>
-
-            <div class="tariff__item" id="801">
-               <div class="tariff__item_header">
-                  <div class="tariff__item_header--title">801</div>
-                  <div class="tariff__item_header--desc"></div>
-                  <div class="tariff__item_header--addition">
-                     <span class="green_span">Новинка</span>
-                     <span class="red_span">Для новых абонентов</span>
-                  </div>
-               </div>
-               <div class="clearfix"></div>
-               <div class="tariff__item_body flex-center">
-                  <div class="tariff__item_body--speed tariff__item_body--item speed-high">
-                     <div class="tariff__item_body--header"><a
-                           href="start/internet/podklyuchit-internet-ot-good-line.html">Интернет</a></div>
-                     <div class="speed--count">100</div>
-                     <div class="speed--size">Мбит/с</div>
-                  </div>
-
-                  <div class="tariff__item_body--speed tariff__item_body--item tariff__item_body--wifi">
-                     <div class="tariff__item_body--header"><a
-                           href="uslugi/servis-i-oborudovanie/oborudovanie/router-good-line.html">Wi-Fi роутер</a>
-                     </div>
-                     <div class="old--price">2000 руб</div>
-                     <div class="new--price">В подарок</div>
-                  </div>
-
-                  <div class="tariff__item_body--speed tariff__item_body--item tariff__item_body--btv">
-                     <div class="tariff__item_body--header"><a
-                           href="start/bolshoe-tv/podklyuchit-czifrovoe-tv-ot-good-line.html">Большое ТВ</a></div>
-                     <div class="speed--count">100</div>
-                     <div class="speed--size">каналов</div>
-                     <div class="old--price">160 руб/мес</div>
-                     <div class="new--price tooltip" data-tooltip-content="#custom-tip">Бесплатно</div>
-                  </div>
-                  <div class="tariff__item_body--speed tariff__item_body--item tariff__item_body--console">
-                     <div class="tariff__item_body--header"><a
-                           href="start/bolshoe-tv/oborudovanie.html">Приставка</a></div>
-                     <div class="old--price">4500 руб</div>
-                     <div class="new--price">В подарок</div>
-                  </div>
-                  <div class="tariff__item_body--price tariff__item_body--item">
-                     <div class="indent20"></div>
-                     <div class="price--count">801</div>
-                     <div class="price--size"></div>
-                     <div class="indent20"></div>
-                     <a class="button rightChoice" href="system/pop-up/801.html">Подключить</a>
-                     <div class="indent20"></div>
-                  </div>
-               </div>
-               <div class="clearfix"></div>
-            </div>
-         </div>
-
-         <div class="col s12 flex-center">
-            <a href="#" class="btn waves-effect waves-light">Все тарифы</a>
+      <div class="row margin-40">
+         <div class="col s12 center-align">
+            <h2 class="breack-word">{{$title_2}}</h2>
          </div>
       </div>
+
+      <div class="row fixed-cards-500 margin-50">
+
+         <div class="col s12 m12 l6">
+            <div class="card">
+               <div class="card-image">
+                  <img src="{{$ef5}}" class="half-img" alt="">
+               </div>
+               <div class="center-align">
+                  <h5>{{$ef5_title}}</h5>
+               </div>
+               <div class="card-content center-align">
+                  {{$ef5_content}}
+               </div>
+            </div>
+         </div>
+
+         <div class="col l6 s12 m12">
+            <div class="card">
+               <div class="card-image">
+                  <img src="{{$ef8}}" alt="" class="half-img">
+               </div>
+               <div class="center-align">
+                  <h5>{{$ef8_title}}</h5>
+               </div>
+               <div class="card-content center-align">
+                  {{$ef8_content}}
+               </div>
+            </div>
+         </div>
+         <div class="col s12 m12 l6">
+            <div class="card">
+               <div class="card-image">
+                  <img src="{{$ef6}}" alt="" class="half-img">
+               </div>
+               <div class="center-align">
+                  <h5>{{$ef6_title}}</h5>
+               </div>
+               <div class="card-content center-align">
+                  {{$ef6_content}}
+               </div>
+            </div>
+         </div>
+
+         <div class="col s12 m12 l6">
+            <div class="card">
+               <div class="card-image">
+                  <img src="{{$ef7}}" alt="" class="half-img">
+               </div>
+               <div class="center-align">
+                  <h5>{{$ef7_title}}</h5>
+               </div>
+               <div class="card-content center-align">
+                  {{$ef7_content}}
+               </div>
+            </div>
+         </div>
+
+
+         <div class="col offset-l3 s12 m12 l6">
+            <div class="card">
+               <div class="card-image">
+                  <img src="{{$ef9}}" alt="" class="half-img">
+               </div>
+               <div class="center-align">
+                  <h5>{{$ef9_title}}</h5>
+               </div>
+               <div class="card-content center-align">
+                  {{$ef9_content}}
+               </div>
+            </div>
+         </div>
+
+      </div>
    </div>
-</div>
-<section id="invite" class="pad-lg full-window flex-center light-gray-bg">
+</section>
+
+<section id="invite" class="pad-lg light-gray-bg">
    <div class="container">
       <div class="row">
          <div class="col offset-l2 offset-m2 m8 l8 s12">
-            <div class="card-panel card">
+            <div class="card-panel">
                <div class="excellent flex-center" style="display: none">
-                  <span class="h2">Заказ оформлен</span>
+                  <h2>Заказ оформлен</h2>
                </div>
                <form action="/main/add" method="POST" id="form">
                   @csrf
                   <div class="input-field">
                      <input name="name" id="form_name" type="text" class="validate">
-                     <label for="form_name">Ф.И.О</label>
+                     <label for="form_name">Имя</label>
                   </div>
                   <div class="input-field">
                      <input name="email" id="form_email" type="text" class="validate">
@@ -293,12 +184,12 @@
                   </div>
                   <div class="input-field">
                      <input name="phone" id="form_phone" class="phone" type="tel"
-                            placeholder="+7 (___)___-__-__">
-                     <label for="form_phone">Номер телефона</label>
+                            placeholder="+7 ( ) - -">
+                     <label for="form_phone">Контактный телефон</label>
                   </div>
                   <div class="input-field">
                      <input name="message" id="form_lorem" type="text" class="validate">
-                     <label for="form_lorem">Сообщение</label>
+                     <label for="form_lorem">Доп. информация</label>
                   </div>
                   <div class="input-field">
                      <div><span class="p range-slider">Кол-во товара</span></div>
@@ -307,14 +198,15 @@
                         <span class="range-slider__value">0</span>
                      </div>
                   </div>
-                  <div class="input-box flex-center">
+                  <div class="input-box">
                      <label>
                         <input name="grant" type="checkbox">
-                        <span>Даю соглаие на обработку персональных данных</span>
+                        <span>Согласие на обработку персональных данных</span>
                      </label>
                   </div>
-                  <div class="input-box flex-center">
-                     <button name="start" class="btn waves-effect waves-light">оформить</button>
+                  @captcha()
+                  <div class="input-box">
+                     <button name="start" value="start" class="btn waves-effect waves-light">оформить</button>
                   </div>
                </form>
             </div>
@@ -322,7 +214,8 @@
       </div>
    </div>
 </section>
-<footer class="page-footer cyan">
+
+<footer class="page-footer cyan darken-2">
    <div class="container">
       <div class="row">
          <div class="col l4 m6 s12">
@@ -365,8 +258,10 @@
       </div>
    </div>
 </footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/mask.js"></script>
 <script>
-   $(document).ready(function () {
+   $(function () {
 
 
       var rangeSlider = function () {
@@ -386,34 +281,9 @@
             });
          });
       };
-
+      $("#form_phone").mask("+9(999)999-99-99");
       rangeSlider();
 
-      var phoneInput = document.querySelector('.phone')
-      phoneInput.addEventListener('keydown', function (event) {
-         if (!(event.key == 'ArrowLeft' || event.key == 'ArrowRight' || event.key == 'Backspace' || event.key == 'Tab')) {
-            event.preventDefault()
-         }
-         let mask = '+7 (111) 111-11-11';
-
-         if (/[0-9\+\ \-\(\)]/.test(event.key)) {
-            let currentString = this.value;
-            let currentLength = currentString.length;
-            if (/[0-9]/.test(event.key)) {
-               if (mask[currentLength] == '1') {
-                  this.value = currentString + event.key;
-               } else {
-                  for (var i = currentLength; i < mask.length; i++) {
-                     if (mask[i] == '1') {
-                        this.value = currentString + event.key;
-                        break;
-                     }
-                     currentString += mask[i];
-                  }
-               }
-            }
-         }
-      });
       $('form').submit(function (event) {
          event.preventDefault();
          $.ajax({
@@ -427,14 +297,20 @@
                $(".loader").removeClass("hidden");
             },
             success: function (result) {
-               M.toast({html: result});
                $(".loader").addClass("hidden");
-               let current = $("button[name=start]").parent().parent();
-               current.fadeOut();
-               $(".excellent").delay(500).fadeIn();
-               let height = current.height();
-               let width = current.width();
-               $(".excellent").width(width).height(height);
+               let response = grecaptcha.getResponse();
+               if (response.length >= 10) {
+                  let current = $("button[name=start]").parent().parent();
+                  current.fadeOut();
+                  $(".excellent").delay(500).fadeIn();
+                  let height = current.height();
+                  let width = current.width();
+                  $(".excellent").width(width).height(height);
+               }
+               else {
+                  M.toast({html: 'Капча не прошла'});
+               }
+               M.toast({html: result});
             },
             error: function (result) {
                let data = result.responseJSON.message;
@@ -446,6 +322,8 @@
             },
          });
       });
+
    })
 </script>
 </body>
+</html>

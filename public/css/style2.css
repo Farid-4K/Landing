@@ -39,13 +39,13 @@
 }
 
 .background-1{
-   background      : url(/image/background-main701-801.png) no-repeat center center;
-   background-size : cover;
+   background      : no-repeat center center;
+   background-size : cover!important;
 }
 
 .background-2{
-   background      : url(/image/background701-801.jpg) no-repeat center center;
-   background-size : cover;
+   background      : no-repeat center center;
+   background-size : cover!important;
 }
 
 .text-shadow{
