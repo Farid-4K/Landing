@@ -60,6 +60,29 @@ class informationControllerTests extends TestCase
         $this->assertResponseStatus(200);
     }
 
+    /**
+     * Успешное создание с изображением
+     */
+    public function testInformationCreateWithImage()
+    {
+        /**
+         * Окружение
+         */
+        $tag_id = str_random(5);
+        $information = '/image/background-main701-801.png';
+        $description = str_random(10);
+
+        /**
+         * Тест
+         */
+        $this->get('/admin/table/create?tag_id=' . $tag_id . '&information=' . $information . '&description=' . $description);
+
+        /**
+         * Проверка
+         */
+        $this->assertResponseStatus(200);
+    }
+
 
     /**
      *tag_id только числа
@@ -138,13 +161,13 @@ class informationControllerTests extends TestCase
         /**
          * Окружение
          */
-        $this->seed('InformationSeed');
         $id = Information::query()->first()->id;
 
         /**
          * Тест
          */
         $this->get('/admin/table/delete?id=' . $id);
+
 
         /**
          * Проверка

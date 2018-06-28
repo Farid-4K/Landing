@@ -18,6 +18,7 @@
                <div class="h5">Почта: {{$user['email']}}</div>
                <div class="h5">Телефон: {{$user['phone']}}</div>
                <div class="h5">Кол-во: {{$user['count']}}</div>
+               <div class="h5">Дата: {{$user['created_at']}}</div>
             </div>
             <div class="card-action">
                <button type="submit" data-role=btnDeleteOrder data-delete-id="{{$user['id']}}"
@@ -47,12 +48,13 @@
                <div class="h5">Почта: {{$users['email']}}</div>
                <div class="h5">Телефон: {{$users['phone']}}</div>
                <div class="h5">Кол-во: {{$users['count']}}</div>
+               <div class="h5">Дата: {{$users['created_at']}}</div>
             </div>
             <div class="card-action">
-               <button type="submit" data-delete-id="{{$users['id']}}" data-role=btnDeleteOrder class="btn waves-effect waves-red">
+               <button type="submit" data-delete-id="{{$users['id']}}" data-role=btnDeleteOrder class="btn-floating waves-effect waves-red right ">
                   <i class="material-icons">delete</i>
                </button>
-               <a class="black-text btn-flat modal-trigger right" href="#modal{{$users['id']}}">Сообщение</a>
+               <a class="black-text btn-flat modal-trigger" href="#modal{{$users['id']}}">Сообщение</a>
             </div>
          </div>
          <div id="modal{{$users['id']}}" class="modal">
