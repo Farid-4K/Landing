@@ -111,6 +111,7 @@ class adminControllerTest extends TestCase
       /**
        * Проверка
        */
+      $this->assertResponseStatus(302);
       $this->assertRedirectedTo('/admin');
    }
 }

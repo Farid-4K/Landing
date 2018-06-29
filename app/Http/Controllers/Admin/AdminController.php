@@ -1,110 +1,95 @@
-<?php
+<?php /** @noinspection PhpUndefinedClassInspection */
 
 namespace App\Http\Controllers\Admin;
 
-use App\Admin\Admin;
 use App\Http\Controllers\Controller;
-use Chumper\Zipper\Facades\Zipper;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Http\Request;
+use App\Admin\Admin;
 
 class AdminController extends Controller
 {
-    public function __construct(Request $request)
-    {
-        /**
-         * Protect  access to methods
-         */
-        $this->middleware('auth');
-    }
+   private $admin;
 
-    public function set(Request $request)
-    {
-        $validated = $request->validate(
-            [
-                'name' => 'max:50',
-                'login' => 'required|max:100',
-                'email' => 'email',
-            ]);
+   public function __construct(Request $request)
+   {
+      /**
+       * Protect  access to methods
+       */
+      $this->middleware('auth');
+      $this->admin = Admin::query()->first();
+   }
 
-        $row = Admin::query()->first();
+   /**
+    * Sets new information about the administrator
+    *
+    * @param \Illuminate\Http\Request $request
+    *
+    * @return string
+    */
+   public function set(Request $request)
+   {
+      /**
+       * Prepare
+       */
+      $validated = $request->validate(
+        [
+          'name'  => 'max:50',
+          'login' => 'required|max:100',
+          'email' => 'email',
+        ]);
 
-        if ($row->fill(
-            [
-                'name' => $validated['name'] ?: 'admin',
-                'login' => $validated['login'],
-                'email' => $validated['email'],
-            ])
-        ) {
-            return $row->save()
-                ? response('Сохранено', 200)
-                : response('Ошибка', 500);
-        }
-    }
+      /**
+       * Set new settings
+       */
+      if($this->admin->fill($validated)) {
+         return $this->admin->save()
+           ? response('Сохранено', 200)
+           : response('Ошибка', 500);
+      }
+   }
 
-    public function setPassword(Request $request)
-    {
-        $validated = $request->validate(
-            [
-                'password' => 'required|max:100',
-            ]);
+   public function setPassword(Request $request)
+   {
+      /**
+       * Prepare
+       */
+      $validated = $request->validate(
+        [
+          'password' => 'required|max:100',
+        ]);
+      $data['password'] = Hash::make($validated['password']);
 
-        $row = Admin::query()->find(1);
+      /**
+       * Update in database
+       */
+      if($this->admin->fill($data)) {
+         return $this->admin->save()
+           ? response('Сохранено', 200)
+           : response('Ошибка', 500);
+      }
+   }
 
-        if ($row->fill(
-            [
-                'password' => Hash::make($validated['password']),
-            ])
-        ) {
-            return $row->save()
-                ? response('Сохранено', 200)
-                : response('Ошибка', 500);
-        }
-    }
+   public function showProfile(Request $request)
+   {
+      if($request->get('page') == 'settings') {
 
-    public function showProfile(Request $request)
-    {
-        if ($request->get('page') == 'settings') {
-            $admin = Admin::query()->first();
+         $data = [
+           'vk'    => $this->admin->vk,
+           'name'  => $this->admin->name,
+           'email' => $this->admin->email,
+           'login' => $this->admin->login,
+         ];
 
-            $data = [
-                'vk' => $admin->vk,
-                'name' => $admin->name,
-                'email' => $admin->email,
-                'login' => $admin->login,
-            ];
+         return view('admin.settings', $data);
+      }
+   }
 
-            return view('admin.settings', $data);
-        }
-    }
+   public function untie()
+   {
+      $this->admin->vk = 0;
+      $this->admin->save();
 
-    public function untie()
-    {
-        $db = Admin::query()->first();
-        $db->vk = 0;
-        $db->save();
-        return redirect('/admin');
-    }
-
-    protected function extractZip(Request $request)
-    {
-        if ($request->archive == 'design.zip') {
-//            File::put($request->archive, $request->archive);
-            $files = glob('css/');
-            Zipper::make('test.zip')->add($files)->close();
-
-//            Zipper::make('public/design.zip')->folder('landing')->extractTo('../resources');
-//
-//            Zipper::make('design.zip')->folder('css')->extractTo('css');
-            return redirect('/admin');
-        } else {
-            response('Файл должен называться design.zip', 500);
-            return redirect('/admin');
-        }
-
-
-//       Zipper::make('zip/test.zip')->folder('admin')->extractTo('extract');
-    }
+      return redirect('/admin');
+   }
 }

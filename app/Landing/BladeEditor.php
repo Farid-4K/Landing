@@ -7,19 +7,19 @@ class BladeEditor
    /**
     * @var string - Преобразованная информация
     */
-   public $current;
+   private $current;
    /**
     * @var string - Загруженный шаблон
     */
-   public $template;
+   private $template;
    /**
     * @var string - Название файла
     */
-   public $file;
+   private $file;
    /**
     * @var string - Полный путь до файла
     */
-   public $path;
+   private $path;
 
    /**
     * BladeEditor constructor.
@@ -28,7 +28,7 @@ class BladeEditor
     */
    public function __construct($name)
    {
-      $this->template = $this->loadTemplate($name);
+      $this->template = file_get_contents(resource_path() . "/views/{$name}.blade.php");
       $this->file = $name;
       $this->path = resource_path() . "/views/{$this->file}.blade.php";
    }
@@ -48,9 +48,9 @@ class BladeEditor
    /**
     * @param bool $variant - Если true, вернет переменные без знака доллара.
     *
-    * @return string - Все переменные в шаблоне
+    * @return array - Все переменные в шаблоне
     */
-   public function parseBladeEchos($variant = false)
+   public function parseBladeEchos($variant = false) : array
    {
       preg_match_all(
         '/(?:\{{2})(\$[\w]+)(?:\}{2})/um', $this->template, $matches);
@@ -67,7 +67,7 @@ class BladeEditor
     *
     * @return bool
     */
-   public function replaceBladeEcho($variable, $subject)
+   public function replaceBladeEcho($variable, $subject) : bool
    {
       $this->current = preg_replace(
         '/\{{2}\$' . $variable . '\}{2}/um',
@@ -79,22 +79,9 @@ class BladeEditor
    /**
     * @return bool
     */
-   public function save()
+   public function save() : bool
    {
       return file_put_contents($this->path, $this->current) ? true
         : file_put_contents($this->path, $this->template) ? true : false;
-   }
-
-   /**
-    * @param $path - Путь до шаблона
-    *
-    * @return string
-    */
-   private function loadTemplate($path)
-   {
-      $template = file_get_contents(
-        resource_path() . "/views/{$path}.blade.php");
-
-      return $template;
    }
 }

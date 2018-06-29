@@ -23,9 +23,7 @@ class bladeEditorTest extends TestCase
        * Окружение
        */
       $this->seed(\DatabaseSeeder::class);
-      $template = new BladeEditor('../../tests/common/landing');
-      $template->template = '{{$variable}}';
-      $template->save();
+      $template = new BladeEditor('test_view');
       /**
        * Тестирование
        */
@@ -42,7 +40,7 @@ class bladeEditorTest extends TestCase
       /**
        * Окружение
        */
-      $template = new BladeEditor('../../tests/common/landing');
+      $template = new BladeEditor('test_view');
 
       /**
        * Тестирование
@@ -60,7 +58,7 @@ class bladeEditorTest extends TestCase
       /**
        * Окружение
        */
-      $template = new BladeEditor('../../tests/common/landing');
+      $template = new BladeEditor('test_view');
 
       /**
        * Тестирование
@@ -80,7 +78,7 @@ class bladeEditorTest extends TestCase
       /**
        * Окружение
        */
-      $template = new BladeEditor('../../tests/common/landing');
+      $template = new BladeEditor('test_view');
 
       /**
        * Тестирование

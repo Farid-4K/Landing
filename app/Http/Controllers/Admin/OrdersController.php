@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
+   /**
+    * Завершение заказа
+    * @param \Illuminate\Http\Request $request
+    *
+    * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+    */
    public function complete(Request $request)
    {
       if ($request->filled('id')) {
@@ -20,6 +26,12 @@ class OrdersController extends Controller
       }
    }
 
+   /**
+    * Удаление заказа
+    * @param \Illuminate\Http\Request $request
+    *
+    * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+    */
    public function delete(Request $request)
    {
       if ($request->filled('id')) {
@@ -32,6 +44,10 @@ class OrdersController extends Controller
       }
    }
 
+   /**
+    * Вывод всех заказов
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
    public function show()
    {
       $uncompleted = Order::query()->where('complete', false)->get();
