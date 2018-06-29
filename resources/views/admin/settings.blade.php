@@ -53,9 +53,23 @@
 
       <div data-role="tabSettings" id="tabSettings" class="col s12">
          <div class="row">
-            <div class="card-panel">
-
-            </div>
+               <div class="card-panel">
+                  <div class="h4">Смена дизайна (архив должен называться design.zip)</div>
+                  <form action="/admin/settings/zip" method="put" enctype="multipart/form-data">
+                     <div class="file-field col s12 input-field">
+                        <div class="btn">
+                           <span>zip-архив</span>
+                           <input type="file" name="archive">
+                        </div>
+                        <div class="file-path-wrapper">
+                           <input class="file-path validate" type="text" placeholder="Загрузить"/>
+                        </div>
+                     </div>
+                  <button class="btn-flat waves-effect waves-red">
+                     Применить
+                  </button>
+                  </form>
+               </div>
          </div>
       </div>
 

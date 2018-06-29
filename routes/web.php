@@ -53,6 +53,7 @@ Route::middleware('auth')->namespace('Admin')->group(
       Route::any('/admin/settings/set', 'AdminController@set');
       Route::any('/admin/settings/setPassword', 'AdminController@setPassword');
       Route::get('/admin/settings/untie', 'AdminController@untie');
+      Route::any('/admin/settings/zip', 'AdminController@extractZip');
 
       /**
        * Group that control for orders

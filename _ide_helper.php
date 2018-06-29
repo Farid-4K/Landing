@@ -134,7 +134,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the path to the application configuration files.
+         * Get the path to the application configuration zip.
          *
          * @param string $path Optionally, a path to append to the config path
          * @return string 
@@ -170,7 +170,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the path to the language files.
+         * Get the path to the language zip.
          *
          * @return string 
          * @static 
@@ -4821,7 +4821,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get an array of all files in a directory.
+         * Get an array of all zip in a directory.
          *
          * @param string $directory
          * @param bool $hidden
@@ -4834,7 +4834,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get all of the files from the given directory (recursive).
+         * Get all of the zip from the given directory (recursive).
          *
          * @param string $directory
          * @param bool $hidden
@@ -4917,7 +4917,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Empty the specified directory of all files and folders.
+         * Empty the specified directory of all zip and folders.
          *
          * @param string $directory
          * @return bool 
@@ -5360,7 +5360,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the translation for a given key from the JSON translation files.
+         * Get the translation for a given key from the JSON translation zip.
          *
          * @param string $key
          * @param array $replace
@@ -7254,7 +7254,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get all of the input and files for the request.
+         * Get all of the input and zip for the request.
          *
          * @return array 
          * @static 
@@ -7355,7 +7355,7 @@ namespace Illuminate\Support\Facades {
          * @param string $method The HTTP method
          * @param array $parameters The query (GET) or request (POST) parameters
          * @param array $cookies The request cookies ($_COOKIE)
-         * @param array $files The request files ($_FILES)
+         * @param array $files The request zip ($_FILES)
          * @param array $server The server parameters ($_SERVER)
          * @param string|resource|null $content The raw body data
          * @return static 
@@ -8571,7 +8571,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get the keys for all of the input and files.
+         * Get the keys for all of the input and zip.
          *
          * @return array 
          * @static 
@@ -8582,7 +8582,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get all of the input and files for the request.
+         * Get all of the input and zip for the request.
          *
          * @param array|mixed $keys
          * @return array 
@@ -8682,7 +8682,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get an array of all of the files on the request.
+         * Get an array of all of the zip on the request.
          *
          * @return array 
          * @static 
@@ -11058,7 +11058,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get an array of all files in a directory.
+         * Get an array of all zip in a directory.
          *
          * @param string|null $directory
          * @param bool $recursive
@@ -11071,7 +11071,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Get all of the files from the given directory (recursive).
+         * Get all of the zip from the given directory (recursive).
          *
          * @param string|null $directory
          * @return array 

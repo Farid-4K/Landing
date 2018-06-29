@@ -15,7 +15,7 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
         "socialiteproviders/vkontakte": "^4.0",
-        "zanysoft/laravel-zip": "^1.0"
+        "chumper/zipper": "1.0.x"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

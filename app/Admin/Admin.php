@@ -3,6 +3,7 @@
 namespace App\Admin;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Admin extends Model
 {
