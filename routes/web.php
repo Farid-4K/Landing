@@ -50,7 +50,8 @@ Route::middleware('auth')->namespace('Admin')->group(
       * Group that edits the profile setting
       */
      Route::any('/admin/settings/profile', 'AdminController@showProfile');
-     Route::any('/admin/settings/set', 'AdminController@set');
+     Route::any('/admin/settings/set/admin', 'AdminController@set');
+     Route::any('/admin/settings/set/mail', 'AdminController@setMail');
      Route::any('/admin/settings/setPassword', 'AdminController@setPassword');
      Route::get('/admin/settings/untie', 'AdminController@untie');
 

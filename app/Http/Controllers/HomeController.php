@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Anam\Captcha\Captcha;
-use App\Admin\Information;
-use App\Admin\Order;
+use App\Admin\{
+  Information, Order
+};
+use App\Mail\OrderMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -24,24 +27,25 @@ class HomeController extends Controller
        */
       $response = $captcha->check($request);
       $validated = $request->validate(
-        [
-          'name'    => 'required',
-          'email'   => 'email',
-          'phone'   => 'required|regex:/(^[\W0-9]+)/i',
-          'count'   => 'required|max:10',
-          'message' => 'required|max:1000',
-          'grant'   => 'required',
-        ]);
+         [
+            'name'    => 'required',
+            'email'   => 'email',
+            'phone'   => 'required|regex:/(^[\W0-9]+)/i',
+            'count'   => 'required|max:10',
+            'message' => 'required|max:1000',
+            'grant'   => 'required',
+         ]);
 
       /**
        * Запись
        */
-      if($response->isVerified() == 'true') {
-          return Order::query()->create($validated)
-           ? response('Запрос отправлен',200)
-           : response('Ошибка',500);
+      Mail::send(new OrderMail($validated));
+      if ($response->isVerified() == 'true') {
+         return Order::query()->create($validated)
+         ? response('Запрос отправлен', 200)
+         : response('Ошибка', 500);
       } else {
-         return response('Ошибка',402);
+         return response('Ошибка', 402);
       }
    }
 

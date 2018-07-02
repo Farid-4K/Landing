@@ -40,12 +40,36 @@ class homeControllerTest extends TestCase
         /**
          * Тест
          */
-        $this->get('/main/add?name=' . $name . '&email=' . $email . '&phone=' . $phone . '&count=' . $count . '&message=' . $message . '&grant=' . $grant);
+        $this->get('/main/add?name=' . $name . '&email=' . $email . '&phone=' . $phone . '&count=' . $count .
+            '&message=' . $message . '&grant=' . $grant);
 
         /**
          * Проверка
          */
         $this->assertResponseStatus(200);
+    }
+
+    public function testHomeAddError()
+    {
+        /**
+         * Окружение
+         */
+        $name = 'Smith';
+        $email = 'smith@test.com';
+        $phone = '+7(999)999-99-99';
+        $count = '11';
+        $message = 'Test text';
+        $grant = 'on';
+
+        /**
+         * Тест
+         */
+        $this->get('/main/add?name=' . $name . '&email=' . $email . '&phone=' . $phone . '&count=' . $count . '&message=' . $message . '&grant=' . $grant);
+
+        /**
+         * Проверка
+         */
+        $this->assertResponseStatus(402);
     }
 
     /**

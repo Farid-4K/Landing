@@ -16,7 +16,7 @@ class InformationController extends Controller
 
    public function create(Request $request)
    {
-      if($request->filled('id')) {
+      if ($request->filled('id')) {
          $row = Information::query()->find($request->get('id'));
          $unique = null;
       } else {
@@ -28,47 +28,47 @@ class InformationController extends Controller
        * Validation
        */
       $validated = $request->validate(
-        [
-          'tag_id'      => 'required|regex:/^([\w]+[^0-9])/|max:100' . $unique,
-          'information' => 'max:1000',
-          'image'       => 'image',
-          'description' => 'required|max:100',
-        ]);
+         [
+            'tag_id'      => 'required|regex:/^([\w]+[^0-9])/|max:100' . $unique,
+            'information' => 'max:1000',
+            'image'       => 'image',
+            'description' => 'required|max:100',
+         ]);
 
       /**
        * Check image upload
        */
-      if($request->hasFile('image')) {
+      if ($request->hasFile('image')) {
          $information = Information::uploadImage($validated['image']);
       }
 
       /**
        * Add to database or update
        */
-      if($row->fill(
-        [
-          'tag_id'      => $validated['tag_id'],
-          'information' => $information??$validated['information'],
-          'description' => $validated['description'],
-        ])
+      if ($row->fill(
+         [
+            'tag_id'      => $validated['tag_id'],
+            'information' => $information ?? $validated['information'],
+            'description' => $validated['description'],
+         ])
       ) {
          return $row->save()
-           ? response('Загружено', 200)
-           : response('Ошибка', 500);
+         ? response('Загружено', 200)
+         : response('Ошибка', 500);
       }
    }
 
    public function createUnused(Request $request)
    {
-      if($request->has('_token')) {
+      if ($request->has('_token')) {
          foreach ($request->all() as $key => $val) {
-            if($val === 'true') {
+            if ($val === 'true') {
                Information::query()->create(
-                 [
-                   'tag_id' => $key,
-                   'information' => 'Текст',
-                   'description' => 'Заголовок',
-                 ]);
+                  [
+                     'tag_id'      => $key,
+                     'information' => 'Текст',
+                     'description' => 'Заголовок',
+                  ]);
             };
          }
       } else {
@@ -87,13 +87,15 @@ class InformationController extends Controller
     */
    public function delete(Request $request)
    {
-      if($request->filled('id')) {
+      if ($request->filled('id')) {
          $id = $request->get('id');
 
          return Information::trash($id)
-           ? response('Блок удален - ' . $id, 200)
-           : response('Ошибка', 500);
+         ? response('Блок удален - ' . $id, 200)
+         : response('Ошибка', 500);
       }
+
+      return response('Ошибка', 400);
    }
 
    /**
@@ -105,9 +107,9 @@ class InformationController extends Controller
     */
    public function deleteUnused(Request $request)
    {
-      if($request->has('_token')) {
+      if ($request->has('_token')) {
          foreach ($request->all() as $key => $val) {
-            if($val === 'true') {
+            if ($val === 'true') {
                Information::query()->where('tag_id', '=', $key)->delete();
             };
          }
@@ -126,17 +128,17 @@ class InformationController extends Controller
    public function eraseUnused(Request $request)
    {
       $template = new BladeEditor("landing");
-      if($request->has('_token')) {
+      if ($request->has('_token')) {
          foreach ($request->all() as $key => $val) {
-            if($val === 'true') {
+            if ($val === 'true') {
                $template->replaceBladeEcho($key, '');
             }
          }
       }
 
       return $template->save()
-        ? response('Удалено')
-        : response('Ошибка');
+      ? response('Удалено')
+      : response('Ошибка');
    }
 
    /**
@@ -158,6 +160,7 @@ class InformationController extends Controller
 
    /**
     * Show table with all Information
+    *
     * @param \Illuminate\Http\Request $request
     *
     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -167,33 +170,34 @@ class InformationController extends Controller
       /**
        * Format and show information
        */
-      if($request->get('page') == 'information') {
-         $db = json_decode(Information::all());
-         $parse = new BladeEditor("landing");
-         $variables = $parse->parseBladeEchos(true);
-         foreach ($db as $key => $columns) {
-            $tags[$key] = $columns->tag_id;
-         }
-         $data = [
-           'information' => array_map(
-             function ($s) {
-                return [
+      $db = json_decode(Information::all());
+
+      $parse = new BladeEditor("landing");
+      $variables = $parse->parseBladeEchos(true);
+
+      foreach ($db as $key => $columns) {
+         $tags[$key] = $columns->tag_id;
+      }
+
+      $data = [
+         'information' => array_map(
+            function ($s) {
+               return [
                   'id'          => $s->id,
                   'tag_id'      => $s->tag_id,
                   'information' => $s->information,
                   'description' => $s->description,
                   'image'       => preg_match(
-                    '/(\/image\/)/',
-                    $s->information)
-                    ? true : false,
-                ];
-             },
-             $db),
-           'use'         => array_diff($tags, $variables),
-           'not_use'     => array_diff($variables, $tags),
-         ];
+                     '/(\/image\/)/',
+                     $s->information)
+                  ? true : false,
+               ];
+            },
+            $db),
+         'use'         => array_diff($tags, $variables),
+         'not_use'     => array_diff($variables, $tags),
+      ];
 
-         return view('admin.information_table', $data);
-      }
+      return view('admin.information.main', $data);
    }
 }

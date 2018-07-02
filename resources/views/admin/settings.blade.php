@@ -52,9 +52,12 @@
       </div>
 
       <div data-role="tabSettings" id="tabSettings" class="col s12">
+
          <div class="row">
+            <div class="col s12">
                <div class="card-panel">
-                  <div class="h4">Смена дизайна (архив должен называться design.zip)</div>
+                  <div class="h4">Смена дизайна</div>
+                  <div class="h5">архив должен называться design.zip</div>
                   <form action="/admin/settings/zip" method="put" enctype="multipart/form-data">
                      <div class="file-field col s12 input-field">
                         <div class="btn">
@@ -65,11 +68,50 @@
                            <input class="file-path validate" type="text" placeholder="Загрузить"/>
                         </div>
                      </div>
-                  <button class="btn-flat waves-effect waves-red">
-                     Применить
-                  </button>
+                     <button class="btn-flat waves-effect waves-red">
+                        Применить
+                     </button>
                   </form>
                </div>
+            </div>
+
+            <div class="col s12">
+               <div class="card">
+                  <form data-role="saveMailData">
+                     <div class="card-content">
+                        <div class="card-title">Настройки почтового сервера</div>
+                        <div class="input-field">
+                           <input name="driver" type="text" value="{{$mail['MAIL_DRIVER']}}">
+                           <label class="active">Драйвер</label>
+                        </div>
+                        <div class="input-field">
+                           <input name="host" type="text" value="{{$mail['MAIL_HOST']}}">
+                           <label class="active">Сервер</label>
+                        </div>
+                        <div class="input-field">
+                           <input name="username" type="text" value="{{$mail['MAIL_USERNAME']}}">
+                           <label class="active">Пользователь</label>
+                        </div>
+                        <div class="input-field">
+                           <input name="password" type="text" value="{{$mail['MAIL_PASSWORD']}}">
+                           <label class="active">Пароль</label>
+                        </div>
+                        <div class="input-field">
+                           <input name="encryption" type="text" value="{{$mail['MAIL_ENCRYPTION']}}">
+                           <label class="active">Шифрование</label>
+                        </div>
+                        <div class="input-field">
+                           <input name="port" type="text" value="{{$mail['MAIL_PORT']}}">
+                           <label class="active">Порт</label>
+                        </div>
+                     </div>
+                     <div class="card-action">
+                        <a data-role="saveMailDataBtn" class="btn-flat black-text waves-effect waves-green">Сохранить</a>
+                     </div>
+                  </form>
+               </div>
+            </div>
+
          </div>
       </div>
 
@@ -125,40 +167,55 @@
 
 <script src="/js/form.js"></script>
 <script>
-    jQuery(function () {
-        let tab = {
-            about: '[data-role=tabAbout]',
-            settings: '[data-role=tabSettings]',
-            danger: '[data-role=tabDanger]',
-        };
-        let action = {
-            about: {
-                save:"/admin/settings/set",
-                password:'/admin/settings/setPassword',
-            },
-        };
-        let form = {
-            about: {
-                save: '[data-role=saveAdminData]',
-                password: '[data-role=resetPassword]',
-            }
-        };
-        let btn = {
-            about: {
-                save: '[data-role=saveNewSettings]',
-                password: '[data-role=saveNewPassword]',
-            },
-        };
-        jQuery(btn.about.save).click(function () {
-            ajaxStart(action.about.save, 'GET', $(this).parents(form.about.save).serialize());
-            return true;
-        });
-        jQuery(btn.about.password).click(function(){
-            ajaxStart(action.about.password, 'GET', $(this).parents(form.about.password).serialize());
-            return true
-        });
+   jQuery(document).ready(function ($) {
+      let tab = {
+         about: '[data-role=tabAbout]',
+         settings: '[data-role=tabSettings]',
+         danger: '[data-role=tabDanger]',
+      };
+      let action = {
+         about: {
+            save: "/admin/settings/set/admin",
+            password: '/admin/settings/setPassword',
+         },
+         setting: {
+            save: "/admin/settings/set/mail",
+         }
+      };
+      let form = {
+         about: {
+            save: '[data-role=saveAdminData]',
+            password: '[data-role=resetPassword]',
+         },
+         setting: {
+            save: "[data-role=saveMailData]",
+         }
+      };
+      let btn = {
+         about: {
+            save: '[data-role=saveNewSettings]',
+            password: '[data-role=saveNewPassword]',
+         },
+         setting: {
+            save: "[data-role=saveMailDataBtn]",
+         }
+      };
+      $(btn.about.save).click(function () {
+         ajaxStart(action.about.save, 'GET', $(this).parents(form.about.save).serialize());
+         return true;
+      });
 
-        jQuery('.tabs').tabs();
-        jQuery('.modal').modal();
-    });
+      $(btn.about.password).click(function () {
+         ajaxStart(action.about.password, 'GET', $(this).parents(form.about.password).serialize());
+         return true
+      });
+
+      $(btn.setting.save).click(function () {
+         ajaxStart(action.setting.save, 'GET', $(this).parents(form.setting.save).serialize());
+      });
+
+
+      $('.tabs').tabs();
+      $('.modal').modal();
+   });
 </script>

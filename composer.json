@@ -9,13 +9,14 @@
         "anam/captcha": "^1.0",
         "andreasindal/laravel-markdown": "3.0",
         "barryvdh/laravel-ide-helper": "^2.4",
+        "chumper/zipper": "1.0.x",
         "deployer/deployer": "^6.2",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.6.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "^1.0",
-        "socialiteproviders/vkontakte": "^4.0",
-        "chumper/zipper": "1.0.x"
+        "socialiteproviders/vkontakte": "^4.0"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
