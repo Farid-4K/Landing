@@ -1,1 +1,1 @@
-{"driver":"smtp","host":"smtp.gmail.com","port":"587","from":{"address":"hello@example.com","name":"Example"},"encryption":"tls","username":"farid5ip50@gmail.com","password":"zjlnkshgqxsajiyh","sendmail":"\/usr\/sbin\/sendmail -bs","markdown":{"theme":"default","paths":["\/var\/www\/landing\/resources\/views\/vendor\/mail"]}}
+{{$variable}}

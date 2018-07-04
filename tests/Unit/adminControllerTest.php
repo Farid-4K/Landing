@@ -26,7 +26,7 @@ class adminControllerTest extends TestCase
        * Тест
        */
       $this->get(
-        '/admin/settings/set?login=' . str_random(7)
+        '/admin/settings/set/admin/?login=' . str_random(7)
         . '&name=' . str_random(7)
         . '&email=asd@asd.asds');
 
@@ -48,7 +48,7 @@ class adminControllerTest extends TestCase
        * Тест
        */
       $this->get(
-        '/admin/settings/set?'
+        '/admin/settings/set/admin?'
         . 'name=' . str_random(55)
         . '&email=asd@asd.asds');
 
@@ -68,7 +68,7 @@ class adminControllerTest extends TestCase
       /**
        * Тест
        */
-      $this->get('/admin/settings/setPassword?password='.$testPassword);
+      $this->get('/admin/settings/set/password?password='.$testPassword);
 //      $this->seed('AdminSeed');
 
       /**

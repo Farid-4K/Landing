@@ -52,7 +52,7 @@ Route::middleware('auth')->namespace('Admin')->group(
      Route::any('/admin/settings/profile', 'AdminController@showProfile');
      Route::any('/admin/settings/set/admin', 'AdminController@set');
      Route::any('/admin/settings/set/mail', 'AdminController@setMail');
-     Route::any('/admin/settings/setPassword', 'AdminController@setPassword');
+     Route::any('/admin/settings/set/password', 'AdminController@setPassword');
      Route::get('/admin/settings/untie', 'AdminController@untie');
 
      /**

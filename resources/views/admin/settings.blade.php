@@ -176,7 +176,7 @@
       let action = {
          about: {
             save: "/admin/settings/set/admin",
-            password: '/admin/settings/setPassword',
+            password: '/admin/settings/set/password',
          },
          setting: {
             save: "/admin/settings/set/mail",

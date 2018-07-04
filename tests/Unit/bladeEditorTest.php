@@ -22,6 +22,7 @@ class bladeEditorTest extends TestCase
       /**
        * Окружение
        */
+      file_put_contents(resource_path('/views/test_view.blade.php'), '{{$'.self::VARIABLE.'}}');
       $this->seed(\DatabaseSeeder::class);
       $template = new BladeEditor('test_view');
       /**
