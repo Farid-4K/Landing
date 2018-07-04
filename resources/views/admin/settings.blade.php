@@ -53,38 +53,38 @@
             </div>
          </div>
 
-      </div>
+        </div>
 
-      <div data-role="tabSettings" id="tabSettings" class="col s12">
-         <div class="row">
-            <div class="col s12">
-               <div class="card">
-                  <div class="card-content">
-                     <div class="card-title">
-                        Смена дизайна (архив должен называться design.zip)
-                     </div>
-                  </div>
-                  <div class="card-action">
-                     <div class="form-action-inline">
-                        <form action="/admin/settings/upload/zip" method="POST" enctype="multipart/form-data">
-                           @csrf
-                           <div class="file-field col s12 input-field">
-                              <div class="btn">
-                                 <span>Zip-архив</span>
-                                 <input type="file" name="archive">
-                              </div>
-                              <div class="file-path-wrapper">
-                                 <input class="file-path validate" type="text" placeholder="Загрузить"/>
-                              </div>
-                           </div>
-                           <button class="btn-flat waves-effect waves-red">
-                              Применить
-                           </button>
-                        </form>
-                     </div>
-                  </div>
-               </div>
-            </div>
+        <div data-role="tabSettings" id="tabSettings" class="col s12">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title">
+                                Загрузка новой верстки
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <div class="form-action-inline">
+                                <form action="/admin/settings/upload/zip" data-role="formWithZip" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="file-field col s12 input-field">
+                                        <div class="btn">
+                                            <span>Zip-архив</span>
+                                            <input type="file" name="archive">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text" placeholder="Загрузить"/>
+                                        </div>
+                                    </div>
+                                    <a data-role="uploadZipBtn" class="btn-flat waves-effect waves-red">
+                                        Применить
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             <div class="col s12">
@@ -188,6 +188,7 @@
          },
          setting: {
             save: "/admin/settings/set/mail",
+            zip:"/admin/settings/upload/zip",
          },
          danger: {
             enable: '/admin/settings/site/enable',
@@ -201,6 +202,7 @@
          },
          setting: {
             save: "[data-role=saveMailData]",
+            zip:'[data-role=formWithZip]',
          }
       };
       let btn = {
@@ -210,12 +212,18 @@
          },
          setting: {
             save: "[data-role=saveMailDataBtn]",
+            zip: "[data-role=uploadZipBtn]",
          },
          danger: {
             enable: "[data-role=siteEnabledBtn]",
             disable: "[data-role=siteDisabledBtn]",
          }
       };
+
+      $(btn.setting.zip).click(function () {
+         ajaxStart(action.setting.zip, "POST", $(this).parents(form.setting.zip).serialize());
+         return true;
+      });
 
       $(btn.danger.enable).click(function () {
          ajaxStart(action.danger.enable, "GET", 'access=yes');

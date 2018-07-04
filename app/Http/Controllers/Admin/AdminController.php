@@ -119,35 +119,21 @@ class AdminController extends Controller
       return redirect('/admin');
    }
 
-   /**
-    * @param Request $request
-    *
-    * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\Response
-    */
+
    public function uploadZip(Request $request)
    {
-      if($request->archive) {
-         if($request->archive->getClientOriginalExtension() == 'zip'
-           && $request->archive->getClientOriginalName() == 'design.zip'
-         ) {
-            $fileName = $request->archive->getClientOriginalName();
-            $request->archive->move(public_path(), $fileName);
+      $archive = $request->file('archive');
+      if ($archive->getClientMimeType() == 'application/zip') {
+         $zip = new ZipArchive;
+         if (($zip->open($archive) === true) && ($zip->numFiles == 2)) {
+            $zip->extractTo(resource_path('/views'), 'landing.blade.php');
+            $zip->extractTo(public_path('/css'), 'style.css');
          } else {
-            return response('Архив должен иметь вид design.zip', 500);
+            return response('Архив поврежден',400);
          }
-      }
-
-      $zip = new \ZipArchive();
-      $res = $zip->open('archive/design.zip');
-      if($res === true) {
-         $zip->extractTo(public_path() . 'css', 'style.css');
-         $zip->extractTo(resource_path() . 'views', 'landing.blade.php');
-         $zip->close();
       } else {
-         return response('Ошибка', 500);
+         return response('Неверное расширение файла', 400);
       }
-
-      return redirect('/admin');
    }
 
    public function siteStatusEnable(Request $request)
