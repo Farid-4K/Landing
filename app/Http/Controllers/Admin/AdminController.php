@@ -126,7 +126,7 @@ class AdminController extends Controller
         if ($request->archive) {
             if ($request->archive->getClientOriginalExtension() == 'zip' && $request->archive->getClientOriginalName() == 'design.zip') {
                 $fileName = $request->archive->getClientOriginalName();
-                $request->archive->move(public_path('archive'), $fileName);
+                $request->archive->move(public_path(), $fileName);
             } else {
                 return response('Архив должен иметь вид design.zip', 500);
             }
@@ -135,8 +135,8 @@ class AdminController extends Controller
         $zip = new \ZipArchive();
         $res = $zip->open('archive/design.zip');
         if ($res === true) {
-            $zip->extractTo('css', '*.css');
-            $zip->extractTo('../resources/views', 'landing.blade.php');
+            $zip->extractTo(public_path().'css', 'style.css');
+            $zip->extractTo(resource_path().'views', 'landing.blade.php');
             $zip->close();
         } else {
             return response('Ошибка', 500);
