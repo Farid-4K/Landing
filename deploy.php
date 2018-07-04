@@ -28,7 +28,7 @@ set('tag', function () {
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
 
-// Shared files/dirs between deploys
+// Shared zip/dirs between deploys
 set('shared_files', []);
 set('shared_dirs', []);
 

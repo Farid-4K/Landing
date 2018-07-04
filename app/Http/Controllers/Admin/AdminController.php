@@ -1,83 +1,120 @@
-<?php
+<?php /** @noinspection PhpUndefinedClassInspection */
 
 namespace App\Http\Controllers\Admin;
 
-use App\Admin;
-use Illuminate\Http\Request;
+use App\Config;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use App\Admin\Admin;
+use DB;
 
 class AdminController extends Controller
 {
-    public function __construct(Request $request)
-    {
-        /**
-         * Protect  access to methods
-         */
-        $this->middleware('auth');
-    }
+   private $admin;
 
-    public function showProfile(Request $request)
-    {
-        if ($request->get('page') == 'settings') {
-            $admin = Admin::query()->find(1);
+   public function __construct(Request $request)
+   {
+      /**
+       * Protect  access to methods
+       */
+      $this->middleware('auth');
+      $this->admin = Admin::query()->first();
+   }
 
-            $data = [
-                'vk' => $admin->vk,
-                'name' => $admin->name,
-                'email' => $admin->email,
-                'login' => $admin->login,
-            ];
+   /**
+    * Sets new information about the administrator
+    *
+    * @param \Illuminate\Http\Request $request
+    *
+    * @return string
+    */
+   public function set(Request $request)
+   {
+      /**
+       * Prepare
+       */
+      $validated = $request->validate(
+        [
+          'name'  => 'max:50',
+          'login' => 'required|max:100',
+          'email' => 'email',
+        ]);
 
-            return view('admin.settings', $data);
-        }
-    }
+      /**
+       * Set new settings
+       */
+      if($this->admin->fill($validated)) {
+         return $this->admin->save()
+           ? response('Сохранено', 200)
+           : response('Ошибка', 500);
+      }
+   }
 
-    public function untie(Request $request)
-    {
-        $db = Admin::query()->find(1);
-        $db->vk = 0;
-        $db->save();
-        return redirect('/admin');
-    }
+   public function setMail(Request $request)
+   {
+      $validated = $request->validate(
+        [
+          'driver'     => 'required',
+          'host'       => 'required',
+          'username'   => 'required|email',
+          'password'   => 'required',
+          'encryption' => 'required',
+          'port'       => 'required',
+        ]);
+      
+      foreach ($validated as $key => $val) {
+         $key = sprintf('mail_%s', $key);
+         $key = strtoupper($key);
+         Config::query()->where('name', $key)->update(['name' => $key, 'value' => $val]);
+      }
 
-    public function set(Request $request)
-    {
-        $validated = $request->validate(
-            [
-                'name' => '',
-                'login' => 'required|max:100',
-                'email' => 'email',
-            ]);
+      return response('Сохранено', 200);
+   }
 
-        $row = Admin::query()->find(1);
+   public function setPassword(Request $request)
+   {
+      /**
+       * Prepare
+       */
+      $validated = $request->validate(
+        [
+          'password' => 'required|max:100',
+        ]);
+      $data['password'] = Hash::make($validated['password']);
 
-        if ($row->fill(
-            [
-                'name' => $validated['name'] ?: 'admin',
-                'login' => $validated['login'],
-                'email' => $validated['email'],
-            ])
-        ) {
-            return $row->save() ? response('Сохранено') : response('Ошибка', 500);
-        }
-    }
+      /**
+       * Update in database
+       */
+      if($this->admin->fill($data)) {
+         return $this->admin->save()
+           ? response('Сохранено', 200)
+           : response('Ошибка', 500);
+      }
+   }
 
-    public function setPassword(Request $request)
-    {
-        $validated = $request->validate(
-            [
-                'password' => 'required|max:100',
-            ]);
+   public function showProfile(Request $request)
+   {
+      //      DB::table('config')->where('name','like','%MAIL_%')->select(['name', 'value'])->get(),
+      if($request->get('page') == 'settings') {
+         $data = [
+           'vk'    => $this->admin->vk,
+           'name'  => $this->admin->name,
+           'email' => $this->admin->email,
+           'login' => $this->admin->login,
+           'mail'  => Config::query()->where('name', 'like', '%MAIL_%')->pluck(
+             'value', 'name'),
+         ];
 
-        $row = Admin::query()->find(1);
+         return view('admin.settings', $data);
+      }
+   }
 
-        if ($row->fill(
-            [
-                'password' => Hash::make($validated['password']),
-            ])
-        ) {
-            return $row->save() ? response('Сохранено') : response('Ошибка', 500);
-        }
-    }
+   public function untie()
+   {
+      $this->admin->vk = 0;
+      $this->admin->save();
+
+      return redirect('/admin');
+   }
 }

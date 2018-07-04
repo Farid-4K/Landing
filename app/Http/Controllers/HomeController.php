@@ -3,56 +3,61 @@
 namespace App\Http\Controllers;
 
 use Anam\Captcha\Captcha;
-use App\Information;
-use App\Order;
+use App\Admin\{
+  Information, Order
+};
+use App\Mail\OrderMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
-    public function welcome()
-    {
-        $flights = Information::all();
+   /**
+    * Добавление заказа
+    *
+    * @param \Illuminate\Http\Request $request
+    * @param \Anam\Captcha\Captcha $captcha
+    *
+    * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+    */
+   public function add(Request $request, Captcha $captcha)
+   {
+      /**
+       * Валидация
+       */
+      $response = $captcha->check($request);
+      $validated = $request->validate(
+         [
+            'name'    => 'required',
+            'email'   => 'email',
+            'phone'   => 'required|regex:/(^[\W0-9]+)/i',
+            'count'   => 'required|max:10',
+            'message' => 'required|max:1000',
+            'grant'   => 'required',
+         ]);
 
-        $data = [];
+      /**
+       * Запись
+       */
+      Mail::send(new OrderMail($validated));
+      if ($response->isVerified() == 'true') {
+         return Order::query()->create($validated)
+         ? response('Запрос отправлен', 200)
+         : response('Ошибка', 500);
+      } else {
+         return response('Ошибка', 402);
+      }
+   }
 
-        foreach ($flights as $flight) {
-            $data[$flight->tag_id] = $flight->information;
-        }
+   /**
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+   public function welcome()
+   {
+      foreach (Information::all() as $col) {
+         $data[$col->tag_id] = $col->information;
+      }
 
-        return view('welcome', $data);
-    }
-
-    public function add(Request $request, Captcha $captcha)
-    {
-        $response = $captcha->check($request);
-        $validated = $request->validate(
-            [
-                'name' => 'required',
-                'email' => 'email',
-                'phone' => 'required|regex:/\+([0-9]\([0-9]{3}\)[0-9]{3}-[0-9]{2}-[0-9]{2})/i',
-                'count' => 'required|max:10',
-                'message' => 'max:1000',
-                'grant' => 'required',
-            ]);
-        $user = new Order;
-        if($response->isVerified() == 'true') {
-            $user->fill(
-                [
-                    'name' => $validated['name'],
-                    'email' => $validated['email'],
-                    'phone' => $validated['phone'] ?: 0,
-                    'count' => $validated['count'] ?: 0,
-                    'message' => $validated['message'] ?: 'Сообщения нет',
-                    'grant' => $validated['grant'],
-                ]);
-            if ($user->save()) {
-                return response('Запрос отправлен');
-            } else {
-                return response('Ошибка');
-            }
-        }
-        else {
-            return response('Ошибка');
-        }
-    }
+      return view('landing', $data ?? null);
+   }
 }

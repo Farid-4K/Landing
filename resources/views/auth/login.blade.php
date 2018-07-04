@@ -9,10 +9,10 @@
     <div class="form-page">
         <div class="container">
             <div class="row">
-                <div class="col l4 m4 s8 offset-l4 offset-m4 offset-s2">
+                <div class="col l6 offset-l3 xl4 offset-xl4 m8 s12 offset-m2">
                     <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                         @csrf
-                        <div id="form" class="card-panel">
+                        <div id="form" style="width: 100%" class="card-panel">
                             <div class="input-field">
                                 <input id="login" name="login" type="text" class="validate">
                                 <label class="active" for="login">LOGIN</label>
