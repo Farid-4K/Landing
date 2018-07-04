@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Admin\Admin;
 use App\Config;
 use Illuminate\Mail\Mailer;
 use Illuminate\Mail\Markdown;
@@ -46,12 +45,12 @@ class MailServiceProvider extends ServiceProvider
       $this->app->singleton(
         'mailer', function ($app) {
          $config = $app->make('config')->get('mail');
-         $config['driver'] = Config::query()->where('name', '=', 'MAIL_DRIVER');
-         $config['host'] = Config::query()->where('name', '=', 'MAIL_HOST');
-         $config['port'] = Config::query()->where('name', '=', 'MAIL_PORT');
-         $config['username'] = Config::query()->where('name', '=', 'MAIL_USERNAME');
-         $config['password'] = Config::query()->where('name', '=', 'MAIL_PASSWORD');
-         $config['encryption'] = Config::query()->where('name', '=', 'MAIL_ENCRYPTION');
+         $config['driver'] = Config::where('name', 'MAIL_DRIVER')->first()->value;
+         $config['host'] = Config::where('name', 'MAIL_HOST')->first()->value;
+         $config['port'] = Config::where('name', 'MAIL_PORT')->first()->value;
+         $config['username'] = Config::where('name', 'MAIL_USERNAME')->first()->value;
+         $config['password'] = Config::where('name', 'MAIL_PASSWORD')->first()->value;
+         $config['encryption'] = Config::where('name', 'MAIL_ENCRYPTION')->first()->value;
 
          $mailer = new Mailer(
            $app['view'], $app['swift.mailer'], $app['events']
