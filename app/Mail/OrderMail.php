@@ -44,7 +44,8 @@ class OrderMail extends Mailable
 
       $data['userMessage'] = $data['message']??null;
 
-      return $this->to(self::$target)
+      return $this->from(self::$target)
+                  ->to(self::$target)
                   ->view('mail.order', $data??null);
    }
 }
