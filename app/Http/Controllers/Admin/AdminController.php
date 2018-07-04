@@ -124,10 +124,11 @@ class AdminController extends Controller
    {
       $archive = $request->file('archive');
       if ($archive->getClientMimeType() == 'application/zip') {
-         $zip = new ZipArchive;
+         $zip = new \ZipArchive;
          if (($zip->open($archive) === true) && ($zip->numFiles == 2)) {
             $zip->extractTo(resource_path('/views'), 'landing.blade.php');
             $zip->extractTo(public_path('/css'), 'style.css');
+            return redirect('/admin');
          } else {
             return response('Архив поврежден',400);
          }

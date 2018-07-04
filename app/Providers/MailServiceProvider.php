@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Admin\Admin;
 use App\Config;
 use Illuminate\Mail\Mailer;
 use Illuminate\Mail\Markdown;
