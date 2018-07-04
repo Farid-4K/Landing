@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Admin\Admin;
-use DB;
 
 class AdminController extends Controller
 {
@@ -117,4 +116,34 @@ class AdminController extends Controller
 
       return redirect('/admin');
    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\Response
+     */
+    public function uploadZip(Request $request)
+    {
+        if ($request->archive) {
+            if ($request->archive->getClientOriginalExtension() == 'zip' && $request->archive->getClientOriginalName() == 'design.zip') {
+                $fileName = $request->archive->getClientOriginalName();
+                $request->archive->move(public_path('archive'), $fileName);
+            } else {
+                return response('Архив должен иметь вид design.zip', 500);
+            }
+        }
+
+        $zip = new \ZipArchive();
+        $res = $zip->open('archive/design.zip');
+        if ($res === true) {
+            $zip->extractTo('css', '*.css');
+            $zip->extractTo('../resources/views', 'landing.blade.php');
+            $zip->close();
+        } else {
+            return response('Ошибка', 500);
+        }
+
+        return redirect('/admin');
+    }
+
+
 }

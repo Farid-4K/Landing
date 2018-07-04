@@ -54,6 +54,7 @@ Route::middleware('auth')->namespace('Admin')->group(
      Route::any('/admin/settings/set/mail', 'AdminController@setMail');
      Route::any('/admin/settings/set/password', 'AdminController@setPassword');
      Route::get('/admin/settings/untie', 'AdminController@untie');
+     Route::any('/admin/settings/upload/zip', 'AdminController@uploadZip');
 
      /**
       * Group that control for orders

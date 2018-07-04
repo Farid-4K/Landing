@@ -53,29 +53,35 @@
 
       <div data-role="tabSettings" id="tabSettings" class="col s12">
 
-         <div class="row">
-            <div class="col s12">
-               <div class="card-panel">
-                  <div class="h4">Смена дизайна</div>
-                  <div class="h5">архив должен называться design.zip</div>
-                  <form action="/admin/settings/zip" method="put" enctype="multipart/form-data">
-                     <div class="file-field col s12 input-field">
-                        <div class="btn">
-                           <span>zip-архив</span>
-                           <input type="file" name="archive">
-                        </div>
-                        <div class="file-path-wrapper">
-                           <input class="file-path validate" type="text" placeholder="Загрузить"/>
-                        </div>
+         <div class="card">
+            <div class="card-content">
+               <div class="card-title">
+                  Смена дизайна (архив должен называться design.zip)
+               </div>
+            </div>
+            <div class="card-action">
+               <div class="form-action-inline">
+                  <form action="/admin/settings/upload/zip" method="POST" enctype="multipart/form-data">
+                      @csrf
+                  <div class="file-field col s12 input-field">
+                     <div class="btn">
+                        <span>Zip-архив</span>
+                        <input type="file" name="archive">
                      </div>
-                     <button class="btn-flat waves-effect waves-red">
-                        Применить
-                     </button>
+                     <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Загрузить"/>
+                     </div>
+                  </div>
+                  <button class="btn-flat waves-effect waves-red">
+                     Применить
+                  </button>
                   </form>
                </div>
             </div>
+         </div>
 
-            <div class="col s12">
+
+         <div class="col s12">
                <div class="card">
                   <form data-role="saveMailData">
                      <div class="card-content">
