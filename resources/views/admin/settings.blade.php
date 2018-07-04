@@ -61,12 +61,12 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="card-title">
-                                Смена дизайна (архив должен называться design.zip)
+                                Загрузка новой верстки
                             </div>
                         </div>
                         <div class="card-action">
                             <div class="form-action-inline">
-                                <form action="/admin/settings/upload/zip" method="POST" enctype="multipart/form-data">
+                                <form action="/admin/settings/upload/zip" data-role="formWithZip" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="file-field col s12 input-field">
                                         <div class="btn">
@@ -77,9 +77,9 @@
                                             <input class="file-path validate" type="text" placeholder="Загрузить"/>
                                         </div>
                                     </div>
-                                    <button class="btn-flat waves-effect waves-red">
+                                    <a data-role="uploadZipBtn" class="btn-flat waves-effect waves-red">
                                         Применить
-                                    </button>
+                                    </a>
                                 </form>
                             </div>
                         </div>
@@ -202,6 +202,7 @@
             },
             setting: {
                 save: "/admin/settings/set/mail",
+                zip:"/admin/settings/upload/zip",
             }
         };
         let form = {
@@ -211,6 +212,7 @@
             },
             setting: {
                 save: "[data-role=saveMailData]",
+                zip:'[data-role=formWithZip]',
             }
         };
         let btn = {
@@ -220,8 +222,15 @@
             },
             setting: {
                 save: "[data-role=saveMailDataBtn]",
+                zip: "[data-role=uploadZipBtn]",
             }
         };
+
+        $(btn.setting.zip).click(function () {
+            ajaxStart(action.setting.zip, "POST", $(this).parents(form.setting.zip).serialize());
+            return true;
+        });
+
         $(btn.about.save).click(function () {
             ajaxStart(action.about.save, 'GET', $(this).parents(form.about.save).serialize());
             return true;
