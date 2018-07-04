@@ -30,10 +30,13 @@
 					data-method="get"><a>Заказы</a></div>
 				</li>
 			</ul>
-			<a class="btn waves-effect waves-red" href="{{ route('logout') }}"
-			onclick="logout();">
-			{{ __('Logout') }}
-		</a>
+         <a class="btn waves-effect waves-red" href="{{ route('logout') }}"
+            onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+         </a>
+         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+         </form>
 	</div>
 	<div class="show-on-medium-and-down right">
 		<a href="#" data-target="slide-out" class="sidenav-trigger">
@@ -69,21 +72,19 @@
 		<div class="divider"></div>
 	</li>
 	<li>
-		<a class="waves-effect waves-red" href="{{ route('logout') }}"
-		onclick="logout();">
-		{{ __('Logout') }}
-	</a>
+      <a class="btn waves-effect waves-red" href="{{ route('logout') }}"
+         onclick="event.preventDefault();document.getElementById('logout-form-min').submit();">
+         {{ __('Logout') }}
+      </a>
+      <form id="logout-form-min" action="{{ route('logout') }}" method="POST" style="display: none;">
+         @csrf
+      </form>
 </li>
 </ul>
 
-<form id="logout-form" action="{{ route('logout') }}" role="form" method="POST" style="display: none;">
-	@csrf
-	{{method_field('POST')}}
-</form>
-
 <div data-role="content"></div>
 
-<div class="loader hidden">
+<div class="loader" style="display: none;">
 	<div class="preloader-wrapper big active">
 		<div class="spinner-layer spinner-blue-only">
 			<div class="circle-clipper left">
@@ -103,10 +104,6 @@
 	let menu = "[data-role=menu]";
 	let content = "[data-role=content]";
 
-	function logout(event) {
-		event.preventDefault();
-		document.getElementById('logout-form').submit();
-	}
 
 	jQuery(document).ready(function($) {
 		$('.sidenav').sidenav();

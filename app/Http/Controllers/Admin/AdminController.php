@@ -11,6 +11,7 @@ use App\Admin\Admin;
 class AdminController extends Controller
 {
    private $admin;
+   private $siteStatus;
 
    public function __construct(Request $request)
    {
@@ -19,6 +20,7 @@ class AdminController extends Controller
        */
       $this->middleware('auth');
       $this->admin = Admin::query()->first();
+      $this->siteStatus = Config::where('name', 'SITE_ENABLED')->first();
    }
 
    /**
@@ -61,7 +63,7 @@ class AdminController extends Controller
           'encryption' => 'required',
           'port'       => 'required',
         ]);
-      
+
       foreach ($validated as $key => $val) {
          $key = sprintf('mail_%s', $key);
          $key = strtoupper($key);
@@ -94,15 +96,15 @@ class AdminController extends Controller
 
    public function showProfile(Request $request)
    {
-      //      DB::table('config')->where('name','like','%MAIL_%')->select(['name', 'value'])->get(),
       if($request->get('page') == 'settings') {
          $data = [
-           'vk'    => $this->admin->vk,
-           'name'  => $this->admin->name,
-           'email' => $this->admin->email,
-           'login' => $this->admin->login,
-           'mail'  => Config::query()->where('name', 'like', '%MAIL_%')->pluck(
+           'vk'          => $this->admin->vk,
+           'name'        => $this->admin->name,
+           'email'       => $this->admin->email,
+           'login'       => $this->admin->login,
+           'mail'        => Config::query()->where('name', 'like', '%MAIL_%')->pluck(
              'value', 'name'),
+           'site_status' => $this->siteStatus->value,
          ];
 
          return view('admin.settings', $data);
@@ -117,33 +119,52 @@ class AdminController extends Controller
       return redirect('/admin');
    }
 
-    /**
-     * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\Response
-     */
-    public function uploadZip(Request $request)
-    {
-        if ($request->archive) {
-            if ($request->archive->getClientOriginalExtension() == 'zip' && $request->archive->getClientOriginalName() == 'design.zip') {
-                $fileName = $request->archive->getClientOriginalName();
-                $request->archive->move(public_path(), $fileName);
-            } else {
-                return response('Архив должен иметь вид design.zip', 500);
-            }
-        }
+   /**
+    * @param Request $request
+    *
+    * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Symfony\Component\HttpFoundation\Response
+    */
+   public function uploadZip(Request $request)
+   {
+      if($request->archive) {
+         if($request->archive->getClientOriginalExtension() == 'zip'
+           && $request->archive->getClientOriginalName() == 'design.zip'
+         ) {
+            $fileName = $request->archive->getClientOriginalName();
+            $request->archive->move(public_path(), $fileName);
+         } else {
+            return response('Архив должен иметь вид design.zip', 500);
+         }
+      }
 
-        $zip = new \ZipArchive();
-        $res = $zip->open('archive/design.zip');
-        if ($res === true) {
-            $zip->extractTo(public_path().'css', 'style.css');
-            $zip->extractTo(resource_path().'views', 'landing.blade.php');
-            $zip->close();
-        } else {
-            return response('Ошибка', 500);
-        }
+      $zip = new \ZipArchive();
+      $res = $zip->open('archive/design.zip');
+      if($res === true) {
+         $zip->extractTo(public_path() . 'css', 'style.css');
+         $zip->extractTo(resource_path() . 'views', 'landing.blade.php');
+         $zip->close();
+      } else {
+         return response('Ошибка', 500);
+      }
 
-        return redirect('/admin');
-    }
+      return redirect('/admin');
+   }
 
+   public function siteStatusEnable(Request $request)
+   {
+      if($this->siteStatus->update(['value' => 'true'])) {
+         return response('Сайт включен', 200);
+      } else {
+         return response('Ошибка', 500);
+      }
+   }
 
+   public function siteStatusDisable(Request $request)
+   {
+      if($this->siteStatus->update(['value' => 'false'])) {
+         return response('Сайт отключен', 200);
+      } else {
+         return response('Ошибка', 500);
+      }
+   }
 }

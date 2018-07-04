@@ -3,8 +3,9 @@
 /**
  * Public route group
  */
-Route::get('/', 'HomeController@welcome');
-Route::any('/main/add', 'HomeController@add');
+
+Route::get('/', 'HomeController@welcome')->middleware('siteStatus');
+Route::any('/main/add', 'HomeController@add')->middleware('siteStatus');
 
 /**
  * Login route group
@@ -55,6 +56,8 @@ Route::middleware('auth')->namespace('Admin')->group(
      Route::any('/admin/settings/set/password', 'AdminController@setPassword');
      Route::get('/admin/settings/untie', 'AdminController@untie');
      Route::any('/admin/settings/upload/zip', 'AdminController@uploadZip');
+     Route::get('/admin/settings/site/enable','AdminController@siteStatusEnable');
+     Route::get('/admin/settings/site/disable','AdminController@siteStatusDisable');
 
      /**
       * Group that control for orders

@@ -18,6 +18,7 @@ class ConfigSeed extends Seeder
        'MAIL_USERNAME',
        'MAIL_PASSWORD',
        'MAIL_ENCRYPTION',
+       'SITE_ENABLED'
      ];
 
    const INF
@@ -28,9 +29,10 @@ class ConfigSeed extends Seeder
        'farid5ip50@gmail.com',
        'zjlnkshgqxsajiyh',
        'tls',
+       'true'
      ];
 
-   const COUNT = 6;
+   const COUNT = 7;
 
    public function run()
    {

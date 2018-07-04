@@ -10,20 +10,19 @@ function ajaxStart(url, method, data) {
       cache: false,
       processData: false,
       beforeSend: function () {
-         $(".loader").removeClass("hidden");
          $(".loader").fadeIn(50);
       },
       success: function (result) {
-         M.toast({html: result});
          $(".loader").fadeOut(50);
+         M.toast({html: result});
       },
       error: function (result) {
+         $(".loader").fadeOut(50);
          let data = result.responseJSON.message;
          let error = result.responseJSON.errors;
          if (data !== undefined) {
             M.toast({html: error[Object.keys(error)[0]]});
          }
-         $(".loader").fadeOut(50);
       },
    });
 }
