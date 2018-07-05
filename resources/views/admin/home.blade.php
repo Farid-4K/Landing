@@ -100,6 +100,8 @@
       </div>
    </div>
 
+   <script src="/js/cookie.js"></script>
+
    <script>
       let menu = "[data-role=menu]";
       let content = "[data-role=content]";
@@ -107,8 +109,8 @@
 
       jQuery(document).ready(function ($) {
          $('.sidenav').sidenav();
-
          $(menu + " .action-ajax").click(function () {
+            Cookies.set('page', $(this).attr('data-call'));
             let token = $('meta[name="csrf-token"]');
             $.ajax({
                url: $(this).attr('data-action'),
@@ -135,7 +137,10 @@
             return true;
          });
 
-         $("#start").delay(200).click();
+         if(Cookies.get('page')!==undefined)
+         {
+            $('[data-call='+Cookies.get('page')+']').click();
+         }
       });
    </script>
 

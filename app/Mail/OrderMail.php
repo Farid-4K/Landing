@@ -42,9 +42,7 @@ class OrderMail extends Mailable
 
       $data['userMessage'] = $data['message']??null;
 
-      return $this->from(self::$target)
-                  ->to(self::$target)
-                  ->view('mail.order', $data??null)
-                  ->subject('Новый заказ');
+      return $this->to(self::$target)
+                  ->view('mail.order', $data??null);
    }
 }

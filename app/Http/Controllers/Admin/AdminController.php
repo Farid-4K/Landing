@@ -64,11 +64,19 @@ class AdminController extends Controller
           'port'       => 'required',
         ]);
 
+      $pathToConfig = storage_path('/app/mail.json');
+      if(file_exists($pathToConfig)) {
+         $config = json_decode(file_get_contents($pathToConfig), true);
+      }
+
       foreach ($validated as $key => $val) {
+         $config[$key] = $val;
          $key = sprintf('mail_%s', $key);
          $key = strtoupper($key);
          Config::query()->where('name', $key)->update(['name' => $key, 'value' => $val]);
       }
+
+      file_put_contents($pathToConfig,json_encode($config));
 
       return response('Сохранено', 200);
    }
