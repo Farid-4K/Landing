@@ -28,7 +28,7 @@ Route::middleware('auth')->namespace('Admin')->group(
         return view('admin.home');
      });
 
-     Route::get(
+     Route::post(
        '/admin/about', function () {
         return view('admin.makeup_rules');
      });
@@ -40,9 +40,9 @@ Route::middleware('auth')->namespace('Admin')->group(
      /**
       * Group that edits the content
       */
-     Route::get('/admin/table/', 'InformationController@table');
+     Route::post('/admin/table/', 'InformationController@table');
      Route::get('/admin/table/delete', 'InformationController@delete');
-     Route::get('/admin/table/create', 'InformationController@create');
+     Route::post('/admin/table/create', 'InformationController@create');
      Route::get('/admin/table/delete/unused', 'InformationController@deleteUnused');
      Route::get('/admin/table/create/unused', 'InformationController@createUnused');
      Route::get('/admin/table/erase/unused', 'InformationController@eraseUnused');
@@ -50,7 +50,7 @@ Route::middleware('auth')->namespace('Admin')->group(
      /**
       * Group that edits the profile setting
       */
-     Route::any('/admin/settings/profile', 'AdminController@showProfile');
+     Route::post('/admin/settings/profile', 'AdminController@showProfile');
      Route::any('/admin/settings/set/admin', 'AdminController@set');
      Route::any('/admin/settings/set/mail', 'AdminController@setMail');
      Route::any('/admin/settings/set/password', 'AdminController@setPassword');
@@ -62,7 +62,7 @@ Route::middleware('auth')->namespace('Admin')->group(
      /**
       * Group that control for orders
       */
-     Route::get('/admin/orders', 'OrdersController@show');
+     Route::post('/admin/orders', 'OrdersController@show');
      Route::any('/admin/orders/delete', 'OrdersController@delete');
      Route::any('/admin/orders/complete', 'OrdersController@complete');
 

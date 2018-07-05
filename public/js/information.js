@@ -1,4 +1,3 @@
-
 jQuery(function () {
 
    function inputClear(selector) {
@@ -14,7 +13,7 @@ jQuery(function () {
          erase: '/admin/table/erase/unused',
       }
    };
-   
+
 
    /* Query settings */
    let btn = {
@@ -32,7 +31,7 @@ jQuery(function () {
          erase: 'a[data-role=btnEraseUnused]'
       },
    };
-   
+
 
    /* Query settings */
    let form = {
@@ -46,7 +45,7 @@ jQuery(function () {
          img: '[data-role=formImage]'
       },
    };
-   
+
 
    /* Query settings */
    let card = {
@@ -55,25 +54,21 @@ jQuery(function () {
          des: '[data-role=cardDescription]',
          tag: '[data-role=cardTag]',
          inf: '[data-role=cardInformation]'
-      }, 
+      },
    };
 
    let manage = {
       database: '[data-role=ManagementUnusedDataBase]',
       template: '[data-role=ManagementUnusedDataTemplate]',
    };
-   
 
    /* Создание информации */
-   $(form.parent).submit(function () {
-      ajaxStart($(form.self).attr("action"), 'GET', $(form.self).serialize());
-   });
-
    $(form.self).submit(function (event) {
       event.preventDefault();
-      ajaxStart($(this).attr("action"), 'GET', $(this).serialize());
+      ajaxStart($(form.self).attr("action"), 'POST', new FormData(this));
       return false;
    });
+
    /* Удаление карточки */
    $(btn.card.delete).click(function () {
       let parent = $(this).parents(card.self);
@@ -147,4 +142,19 @@ jQuery(function () {
       $(form.data.id).val(data.id).attr("value", data.id);
       $(form.parent).fadeIn(150);
    });
+
+   function showEditForm() {
+      let parent = $(this);
+      let data = {
+         id: parent.attr("data-id"),
+         information: parent.find(card.data.inf).text(),
+         description: parent.find(card.data.des).text(),
+         tag: parent.find(card.data.tag).text()
+      };
+      $(form.data.tag).val(data.tag).attr("value", data.tag).hide(0);
+      $(form.data.des).val(data.description).attr("value", data.description);
+      $(form.data.inf).val(data.information).attr("value", data.information);
+      $(form.data.id).val(data.id).attr("value", data.id);
+      $(form.parent).fadeIn(150);
+   }
 });

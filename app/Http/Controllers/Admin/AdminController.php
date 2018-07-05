@@ -96,19 +96,17 @@ class AdminController extends Controller
 
    public function showProfile(Request $request)
    {
-      if($request->get('page') == 'settings') {
-         $data = [
-           'vk'          => $this->admin->vk,
-           'name'        => $this->admin->name,
-           'email'       => $this->admin->email,
-           'login'       => $this->admin->login,
-           'mail'        => Config::query()->where('name', 'like', '%MAIL_%')->pluck(
-             'value', 'name'),
-           'site_status' => $this->siteStatus->value,
-         ];
+      $data = [
+        'vk'          => $this->admin->vk,
+        'name'        => $this->admin->name,
+        'email'       => $this->admin->email,
+        'login'       => $this->admin->login,
+        'mail'        => Config::query()->where('name', 'like', '%MAIL_%')->pluck(
+          'value', 'name'),
+        'site_status' => $this->siteStatus->value,
+      ];
 
-         return view('admin.settings', $data);
-      }
+      return view('admin.settings', $data);
    }
 
    public function untie()
@@ -119,18 +117,18 @@ class AdminController extends Controller
       return redirect('/admin');
    }
 
-
    public function uploadZip(Request $request)
    {
       $archive = $request->file('archive');
-      if ($archive->getClientMimeType() == 'application/zip') {
+      if($archive->getClientMimeType() == 'application/zip') {
          $zip = new \ZipArchive;
-         if (($zip->open($archive) === true) && ($zip->numFiles == 2)) {
+         if(($zip->open($archive) === true) && ($zip->numFiles == 2)) {
             $zip->extractTo(resource_path('/views'), 'landing.blade.php');
             $zip->extractTo(public_path('/css'), 'style.css');
+
             return redirect('/admin');
          } else {
-            return response('Архив поврежден',400);
+            return response('Архив поврежден', 400);
          }
       } else {
          return response('Неверное расширение файла', 400);

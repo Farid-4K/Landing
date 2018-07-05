@@ -1,12 +1,10 @@
 <div class="container">
-   <div class="card-panel">
-      <div class="row">
-         <div class="col s12">
-            <ul class="tabs">
-               <li class="tab col s6"><a class="active" href="#unfinished">Действующие</a></li>
-               <li class="tab col s6"><a href="#finished">Выполненые</a></li>
-            </ul>
-         </div>
+   <div class="row">
+      <div class="col s12">
+         <ul class="tabs tabs-p z-depth-1">
+            <li class="tab col s6"><a class="active" href="#unfinished">Действующие</a></li>
+            <li class="tab col s6"><a href="#finished">Выполненые</a></li>
+         </ul>
       </div>
    </div>
 
@@ -19,23 +17,19 @@
                <div class="h5">Телефон: {{$user['phone']}}</div>
                <div class="h5">Кол-во: {{$user['count']}}</div>
                <div class="h5">Дата: {{$user['created_at']}}</div>
+               <div><p>{{$user['message']}}</p></div>
             </div>
             <div class="card-action">
-               <button type="submit" data-role=btnDeleteOrder data-delete-id="{{$user['id']}}"
-                       class="btn-floating btn-m-l right waves-effect waves-red">
-                  <i class="material-icons">delete</i>
-               </button>
                <button type="submit" data-role=btnFinishOrder data-delete-id="{{$user['id']}}"
-                       class="btn-floating right waves-effect waves-green">
-                  <i class="material-icons">check</i>
+                       class="btn-flat waves-effect waves-green">Завершить
+                  <i class="material-icons left">check</i>
                </button>
-               <a class="black-text btn-flat modal-trigger" href="#modal{{$user['id']}}">Сообщение</a>
-            </div>
-         </div>
-         <div id="modal{{$user['id']}}" class="modal">
-            <div class="modal-content flow-text word-break"><p class="word-break">{{$user['message']}}</p></div>
-            <div class="modal-footer">
-               <a href="#" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
+               <div class="right">
+                  <button type="submit" data-role=btnDeleteOrder data-delete-id="{{$user['id']}}"
+                          class="btn-floating btn-m-l waves-effect waves-red">
+                     <i class="material-icons">delete</i>
+                  </button>
+               </div>
             </div>
          </div>
       @endforeach
@@ -49,18 +43,13 @@
                <div class="h5">Телефон: {{$users['phone']}}</div>
                <div class="h5">Кол-во: {{$users['count']}}</div>
                <div class="h5">Дата: {{$users['created_at']}}</div>
+               <div><p>{{$users['message']}}</p></div>
             </div>
-            <div class="card-action">
-               <button type="submit" data-delete-id="{{$users['id']}}" data-role=btnDeleteOrder class="btn-floating waves-effect waves-red right ">
+            <div class="card-action flex-reverse form-action-inline">
+               <button type="submit" data-delete-id="{{$users['id']}}" data-role=btnDeleteOrder
+                       class="btn-floating waves-effect right waves-red">
                   <i class="material-icons">delete</i>
                </button>
-               <a class="black-text btn-flat modal-trigger" href="#modal{{$users['id']}}">Сообщение</a>
-            </div>
-         </div>
-         <div id="modal{{$users['id']}}" class="modal">
-            <div class="modal-content flow-text word-break"><p class="word-break">{{$users['message']}}</p></div>
-            <div class="modal-footer">
-               <a href="#" class="modal-close waves-effect waves-green btn-flat">Закрыть</a>
             </div>
          </div>
       @endforeach
@@ -71,7 +60,7 @@
 <script>
    jQuery(function () {
       $('.modal').modal();
-      $(".tabs").tabs();
+      $(".tabs").tabs({responsiveThreshold: 50});
 
       let btn = {
          Unfinished: {

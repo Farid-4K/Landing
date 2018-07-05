@@ -3,8 +3,8 @@ function ajaxStart(url, method, data) {
       headers: {
          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      type: method,
       url: url,
+      method: method,
       data: data,
       contentType: false,
       cache: false,

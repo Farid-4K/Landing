@@ -3,8 +3,6 @@
 namespace App\Mail;
 
 use App\Admin\Admin;
-use App\Admin\Information;
-use App\Admin\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -46,6 +44,7 @@ class OrderMail extends Mailable
 
       return $this->from(self::$target)
                   ->to(self::$target)
-                  ->view('mail.order', $data??null);
+                  ->view('mail.order', $data??null)
+                  ->subject('Новый заказ');
    }
 }
