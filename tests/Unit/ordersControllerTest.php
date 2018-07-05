@@ -36,6 +36,23 @@ class ordersControllerTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
+    public function testOrdersShow()
+    {
+        /**
+         * Окружение
+         */
+
+        /**
+         * Тест
+         */
+        $this->get('/admin/orders');
+
+        /**
+         * Проверка
+         */
+        $this->see('Сообщение');
+    }
+
     /**
      *
      */
@@ -76,5 +93,23 @@ class ordersControllerTest extends TestCase
          * Проверка
          */
         $this->assertResponseStatus(200);
+    }
+
+    public function testOrdersDeleteErrors()
+    {
+        /**
+         * Окружение
+         */
+        $id = 5000;
+
+        /**
+         * Тест
+         */
+        $this->get('/admin/orders/delete?id=' . $id);
+
+        /**
+         * Проверка
+         */
+        $this->assertResponseStatus(500);
     }
 }

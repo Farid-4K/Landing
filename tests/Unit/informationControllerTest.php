@@ -52,7 +52,11 @@ class informationControllerTests extends TestCase
         /**
          * Тест
          */
-        $this->get('/admin/table/create?tag_id=' . $tag_id . '&information=' . $information . '&description=' . $description);
+        $this->post('/admin/table/create', [
+            'tag_id' => $tag_id,
+            'information' => $information,
+            'description' => $description,
+        ]);
 
         /**
          * Проверка
@@ -75,7 +79,11 @@ class informationControllerTests extends TestCase
         /**
          * Тест
          */
-        $this->get('/admin/table/create?tag_id=' . $tag_id . '&information=' . $information . '&description=' . $description);
+        $this->post('/admin/table/create', [
+            'tag_id' => $tag_id,
+            'information' => $information,
+            'description' => $description,
+        ]);
 
         /**
          * Проверка
@@ -92,14 +100,18 @@ class informationControllerTests extends TestCase
         /**
          * Окружение
          */
-        $tag_id = 21343;
+        $tag_id = 25000;
         $information = str_random(10);
         $description = str_random(10);
 
         /**
          * Тест
          */
-        $this->get('/admin/table/create?tag_id=' . $tag_id . '&information=' . $information . '&description=' . $description);
+        $this->post('/admin/table/create', [
+            'tag_id' => $tag_id,
+            'information' => $information,
+            'description' => $description,
+        ]);
 
         /**
          * Проверка
@@ -122,7 +134,11 @@ class informationControllerTests extends TestCase
         /**
          * Тест
          */
-        $this->get('/admin/table/create?tag_id=' . $tag_id . '&information=' . $information . '&description=' . $description);
+        $this->post('/admin/table/create', [
+            'tag_id' => $tag_id,
+            'information' => $information,
+            'description' => $description,
+        ]);
 
         /**
          * Проверка
@@ -145,7 +161,11 @@ class informationControllerTests extends TestCase
         /**
          * Тест
          */
-        $this->get('/admin/table/create?tag_id=' . $tag_id . '&information=' . $information . '&description=' . $description);
+        $this->post('/admin/table/create', [
+            'tag_id' => $tag_id,
+            'information' => $information,
+            'description' => $description,
+        ]);
 
         /**
          * Проверка
