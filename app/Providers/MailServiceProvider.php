@@ -44,13 +44,17 @@ class MailServiceProvider extends ServiceProvider
    {
       $this->app->singleton(
         'mailer', function ($app) {
-         $config = $app->make('config')->get('mail');
          $config['driver'] = Config::where('name', 'MAIL_DRIVER')->first()->value;
          $config['host'] = Config::where('name', 'MAIL_HOST')->first()->value;
          $config['port'] = Config::where('name', 'MAIL_PORT')->first()->value;
          $config['username'] = Config::where('name', 'MAIL_USERNAME')->first()->value;
          $config['password'] = Config::where('name', 'MAIL_PASSWORD')->first()->value;
          $config['encryption'] = Config::where('name', 'MAIL_ENCRYPTION')->first()->value;
+         $config['from'] = ['address'=>'hello@example.com', 'name'=>'Example'];
+         $config['sendmail'] = '/usr/sbin/sendmail -bs';
+         $config['markdown'] = [
+             'theme'=> 'default',
+         ];
 
          $mailer = new Mailer(
            $app['view'], $app['swift.mailer'], $app['events']

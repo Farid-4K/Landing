@@ -7,8 +7,10 @@ use App\Admin\{
     Information, Order
 };
 use App\Mail\OrderMail;
+use App\Providers\MailServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+
 
 class HomeController extends Controller
 {
@@ -32,7 +34,7 @@ class HomeController extends Controller
                 'email' => 'email',
                 'phone' => 'required|regex:/(^[\W0-9]+)/i',
                 'count' => 'required',
-                'message' => 'required|max:1000',
+                'message' => 'required|max:2000',
                 'grant' => 'required',
             ]);
 
@@ -46,7 +48,6 @@ class HomeController extends Controller
             } else {
                 return response('Ошибка', 500);
             }
-
         } else {
             return response('Ошибка', 402);
         }

@@ -135,7 +135,7 @@ class AdminController extends Controller
       }
    }
 
-   public function siteStatusEnable(Request $request)
+   public function siteStatusEnable()
    {
       if($this->siteStatus->update(['value' => 'true'])) {
          return response('Сайт включен', 200);
@@ -144,7 +144,7 @@ class AdminController extends Controller
       }
    }
 
-   public function siteStatusDisable(Request $request)
+   public function siteStatusDisable()
    {
       if($this->siteStatus->update(['value' => 'false'])) {
          return response('Сайт отключен', 200);
