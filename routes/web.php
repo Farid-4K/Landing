@@ -42,22 +42,22 @@ Route::middleware('auth')->namespace('Admin')->group(
       */
      Route::post('/admin/table/', 'InformationController@table');
      Route::get('/admin/table/delete', 'InformationController@delete');
-     Route::post('/admin/table/create', 'InformationController@create');
-     Route::get('/admin/table/delete/unused', 'InformationController@deleteUnused');
-     Route::get('/admin/table/create/unused', 'InformationController@createUnused');
-     Route::get('/admin/table/erase/unused', 'InformationController@eraseUnused');
+     Route::post('/admin/table/create', 'InformationController@createOrUpdate');
+     Route::get('/admin/table/delete/unused', 'InformationController@deleteUnusedFields');
+     Route::get('/admin/table/create/unused', 'InformationController@CreateMissingFields');
+     Route::get('/admin/table/erase/unused', 'InformationController@EraseExtraVariables');
 
      /**
       * Group that edits the profile setting
       */
      Route::post('/admin/settings/profile', 'AdminController@showProfile');
-     Route::any('/admin/settings/set/admin', 'AdminController@set');
+     Route::any('/admin/settings/set/admin', 'AdminController@setNewBio');
      Route::any('/admin/settings/set/mail', 'AdminController@setMail');
      Route::any('/admin/settings/set/password', 'AdminController@setPassword');
-     Route::get('/admin/settings/untie', 'AdminController@untie');
+     Route::get('/admin/settings/untie', 'AdminController@unlinkFromVk');
      Route::any('/admin/settings/upload/zip', 'AdminController@uploadZip');
-     Route::get('/admin/settings/site/enable','AdminController@siteStatusEnable');
-     Route::get('/admin/settings/site/disable','AdminController@siteStatusDisable');
+     Route::get('/admin/settings/site/enable', 'AdminController@siteStatusEnable');
+     Route::get('/admin/settings/site/disable', 'AdminController@siteStatusDisable');
 
      /**
       * Group that control for orders

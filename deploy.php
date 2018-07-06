@@ -9,21 +9,6 @@ set('application', 'laravel');
 // Project repository
 set('repository', 'git@git.rep.elt:Phalcon/landing.git');
 set('branch', 'master');
-set('tag', function () {
-    $cmd = 'git ls-remote --tags --refs {{repository}}';
-//    $output = runLocally($cmd);
-    $output = run($cmd);
-    $tags = preg_split('#$#m', $output);
-    $tags = array_map(
-        function ($x) {
-            $tt = explode('/', $x);
-            return $tt[count($tt) - 1];
-        },
-        $tags);
-    natsort($tags);
-    $tags = array_values($tags);
-    return count($tags) ? $tags[count($tags) - 1] : null;
-});
 
 // [Optional] Allocate tty for git clone. Default value is false.
 set('git_tty', true);
@@ -55,6 +40,10 @@ task('deploy:link', function () {
     run('link {{release_path}}/../../shared/.env {{release_path}}/.env');
 })->desc('create env link');
 
+task('deploy:linkEmail', function () {
+   run('link {{release_path}}/../../shared/storage/app/mail.json {{release_path}}/storage/app/mail.json');
+})->desc('create mail link');
+
 task('deploy:composerinstall', function () {
     run('cd {{release_path}} && composer install');
 })->desc('create env link');
@@ -68,6 +57,7 @@ task('deploy', [
     'deploy:update_code',
     'deploy:composerinstall',
     'deploy:link',
+    'deploy:linkEmail',
     'deploy:migration',
     'deploy:seed',
     'deploy:clear_paths',
@@ -76,16 +66,6 @@ task('deploy', [
     'cleanup',
     'success',
 ]);
-
-task('deploy:update_code', function () {
-    $tag = get('tag');
-    if (empty($tag)) {
-        throw new \Exception("No release tag specified to deploy!");
-    }
-    writeln("About to get sources from tags/{{tag}}");
-    run("git clone --depth 1 --branch {{branch}} {{repository}} {{release_path}}");
-    run("cd {{release_path}} && git fetch --tags && git checkout tags/{{tag}}");
-})->desc('Updating code from git repository');
 
 task('status', function () {
     writeln("latest release tag: {{tag}}");

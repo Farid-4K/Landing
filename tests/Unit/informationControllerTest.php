@@ -12,244 +12,147 @@ use Tests\TestCase;
 
 class informationControllerTests extends TestCase
 {
-    use WithoutMiddleware;
-    use RefreshDatabase;
+   use WithoutMiddleware;
+   use RefreshDatabase;
 
-    /**
-     *
-     */
-    public function testInformation()
-    {
-        /**
-         * Окружение
-         */
-        $this->seed('InformationSeed');
-        Auth::loginUsingId(Admin::query()->first()->id);
+   public function testInformation()
+   {
+      /* prepare */
+      $this->seed('InformationSeed');
 
-        /**
-         * Тест
-         */
-        $response = $this->call('GET', '/admin');
+      /* test */
+      $response = $this->call('GET', '/admin');
 
-        /**
-         * Проверка
-         */
-        $this->assertEquals(200, $response->status());
-    }
+      /* check */
+      $this->assertResponseOk();
+   }
 
-    /**
-     *Успешное создание
-     */
-    public function testInformationCreate()
-    {
-        /**
-         * Окружение
-         */
-        $tag_id = str_random(5);
-        $information = str_random(10);
-        $description = str_random(10);
+   /**
+    *Успешное создание
+    */
+   public function testInformationCreate()
+   {
+      $data = factory(\App\Admin\Information::class)->make();
+      unset($data['id']);
 
-        /**
-         * Тест
-         */
-        $this->post('/admin/table/create', [
-            'tag_id' => $tag_id,
-            'information' => $information,
-            'description' => $description,
-        ]);
+      $this->post('/admin/table/create', $data->toArray());
 
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(200);
-    }
+      $this->assertResponseStatus(200);
+   }
 
-    /**
-     * Успешное создание с изображением
-     */
-    public function testInformationCreateWithImage()
-    {
-        /**
-         * Окружение
-         */
-        $tag_id = str_random(5);
-        $information = '/image/background-main701-801.png';
-        $description = str_random(10);
+   /**
+    * Успешное создание с изображением
+    */
+   public function testInformationCreateWithImage()
+   {
+      /* prepare */
+      $tag_id = str_random(5);
+      $information = '/image/background-main701-801.png';
+      $description = str_random(10);
 
-        /**
-         * Тест
-         */
-        $this->post('/admin/table/create', [
-            'tag_id' => $tag_id,
-            'information' => $information,
-            'description' => $description,
-        ]);
+      /* test */
+      $this->post('/admin/table/create', [
+         'tag_id'      => $tag_id,
+         'information' => $information,
+         'description' => $description,
+      ]);
 
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(200);
-    }
+      /* check */
+      $this->assertResponseStatus(200);
+   }
 
+   public function testInformationCreateTagIdNumberError()
+   {
+      /* prepare */
+      $data = factory(\App\Admin\Information::class)->make();
+      $data['tag_id'] = 10000;
+      /* test */
+      $this->post('/admin/table/create', $data->toArray());
 
-    /**
-     *tag_id только числа
-     */
-    public function testInformationCreateTagIdNumberError()
-    {
-        /**
-         * Окружение
-         */
-        $tag_id = 25000;
-        $information = str_random(10);
-        $description = str_random(10);
+      /* check */
+      $this->assertResponseStatus(302);
+   }
 
-        /**
-         * Тест
-         */
-        $this->post('/admin/table/create', [
-            'tag_id' => $tag_id,
-            'information' => $information,
-            'description' => $description,
-        ]);
+   /**
+    *tag_id пустое поле
+    */
+   public function testInformationCreateTagIdNullError()
+   {
+      /* prepare */
+      $tag_id = '';
+      $information = str_random(10);
+      $description = str_random(10);
 
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(302);
-    }
+      /* test */
+      $this->post('/admin/table/create', [
+         'tag_id'      => $tag_id,
+         'information' => $information,
+         'description' => $description,
+      ]);
 
-    /**
-     *tag_id пустое поле
-     */
-    public function testInformationCreateTagIdNullError()
-    {
-        /**
-         * Окружение
-         */
-        $tag_id = '';
-        $information = str_random(10);
-        $description = str_random(10);
+      /* check */
+      $this->assertResponseStatus(302);
+   }
 
-        /**
-         * Тест
-         */
-        $this->post('/admin/table/create', [
-            'tag_id' => $tag_id,
-            'information' => $information,
-            'description' => $description,
-        ]);
+   /**
+    *tag_id больше 100 символов
+    */
+   public function testInformationCreateValidateError()
+   {
+      /* prepare */
+      $field = factory(\App\Admin\Information::class)->create([
+        'tag_id' =>str_random(105),
+      ]);
 
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(302);
-    }
+      /* test */
+      $this->post('/admin/table/create', $field->toArray());
 
-    /**
-     *tag_id больше 100 символов
-     */
-    public function testInformationCreateValidateError()
-    {
-        /**
-         * Окружение
-         */
-        $tag_id = str_random(105);
-        $information = str_random(10);
-        $description = str_random(10);
+      /* check */
+      $this->assertResponseStatus(302);
+   }
 
-        /**
-         * Тест
-         */
-        $this->post('/admin/table/create', [
-            'tag_id' => $tag_id,
-            'information' => $information,
-            'description' => $description,
-        ]);
+   /**
+    *Успешное удаление информации
+    */
+   public function testInformationDelete()
+   {
+      /* prepare */
+      $field = factory(\App\Admin\Information::class)->create();
 
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(302);
-    }
+      /* test */
+      $this->get('/admin/table/delete',$field->toArray());
 
-    /**
-     *Успешное удаление информации
-     */
-    public function testInformationDelete()
-    {
-        /**
-         * Окружение
-         */
-        $id = Information::query()->first()->id;
+      /* check */
+      $this->assertResponseStatus(200);
+   }
 
-        /**
-         * Тест
-         */
-        $this->get('/admin/table/delete?id=' . $id);
+   /**
+    * Создание неиспользуемого тэга
+    */
+   public function testInformationCreateUnused()
+   {
+      /* prepare */
+      $_token = \Session::token();
 
+      /* test */
+      $this->get('/admin/table/create/unused?&test_tag=true');
 
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(200);
-    }
+      /* check */
+      $this->assertResponseStatus(200);
+   }
 
-    /**
-     * Создание неиспользуемого тэга
-     */
-    public function testInformationCreateUnused()
-    {
-        /**
-         * Окружение
-         */
-        $_token = 'XQYPBbyBVAcvXTd29i0VQq1TNa13yrkuD5VGDQNe';
+   /**
+    * Удаление неиспользуемого тэга
+    */
+   public function testInformationDeleteUnused()
+   {
+      /* prepare */
+      $_token = \Session::token();
 
-        /**
-         * Тест
-         */
-        $this->get('/admin/table/create/unused?_token=' . $_token . '&test_tag=true');
+      /* test */
+      $this->get('/admin/table/delete/unused?&test_tag=true');
 
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(200);
-    }
-
-    /**
-     *Создание неиспользуемого тэга без токена
-     */
-    public function testInformationCreateUnusedWithoutToken()
-    {
-        /**
-         * Тест
-         */
-        $this->get('/admin/table/create/unused?test_tag=true');
-
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(403);
-    }
-
-    /**
-     * Удаление неиспользуемого тэга
-     */
-    public function testInformationDeleteUnused()
-    {
-        /**
-         * Окружение
-         */
-        $_token = 'XQYPBbyBVAcvXTd29i0VQq1TNa13yrkuD5VGDQNe';
-
-        /**
-         * Тест
-         */
-        $this->get('/admin/table/delete/unused?_token=' . $_token . '&test_tag=true');
-
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(200);
-    }
+      /* check */
+      $this->assertResponseStatus(200);
+   }
 }

@@ -11,91 +11,62 @@ use Tests\TestCase;
 
 class homeControllerTest extends TestCase
 {
-    /**
-     *
-     */
-    public function testHome()
-    {
-        /**
-         * Тест
-         */
-        $response = $this->call('GET', '/');
+   /**
+    *
+    */
+   public function testHome()
+   {
+      /* test */
+      $response = $this->call('GET', '/');
 
-        /**
-         * Проверка
-         */
-        $this->assertEquals(200, $response->status());
-    }
+      /* check */
+      $this->assertEquals(200, $response->status());
+   }
 
-    /**
-     * Успешный заказ
-     */
-    public function testHomeAdd()
-    {
-        /**
-         * Окружение
-         */
-        $user = factory(\App\Admin\Order::class)->make();
-        $request = Mockery::mock(Request::class);
-        $request->allows()->input('g-recaptcha-response')->andReturn('success');
+   /**
+    * Успешный заказ
+    */
+   public function testHomeAdd()
+   {
+      /* prepare */
+      $user = factory(\App\Admin\Order::class)->make();
+      $request = Mockery::mock(Request::class);
+      $request->allows()->input('g-recaptcha-response')->andReturn('success');
 
-        $request->allows()->ip()->andReturn('127.0.0.1');
+      $request->allows()->ip()->andReturn('127.0.0.1');
 
-        $captcha = Mockery::mock(Captcha::class)->makePartial();
-        $captcha->allows()->verify($request->input('g-recaptcha-response'), $request->ip())
-            ->andReturn(new Response(true));
+      $captcha = Mockery::mock(Captcha::class)->makePartial();
+      $captcha->allows()->verify($request->input('g-recaptcha-response'),
+         $request->ip())
+         ->andReturn(new Response(true));
 
-        $captcha->check($request);
+      $captcha->check($request);
 
-        /**
-         * Тест
-         */
-        $this->get('/main/add', [
-            'name' => $user['name'],
-            'email' => $user['email'],
-            'phone' => $user['phone'],
-            'count' => $user['count'],
-            'message' => $user['message'],
-            'grant' => $user['grant'],
-        ]);
+      /* test */
+      $this->get('/main/add', $user->toArray());
 
-        /**
-         * Проверка
-         */
-        $this->assertTrue($captcha->isVerified());
-        $this->assertResponseStatus(302);
-    }
+      /* check */
+      $this->assertTrue($captcha->isVerified());
+      $this->assertResponseStatus(302);
+   }
 
-    /**
-     * Не введено имя и неверный формат email
-     */
-    public function testHomeAddErrorValidate()
-    {
-        /**
-         * Окружение
-         */
-        $user = factory(\App\Admin\Order::class)->make();
+   /**
+    * Не введено имя и неверный формат email
+    */
+   public function testHomeAddErrorValidate()
+   {
+      /* prepare */
+      $user = factory(\App\Admin\Order::class)->make();
+      unset($user['name']);
+      /* test */
+      $this->get('/main/add', $user->toArray());
 
-        /**
-         * Тест
-         */
-        $this->get('/main/add', [
-            'name' => '',
-            'email' => $user['email'],
-            'phone' => $user['phone'],
-            'count' => $user['count'],
-            'message' => $user['message'],
-            'grant' => $user['grant'],
-        ]);
+      /* check */
+      $this->assertResponseStatus(302);
+   }
 
-        /**
-         * Проверка
-         */
-        $this->assertResponseStatus(302);
-    }
-
-    public function tearDown()
-    {
-        Mockery::close();
-    }
+   public function tearDown()
+   {
+      Mockery::close();
+   }
 }

@@ -110,10 +110,14 @@
       jQuery(document).ready(function ($) {
          $('.sidenav').sidenav();
          $(menu + " .action-ajax").click(function () {
-            Cookies.set('page', $(this).attr('data-call'));
+            getContent($(this).attr('data-call'), $(this).attr('data-action'));
+         });
+
+         function getContent(call, action) {
+            Cookies.set('page', call);
             let token = $('meta[name="csrf-token"]');
             $.ajax({
-               url: $(this).attr('data-action'),
+               url: action,
                headers: {
                   'X-CSRF-TOKEN': token.attr('content')
                },
@@ -135,11 +139,11 @@
                }
             });
             return true;
-         });
+         }
 
-         if(Cookies.get('page')!==undefined)
-         {
-            $('[data-call='+Cookies.get('page')+']').click();
+         if (Cookies.get('page') !== undefined) {
+            let el = '[data-call=' + Cookies.get('page') + ']';
+            getContent($(el).attr('data-call'), $(el).attr('data-action'));
          }
       });
    </script>

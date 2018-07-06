@@ -9,70 +9,61 @@ use Illuminate\Http\Request;
 
 class InformationController extends Controller
 {
-   public function __construct(Request $request)
+   protected $information;
+
+   public function __construct(Request $request, Information $information)
    {
       $this->middleware('auth');
+      $this->information = $information;
    }
 
-   public function create(Request $request)
+   public function check(Request $request)
    {
-      if($request->filled('id')) {
-         $row = Information::query()->find($request->get('id'));
-         $unique = null;
-      } else {
-         $row = new Information();
-         $unique = '|unique:information';
-      }
+      return $request->filled('id') ? true : false;
+   }
 
-      /**
-       * Validation
-       */
+   public function validating(Request $request, Bool $variant)
+   {
       $validated = $request->validate(
         [
-          'tag_id'      => 'required|regex:/^([\w]+[^0-9])/|max:100' . $unique,
-          'information' => 'max:60000',
+          'tag_id'      => $variant
+            ? 'required|string|regex:/^([\w]+[^0-9])/|max:100'
+            : 'required|string|regex:/^([\w]+[^0-9])/|max:100|unique:information',
+          'information' => 'required|max:60000',
           'image'       => 'image',
-          'description' => 'max:100',
+          'description' => 'required|max:100',
         ]);
 
-      /**
-       * Check image upload
-       */
-      if($request->hasFile('image')) {
-         $information = Information::uploadImage($validated['image']);
-      }
-
-      /**
-       * Add to database or update
-       */
-      if($row->fill(
-        [
-          'tag_id'      => $validated['tag_id'],
-          'information' => $information??$validated['information'],
-          'description' => $validated['description'] ?: 'default',
-        ])
-      ) {
-         return $row->save()
-           ? response('Загружено', 200)
-           : response('Ошибка', 500);
-      }
+      return $validated;
    }
 
-   public function createUnused(Request $request)
+   public function createOrUpdate(Request $request)
    {
-      if($request->has('_token')) {
-         foreach ($request->all() as $key => $val) {
-            if($val === 'true') {
-               Information::query()->create(
-                 [
-                   'tag_id'      => $key,
-                   'information' => 'Текст',
-                   'description' => 'Заголовок',
-                 ]);
-            };
-         }
-      } else {
-         return response('Ошибка доступа', 403);
+      $validated = $this->validating($request, $this->check($request));
+
+      if($request->hasFile('image')) {
+         $validated['information'] = $this->information::uploadImage($validated['image']);
+      }
+
+      return $this->information::query()
+                        ->updateOrCreate(
+                          ['tag_id' => $validated['tag_id']],
+                          $validated)
+        ? response('Загружено', 200)
+        : response('Ошибка', 500);
+   }
+
+   public function CreateMissingFields(Request $request)
+   {
+      foreach ($request->all() as $key => $val) {
+         if($val === 'true') {
+            $this->information::query()->create(
+              [
+                'tag_id'      => $key,
+                'information' => 'Текст',
+                'description' => 'Заголовок',
+              ]);
+         };
       }
 
       return response('Создано', 200);
@@ -90,7 +81,7 @@ class InformationController extends Controller
       if($request->filled('id')) {
          $id = $request->get('id');
 
-         return Information::trash($id)
+         return $this->information->trash($id)
            ? response('Блок удален - ' . $id, 200)
            : response('Ошибка', 500);
       }
@@ -105,11 +96,11 @@ class InformationController extends Controller
     *
     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
     */
-   public function deleteUnused(Request $request)
+   public function deleteUnusedFields(Request $request)
    {
       foreach ($request->all() as $key => $val) {
          if($val === 'true') {
-            Information::query()->where('tag_id', '=', $key)->delete();
+            $this->information::query()->where('tag_id', '=', $key)->delete();
          };
       }
 
@@ -123,7 +114,7 @@ class InformationController extends Controller
     *
     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
     */
-   public function eraseUnused(Request $request)
+   public function EraseExtraVariables(Request $request)
    {
       $template = new BladeEditor("landing");
       if($request->has('_token')) {
@@ -149,7 +140,7 @@ class InformationController extends Controller
       /**
        * Analogy of the method from HomeController but have middleware auth
        */
-      foreach (Information::all() as $db) {
+      foreach ($this->information::all() as $db) {
          $data[$db->tag_id] = $db->information;
       }
 
@@ -168,7 +159,7 @@ class InformationController extends Controller
       /**
        * Format and show information
        */
-      $db = json_decode(Information::all());
+      $db = json_decode($this->information::all());
 
       $parse = new BladeEditor("landing");
       $variables = $parse->parseBladeEchos(true);

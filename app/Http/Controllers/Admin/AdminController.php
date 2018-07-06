@@ -30,7 +30,7 @@ class AdminController extends Controller
     *
     * @return string
     */
-   public function set(Request $request)
+   public function setNewBio(Request $request)
    {
       /**
        * Prepare
@@ -117,7 +117,7 @@ class AdminController extends Controller
       return view('admin.settings', $data);
    }
 
-   public function untie()
+   public function unlinkFromVk()
    {
       $this->admin->vk = 0;
       $this->admin->save();

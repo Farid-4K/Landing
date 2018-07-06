@@ -6,17 +6,19 @@ use Illuminate\Contracts\Console\Kernel;
 
 trait CreatesApplication
 {
-    /**
-     * Creates the application.
-     *
-     * @return \Illuminate\Foundation\Application
-     */
-    public function createApplication()
-    {
-        $app = require __DIR__.'/../bootstrap/app.php';
+   /**
+    * Creates the application.
+    *
+    * @return \Illuminate\Foundation\Application
+    */
+   public function createApplication()
+   {
+      putenv('DB_DEFAULT=test');
 
-        $app->make(Kernel::class)->bootstrap();
+      $app = require __DIR__ . '/../bootstrap/app.php';
 
-        return $app;
-    }
+      $app->make(Kernel::class)->bootstrap();
+
+      return $app;
+   }
 }
