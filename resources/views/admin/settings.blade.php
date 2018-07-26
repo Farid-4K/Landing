@@ -144,10 +144,10 @@
                   <div class="card-action">
                      <div class="form-action-inline">
                         @if($site_status === 'true')
-                           <a data-role="siteDisabledBtn" class="right btn-flat waves-effect waves-red">Отключить</a>
+                           <a data-role="siteDisabledBtn" class="right black-text btn-flat waves-effect waves-red">Отключить</a>
                         @else
                            <a data-role="siteEnabledBtn"
-                              class="right btn-flat waves-effect waves-red">Включить</a>
+                              class="right btn-flat waves-effect black-text waves-red">Включить</a>
                         @endif
                      </div>
                   </div>
@@ -177,77 +177,77 @@
 
 <script src="/js/form.js"></script>
 <script>
-    jQuery(document).ready(function ($) {
-        let tab = {
-            about: '[data-role=tabAbout]',
-            settings: '[data-role=tabSettings]',
-        };
-        let action = {
-            about: {
-                save: "/admin/settings/set/admin",
-                password: '/admin/settings/set/password',
-            },
-            setting: {
-                save: "/admin/settings/set/mail",
-                zip: "/admin/settings/upload/zip",
-            },
-            danger: {
-                enable: '/admin/settings/site/enable',
-                disable: '/admin/settings/site/disable',
-            }
-        };
-        let form = {
-            about: {
-                save: '[data-role=saveAdminData]',
-                password: '[data-role=resetPassword]',
-            },
-            setting: {
-                save: "[data-role=saveMailData]",
-                zip: '[data-role=formWithZip]',
-                input: '[data-role=zipInput]',
-            }
-        };
-        let btn = {
-            about: {
-                save: '[data-role=saveNewSettings]',
-                password: '[data-role=saveNewPassword]',
-            },
-            setting: {
-                save: "[data-role=saveMailDataBtn]",
-                zip: "[data-role=uploadZipBtn]",
-            },
-            danger: {
-                enable: "[data-role=siteEnabledBtn]",
-                disable: "[data-role=siteDisabledBtn]",
-            }
-        };
+   jQuery(document).ready(function ($) {
+      let tab = {
+         about: '[data-role=tabAbout]',
+         settings: '[data-role=tabSettings]',
+      };
+      let action = {
+         about: {
+            save: "/admin/settings/set/admin",
+            password: '/admin/settings/set/password',
+         },
+         setting: {
+            save: "/admin/settings/set/mail",
+            zip: "/admin/settings/upload/zip",
+         },
+         danger: {
+            enable: '/admin/settings/site/enable',
+            disable: '/admin/settings/site/disable',
+         }
+      };
+      let form = {
+         about: {
+            save: '[data-role=saveAdminData]',
+            password: '[data-role=resetPassword]',
+         },
+         setting: {
+            save: "[data-role=saveMailData]",
+            zip: '[data-role=formWithZip]',
+            input: '[data-role=zipInput]',
+         }
+      };
+      let btn = {
+         about: {
+            save: '[data-role=saveNewSettings]',
+            password: '[data-role=saveNewPassword]',
+         },
+         setting: {
+            save: "[data-role=saveMailDataBtn]",
+            zip: "[data-role=uploadZipBtn]",
+         },
+         danger: {
+            enable: "[data-role=siteEnabledBtn]",
+            disable: "[data-role=siteDisabledBtn]",
+         }
+      };
 
-        $(btn.danger.enable).click(function () {
-            ajaxStart(action.danger.enable, "GET", 'access=yes');
-            return true;
-        });
+      $(btn.danger.enable).click(function () {
+         ajaxStart(action.danger.enable, "GET", 'access=yes');
+         return true;
+      });
 
-        $(btn.danger.disable).click(function () {
-            ajaxStart(action.danger.disable, "GET", 'access=yes');
-            return true;
-        });
+      $(btn.danger.disable).click(function () {
+         ajaxStart(action.danger.disable, "GET", 'access=yes');
+         return true;
+      });
 
-        $(btn.about.save).click(function () {
-            ajaxStart(action.about.save, 'GET', $(this).parents(form.about.save).serialize());
-            return true;
-        });
+      $(btn.about.save).click(function () {
+         ajaxStart(action.about.save, 'GET', $(this).parents(form.about.save).serialize());
+         return true;
+      });
 
-        $(btn.about.password).click(function () {
-            ajaxStart(action.about.password, 'GET', $(this).parents(form.about.password).serialize());
-            return true
-        });
+      $(btn.about.password).click(function () {
+         ajaxStart(action.about.password, 'GET', $(this).parents(form.about.password).serialize());
+         return true
+      });
 
-        $(btn.setting.save).click(function () {
-            ajaxStart(action.setting.save, 'GET', $(this).parents(form.setting.save).serialize());
-        });
+      $(btn.setting.save).click(function () {
+         ajaxStart(action.setting.save, 'GET', $(this).parents(form.setting.save).serialize());
+      });
 
 
-        $('.tabs').tabs();
-        $('.modal').modal();
-    });
+      $('.tabs').tabs();
+      $('.modal').modal();
+   });
 </script>

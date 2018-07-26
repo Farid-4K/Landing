@@ -6,9 +6,7 @@ use App\Admin\Admin;
 use App\Admin\Information;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
-
 
 class informationControllerTests extends TestCase
 {
@@ -52,7 +50,7 @@ class informationControllerTests extends TestCase
 
       /* test */
       $this->post('/admin/table/create', [
-         'tag_id'      => $tag_id,
+         'tag_id' => $tag_id,
          'information' => $information,
          'description' => $description,
       ]);
@@ -85,7 +83,7 @@ class informationControllerTests extends TestCase
 
       /* test */
       $this->post('/admin/table/create', [
-         'tag_id'      => $tag_id,
+         'tag_id' => $tag_id,
          'information' => $information,
          'description' => $description,
       ]);
@@ -101,7 +99,7 @@ class informationControllerTests extends TestCase
    {
       /* prepare */
       $field = factory(\App\Admin\Information::class)->create([
-        'tag_id' =>str_random(105),
+         'tag_id' => str_random(105),
       ]);
 
       /* test */
@@ -118,9 +116,9 @@ class informationControllerTests extends TestCase
    {
       /* prepare */
       $field = factory(\App\Admin\Information::class)->create();
-
+      $data = Information::query()->first();
       /* test */
-      $this->get('/admin/table/delete',$field->toArray());
+      $this->get('/admin/table/delete', ['id' => $data->id]);
 
       /* check */
       $this->assertResponseStatus(200);

@@ -17,7 +17,7 @@ class SiteStatusMiddleWare
     */
    public function handle($request, Closure $next)
    {
-      if(Config::where('name', 'SITE_ENABLED')->first()->value === 'true') {
+      if (Config::where('name', 'SITE_ENABLED')->first()->value === 'true') {
          return $next($request);
       } else {
          return abort(404);

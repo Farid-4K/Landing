@@ -5,6 +5,7 @@ jQuery(function () {
    }
 
    let delay = 100;
+   let fadeDelay = 150;
 
    let action = {
       unused: {
@@ -79,7 +80,7 @@ jQuery(function () {
 
    /* Закрытие формы */
    $(btn.form.close).click(function () {
-      $(this).parents(form.parent).fadeOut(150);
+      $(this).parents(form.parent).fadeOut(fadeDelay);
       return true;
    });
 
@@ -140,7 +141,7 @@ jQuery(function () {
       $(form.data.des).val(data.description).attr("value", data.description);
       $(form.data.inf).val(data.information).attr("value", data.information);
       $(form.data.id).val(data.id).attr("value", data.id);
-      $(form.parent).fadeIn(150);
+      $(form.parent).fadeIn(fadeDelay);
    });
 
    function showEditForm() {
@@ -155,6 +156,6 @@ jQuery(function () {
       $(form.data.des).val(data.description).attr("value", data.description);
       $(form.data.inf).val(data.information).attr("value", data.information);
       $(form.data.id).val(data.id).attr("value", data.id);
-      $(form.parent).fadeIn(150);
+      $(form.parent).fadeIn(fadeDelay);
    }
 });
